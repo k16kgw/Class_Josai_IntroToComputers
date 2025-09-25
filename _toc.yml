@@ -3,7 +3,20 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+
+parts:
+  - caption: 目次
+    numbered: true
+    chapters:
+      - file: contents/1_digital
+      # - file: contents/2_bool
+      # - file: contents/3_normal_form
+      # - file: contents/4_Karnaugh
+      # - file: contents/5_combinational_circuit
+      # - file: contents/6_adder
+      # - file: contents/8_state
+      # - file: contents/9_clock
+      # - file: contents/10_flip-flop
+      # - file: contents/11_sequential_curcuit
+      # - file: contents/12_multiplier
+      # - file: contents/13_memory
