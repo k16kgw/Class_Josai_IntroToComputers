@@ -1,12 +1,11 @@
-# 計算機入門II（城西大学）
+# 計算機入門I（城西大学）
 
 ## 講義情報
 
 - 対象：
 - 開講日：秋学期火曜日４時限
-- 教室：
-<!-- - 教室：紀-3号棟3206 -->
-<!-- - [シラバス](https://junavi.josai.ac.jp/camweb/slbssbdr.do?value(risyunen)=2025&value(semekikn)=1&value(kougicd)=00228681&value(crclumcd)=zz19999999) -->
+- 教室：紀-1号棟1505
+- [シラバス](https://junavi.josai.ac.jp/camweb/slbssbdu.do?value(risyunen)=2025&value(semekikn)=1&value(kougicd)=00229503)
 
 ```{tableofcontents}
 ```
@@ -139,3 +138,21 @@
 【到達目標】状態の保持による記憶の揮発性と不揮発性について理解する．
 
 【準備学習】12回目の授業の復習と小問を解き，13回目の授業のWebClassの配布資料を事前に確認する．
+
+<!-- 
+```{warning}
+これはwarningです。  
+```
+
+```{admonition} タイトル
+これはadmonitionです。  
+```
+
+```{tip}
+これはtipです。  
+```
+
+```{note}
+これはnoteです。  
+``` 
+-->
