@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Introduction to Computers I</title>
+    <title>2. ブール代数，論理演算，真理値表 &#8212; Introduction to Computers I</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/2_bool';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="1. アナログとデジタル，数値表現" href="1_digital.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,8 +181,9 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. ブール代数，論理演算，真理値表</a></li>
 </ul>
 
     </div>
@@ -367,7 +369,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>ブール代数，論理演算，真理値表</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -376,9 +378,35 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.1. タイムテーブル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2. 復習と準備</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.3. ブール代数</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.3.1. 基本記号と演算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.3.2. 1.2 真理値表（例）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.3.3. 1.3 論理関数の表現</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.4. 2. ブール代数の公理と定理・論理式の双対性（前半その2）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2.4.1. 2.1 公理（代表）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2.4.2. 2.2 基本定理（よく使う等式）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-duality">2.4.3. 2.3 双対性の原理（Principle of Duality）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3">2.4.4. 3.3 例題B（3変数：吸収）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">2.4.5. 3.4 例題C（コンセンサス）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-sop">2.4.6. 3.5 例題D（SOP→簡約）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.5. 4. 例題演習（後半その2）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sop-pos">2.5.1. 4.1 例題1：真理値表→SOP/POS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#majority">2.5.2. 4.2 例題2：多数決（majority）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.5.3. 4.3 例題3：ハザードに注意した冗長項</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.6. 5. ミニ確認テスト（5問・その場採点）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.7. 6. まとめ・次回予告</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2.8. 付録：等式 “チートシート”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.9. 宿題</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -389,7 +417,266 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">2. </span>ブール代数，論理演算，真理値表<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>到達目標</p>
+<ul class="simple">
+<li><p>論理演算の基本となるブール代数および真理値表について理解する．</p></li>
+<li><p>論理関数を<strong>真理値表</strong>・<strong>論理式</strong>で表現できる。</p></li>
+<li><p><strong>ブール代数の公理・基本定理</strong>を用いて論理式を変形できる。</p></li>
+<li><p>**双対性（duality）**の概念を説明し、双対式を導出できる。</p></li>
+<li><p>基本的な<strong>論理式の簡略化</strong>（代数的手法、吸収・冗長項の削除、合意（コンセンサス）など）ができる。</p></li>
+</ul>
+<section id="id2">
+<h2><span class="section-number">2.1. </span>タイムテーブル<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>前半50分</strong>：ブール代数と真理値表／論理関数の表現（25分）→ 公理・定理・双対（25分）</p></li>
+<li><p><strong>休憩5分</strong></p></li>
+<li><p><strong>後半50分</strong>：論理式の簡略化テクニック（25分）→ 例題演習＆解説（25分）</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.2. </span>復習と準備<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+</section>
+<section id="id4">
+<h2><span class="section-number">2.3. </span>ブール代数<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>ブール代数と真理値表・論理演算と論理関数（前半その1）</p>
+<section id="id5">
+<h3><span class="section-number">2.3.1. </span>基本記号と演算<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>変数を <span class="math notranslate nohighlight">\(A,B,C \in {0,1}\)</span> とする．</p></li>
+</ul>
+<p>次のような演算を定義できる．</p>
+<ul class="simple">
+<li><p>否定（NOT）：<span class="math notranslate nohighlight">\(\lnot A\)</span>, <span class="math notranslate nohighlight">\(\overline{A}\)</span></p></li>
+<li><p>論理積（AND）：<span class="math notranslate nohighlight">\(A \land B\)</span>, <span class="math notranslate nohighlight">\(AB\)</span></p></li>
+<li><p>論理和（OR）：<span class="math notranslate nohighlight">\(A \lor B\)</span>, <span class="math notranslate nohighlight">\(A + B\)</span></p></li>
+<li><p>排他的論理和（XOR）：<span class="math notranslate nohighlight">\(A \oplus B\)</span></p></li>
+<li><p>否定論理和（NOR）：<span class="math notranslate nohighlight">\(\overline{A+B}\)</span></p></li>
+<li><p>否定論理積（NAND）：<span class="math notranslate nohighlight">\(\overline{AB}\)</span></p></li>
+</ul>
+</section>
+<section id="id6">
+<h3><span class="section-number">2.3.2. </span>1.2 真理値表（例）<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\lnot A\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(A\land B\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(A\lor B\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(A\oplus B\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id7">
+<h3><span class="section-number">2.3.3. </span>1.3 論理関数の表現<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>真理値表 → <strong>主加法標準形（SOP）</strong>：出力が1となる行の<strong>ミン項</strong>の和。</p></li>
+<li><p>真理値表 → <strong>主乗法標準形（POS）</strong>：出力が0となる行の<strong>マクス項</strong>の積。</p></li>
+</ul>
+<p><strong>例</strong>：$<span class="math notranslate nohighlight">\(F(A,B,C)=1\)</span><span class="math notranslate nohighlight">\( となる行が \)</span><span class="math notranslate nohighlight">\({1,2,6,7}\)</span>$（2進の (001,010,110,111)）のとき、</p>
+<ul class="simple">
+<li><p>SOP：$<span class="math notranslate nohighlight">\(F=\overline{A},\overline{B}C , + , \overline{A}B\overline{C} , + , AB\overline{C} , + , ABC\)</span>$</p></li>
+<li><p>POS：0となる行（(000,011,100,101)）から導く。</p></li>
+</ul>
+<blockquote>
+<div><p>※SOP/POS の機械的導出は第3回で再練。</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h2><span class="section-number">2.4. </span>2. ブール代数の公理と定理・論理式の双対性（前半その2）<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h3><span class="section-number">2.4.1. </span>2.1 公理（代表）<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>交換則：$<span class="math notranslate nohighlight">\(A+B=B+A,,\quad AB=BA\)</span>$</p></li>
+<li><p>結合法則：$<span class="math notranslate nohighlight">\((A+B)+C=A+(B+C),,\quad (AB)C=A(BC)\)</span>$</p></li>
+<li><p>分配法則：$<span class="math notranslate nohighlight">\(A(B+C)=AB+AC,,\quad A+BC=(A+B)(A+C)\)</span>$</p></li>
+<li><p>単位元・零元：$<span class="math notranslate nohighlight">\(A+0=A,,\ A\cdot 1=A,,\ A+1=1,,\ A\cdot 0=0\)</span>$</p></li>
+<li><p>反転：$<span class="math notranslate nohighlight">\(A+\overline{A}=1,,\ A\cdot\overline{A}=0\)</span>$</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3><span class="section-number">2.4.2. </span>2.2 基本定理（よく使う等式）<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>べき等律：$<span class="math notranslate nohighlight">\(A+A=A,,\ AA=A\)</span>$</p></li>
+<li><p>吸収律：$<span class="math notranslate nohighlight">\(A+AB=A,,\ A(A+B)=A\)</span>$</p></li>
+<li><p>反転同値：$<span class="math notranslate nohighlight">\(\overline{\overline{A}}=A\)</span>$</p></li>
+<li><p>ド・モルガン：$<span class="math notranslate nohighlight">\(\overline{A+B}=\overline{A},\overline{B},,\quad \overline{AB}=\overline{A}+\overline{B}\)</span>$</p></li>
+<li><p>コンセンサス（合意）定理：$<span class="math notranslate nohighlight">\(AB + \overline{A}C + BC = AB + \overline{A}C\)</span>$</p></li>
+</ul>
+<blockquote>
+<div><p><strong>使いどころ</strong>：冗長項（例えば $<span class="math notranslate nohighlight">\(BC\)</span>$）を削ってゲート数・段数を減らす。</p>
+</div></blockquote>
+</section>
+<section id="principle-of-duality">
+<h3><span class="section-number">2.4.3. </span>2.3 双対性の原理（Principle of Duality）<a class="headerlink" href="#principle-of-duality" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>規則：「$<span class="math notranslate nohighlight">\(0\leftrightarrow 1\)</span><span class="math notranslate nohighlight">\( と \)</span><span class="math notranslate nohighlight">\(+\leftrightarrow \cdot\)</span>$ を同時に入れ替える」と<strong>常に真</strong>の等式は<strong>双対</strong>も真。</p></li>
+<li><p>例：$<span class="math notranslate nohighlight">\(A+0=A\)</span><span class="math notranslate nohighlight">\( の双対は \)</span><span class="math notranslate nohighlight">\(A\cdot 1=A\)</span>$。</p></li>
+<li><p>例：分配 $<span class="math notranslate nohighlight">\(A+BC=(A+B)(A+C)\)</span><span class="math notranslate nohighlight">\( の双対は \)</span><span class="math notranslate nohighlight">\(A(B+C)=AB+AC\)</span>$。</p></li>
+</ul>
+<p><strong>演習（その場で口頭）</strong>：</p>
+<ol class="arabic">
+<li><div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}A+\overline{A}B = A+B$$ を示せ（吸収＋分配）。
+2. 上式の双対を求めよ。\\---\\## 3. 論理式の簡略化（後半その1）\\&gt; 第4回のカルノー図，第5回のQ-M法に先立ち，**代数的**にシンプルにするコツを学ぶ。\\### 3.1 代数的簡略化の手順例\\1. **共通因子**で括る／分配する。
+2. **吸収律**で項を削る。
+3. **ド・モルガン**で否定を外へ寄せる。
+4. **コンセンサス**で冗長項を落とす。\\### 3.2 例題A（2変数）\\与式：$$F(A,B)= A\overline{B} + AB\end{aligned}\end{align} \]</div>
+</li>
+</ol>
+<ul class="simple">
+<li><p>因数分解：$<span class="math notranslate nohighlight">\(F=A(\overline{B}+B)=A\cdot 1= A\)</span>$
+→ <strong>最小</strong>：NOT/AND/OR不要（バッファ1つ）。</p></li>
+</ul>
+</section>
+<section id="b-3">
+<h3><span class="section-number">2.4.4. </span>3.3 例題B（3変数：吸収）<a class="headerlink" href="#b-3" title="Link to this heading">#</a></h3>
+<p>与式：$<span class="math notranslate nohighlight">\(F= AB + A\overline{B}C + AB\overline{C}\)</span>$</p>
+<ul class="simple">
+<li><p>まず $<span class="math notranslate nohighlight">\(AB\)</span><span class="math notranslate nohighlight">\( が他項を**吸収**：\)</span><span class="math notranslate nohighlight">\(F=AB + A\overline{B}C\)</span>$</p></li>
+<li><p>さらに因数分解：$<span class="math notranslate nohighlight">\(F=A(B+\overline{B}C)=A(B+C)\)</span>$
+→ ゲート段数・配線削減。</p></li>
+</ul>
+</section>
+<section id="c">
+<h3><span class="section-number">2.4.5. </span>3.4 例題C（コンセンサス）<a class="headerlink" href="#c" title="Link to this heading">#</a></h3>
+<p>与式：$<span class="math notranslate nohighlight">\(F= AB + \overline{A}C + BC\)</span>$</p>
+<ul class="simple">
+<li><p>合意定理より：$<span class="math notranslate nohighlight">\(F=AB + \overline{A}C\)</span><span class="math notranslate nohighlight">\(（\)</span><span class="math notranslate nohighlight">\(BC\)</span>$ は冗長）</p></li>
+</ul>
+</section>
+<section id="d-sop">
+<h3><span class="section-number">2.4.6. </span>3.5 例題D（SOP→簡約）<a class="headerlink" href="#d-sop" title="Link to this heading">#</a></h3>
+<p>与式（SOP）：$<span class="math notranslate nohighlight">\(F= \overline{A}BC + A\overline{B}C + ABC\)</span>$</p>
+<ul class="simple">
+<li><p>2項をまとめ：$<span class="math notranslate nohighlight">\(F=C(\overline{A}B + A\overline{B} + AB)=C(B\oplus A + AB)\)</span>$</p></li>
+<li><p>さらに：$<span class="math notranslate nohighlight">\(B\oplus A + AB = A+B\)</span>$（よく出る恒等式）</p></li>
+<li><p>よって：$<span class="math notranslate nohighlight">\(F=C(A+B)\)</span>$</p></li>
+</ul>
+<blockquote>
+<div><p>補足：$<span class="math notranslate nohighlight">\(A\oplus B = A\overline{B}+\overline{A}B\)</span>$ を起点に示せる。</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id11">
+<h2><span class="section-number">2.5. </span>4. 例題演習（後半その2）<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<section id="sop-pos">
+<h3><span class="section-number">2.5.1. </span>4.1 例題1：真理値表→SOP/POS<a class="headerlink" href="#sop-pos" title="Link to this heading">#</a></h3>
+<p><strong>仕様</strong>：2入力の<strong>少なくとも1つが1</strong>なら1。</p>
+<ul class="simple">
+<li><p>真理値表から：$<span class="math notranslate nohighlight">\(F(A,B)=A+B\)</span>$</p></li>
+<li><p>SOP：$<span class="math notranslate nohighlight">\(A\overline{B}+\overline{A}B+AB = A+B\)</span>$（吸収）</p></li>
+<li><p>POS：$<span class="math notranslate nohighlight">\((A+B)\)</span>$（最小形）</p></li>
+</ul>
+</section>
+<section id="majority">
+<h3><span class="section-number">2.5.2. </span>4.2 例題2：多数決（majority）<a class="headerlink" href="#majority" title="Link to this heading">#</a></h3>
+<p><strong>仕様</strong>：3入力中<strong>2つ以上が1</strong>で1。</p>
+<ul class="simple">
+<li><p>SOP（機械的導出）：$<span class="math notranslate nohighlight">\(F=AB+BC+CA\)</span>$（最小）</p></li>
+<li><p>証明スケッチ：真理値表で1となる行を和で表し、吸収で簡約。</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3><span class="section-number">2.5.3. </span>4.3 例題3：ハザードに注意した冗長項<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p><strong>仕様</strong>：$<span class="math notranslate nohighlight">\(F=\overline{A}B + A\overline{B}\)</span>$（XOR）</p>
+<ul class="simple">
+<li><p>タイミングを考慮しない論理最小化ではOKだが、物理回路では<strong>静的ハザード</strong>回避のため $<span class="math notranslate nohighlight">\(AB\)</span><span class="math notranslate nohighlight">\( または \)</span><span class="math notranslate nohighlight">\(\overline{A},\overline{B}\)</span>$ を<strong>意図的に追加</strong>することがある（第9回で詳述）。</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id13">
+<h2><span class="section-number">2.6. </span>5. ミニ確認テスト（5問・その場採点）<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}A+\overline{A}B$$ を簡略化せよ。
+2. 双対性の原理に従い、$$A(B+C)=AB+AC$$ の双対を答えよ。
+3. $$\overline{A+B+C}$$ をド・モルガンで展開せよ。
+4. $$AB+\overline{A}C+BC$$ を簡略化せよ。
+5. 真理値表で1となる行が 3変数で (1,3,5,7) のときのSOPを答えよ。\\**解答例（配布・板書）**：\\1. $$A+\overline{A}B = (A+\overline{A})(A+B)=1\cdot(A+B)=A+B\end{aligned}\end{align} \]</div>
+</li>
+<li><div class="math notranslate nohighlight">
+\[A+BC=(A+B)(A+C)\]</div>
+</li>
+<li><div class="math notranslate nohighlight">
+\[\overline{A},\overline{B},\overline{C}\]</div>
+</li>
+<li><div class="math notranslate nohighlight">
+\[AB+\overline{A}C$$（合意定理）
+5. $$\overline{A},\overline{B}C + \overline{A}BC + A\overline{B}C + ABC = C(A+B)\]</div>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h2><span class="section-number">2.7. </span>6. まとめ・次回予告<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>キー等式</strong>：吸収、ド・モルガン、合意定理、双対。</p></li>
+<li><p><strong>実務観点</strong>：ゲート数と段数の削減＝面積・遅延・消費電力の削減に直結。</p></li>
+<li><p><strong>次回（第3回）</strong>：主加法標準形・主乗法標準形の体系化と<strong>論理ゲート実装</strong>（NAND-NAND, NOR-NOR）。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id15">
+<h2><span class="section-number">2.8. </span>付録：等式 “チートシート”<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[A+\overline{A}B=A+B\]</div>
+</li>
+<li><div class="math notranslate nohighlight">
+\[AB+\overline{A}C+BC=AB+\overline{A}C$$（合意）
+* $$A+AB=A,,\ A(A+B)=A$$（吸収）
+* $$\overline{AB}=\overline{A}+\overline{B}$$, $$\overline{A+B}=\overline{A},\overline{B}$$（ド・モルガン）
+* $$A\oplus B = A\overline{B}+\overline{A}B$$, $$A\oplus B = (A+B)(\overline{A}+\overline{B})\]</div>
+</li>
+</ul>
+</section>
+<section id="id16">
+<h2><span class="section-number">2.9. </span>宿題<a class="headerlink" href="#id16" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>ワークシート（10問）：等式変形とSOP/POS導出。うち2問は自由記述で<strong>どの法則を使ったか</strong>明記。次回冒頭で回収。</p></li>
+</ul>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -420,6 +707,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="1_digital.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>アナログとデジタル，数値表現</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -435,9 +731,35 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.1. タイムテーブル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2. 復習と準備</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.3. ブール代数</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.3.1. 基本記号と演算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.3.2. 1.2 真理値表（例）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.3.3. 1.3 論理関数の表現</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.4. 2. ブール代数の公理と定理・論理式の双対性（前半その2）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2.4.1. 2.1 公理（代表）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2.4.2. 2.2 基本定理（よく使う等式）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-duality">2.4.3. 2.3 双対性の原理（Principle of Duality）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3">2.4.4. 3.3 例題B（3変数：吸収）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">2.4.5. 3.4 例題C（コンセンサス）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-sop">2.4.6. 3.5 例題D（SOP→簡約）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.5. 4. 例題演習（後半その2）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sop-pos">2.5.1. 4.1 例題1：真理値表→SOP/POS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#majority">2.5.2. 4.2 例題2：多数決（majority）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.5.3. 4.3 例題3：ハザードに注意した冗長項</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.6. 5. ミニ確認テスト（5問・その場採点）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2.7. 6. まとめ・次回予告</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2.8. 付録：等式 “チートシート”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2.9. 宿題</a></li>
+</ul>
   </nav></div>
 
 </div></div>
