@@ -74,7 +74,7 @@
 | 1 | 1 | 1 | 1 |
 
 - 主加法標準形：$F = \overline{A} \cdot \overline{B} \cdot C + \overline{A} \cdot B \cdot \overline{C} + A \cdot B \cdot \overline{C} + A \cdot B \cdot C$
-- 主乗法標準形：$F = (\overline{A}+\overline{B}+\overline{C}) \cdot (\overline{A}+B+C) \cdot (A+\overline{B}+\overline{C}) \cdot (A+\overline{B}+C)$
+- 主乗法標準形：$F = (A+B+C) \cdot (A+\overline{B}+\overline{C}) \cdot (\overline{A}+B+C) \cdot (\overline{A}+B+\overline{C})$
 ```
 
 ```{note}
