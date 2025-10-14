@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>主加法標準形，主乗法標準形，論理ゲート &#8212; Introduction to Computers I</title>
+    <title>3. 主加法標準形，主乗法標準形，論理ゲート &#8212; Introduction to Computers I</title>
   
   
   
@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/3_normal_form';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="2. ブール代数，論理演算，真理値表" href="2_bool.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -182,9 +181,10 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
 </ul>
 
     </div>
@@ -380,8 +380,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">論理関数</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">論理関数の表現</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.1. 復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.2. 論理関数</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.2.1. 論理関数の表現</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.2.2. 構成方法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.3. 完備性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.4. 論理ゲート</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.4.1. 論理回路の構成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.4.2. 加法標準形と乗法標準形との変換</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.5. まとめ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">3.5.1. 復習</a></li>
 </ul>
 </li>
 </ul>
@@ -396,80 +408,438 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>主加法標準形，主乗法標準形，論理ゲート<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">3. </span>主加法標準形，主乗法標準形，論理ゲート<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>到達目標</p>
 <ul class="simple">
 <li><p>論理式の標準形である主加法標準形と主乗法標準形，及び論理ゲートについて理解する．</p></li>
 </ul>
-<section id="id2">
-<h2>論理関数<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>論理関数：論理変数を論理演算で結びつけたもの．</p>
-<section id="id3">
-<h3>論理関数の表現<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>今日の問い</p>
+<ol class="arabic simple">
+<li><p>主加法標準形とは何か</p></li>
+<li><p>主乗法標準形とは何か</p></li>
+<li><p>論理ゲートにはどのような種類があるか</p></li>
+</ol>
+<p>キーワード</p>
 <ul class="simple">
-<li><p>真理値表 → <strong>主加法標準形（SOP）</strong>：出力が1となる行の<strong>min項</strong>の和。</p></li>
-<li><p>真理値表 → <strong>主乗法標準形（POS）</strong>：出力が0となる行の<strong>max項</strong>の積。</p></li>
+<li><p>主加法標準形</p></li>
+<li><p>主乗法標準形</p></li>
+<li><p>論理ゲート</p></li>
 </ul>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>変数<span class="math notranslate nohighlight">\(F\)</span>の真理値表が下表のようになっており，<span class="math notranslate nohighlight">\(F(A,B,C)=1\)</span> となる行が <span class="math notranslate nohighlight">\({1,2,6,7}\)</span>（2進表示の (001,010,110,111)）のとき，<span class="math notranslate nohighlight">\(F\)</span>の主加法標準形と主乗法標準形は次のように表される．</p>
+<section id="id2">
+<h2><span class="section-number">3.1. </span>復習<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>基本的な演算（論理否定・論理和・論理積）の定義（真理値表）</p></li>
+</ol>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>A</p></th>
-<th class="head"><p>B</p></th>
-<th class="head"><p>C</p></th>
-<th class="head"><p>F</p></th>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\overline{A}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(A \cdot B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(A + B\)</span></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>1</p></td>
-<td><p>1</p></td>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
 </tr>
-<tr class="row-odd"><td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>0</p></td>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>1</p></td>
-<td><p>1</p></td>
-<td><p>0</p></td>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>0</p></td>
-<td><p>1</p></td>
-<td><p>0</p></td>
-<td><p>1</p></td>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>0</p></td>
-<td><p>1</p></td>
-<td><p>0</p></td>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>否定論理和 (NOR) と否定論理積 (NAND) の真理値表は上を元に次のように書ける．</p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\overline{A+B}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\overline{A \cdot B}\)</span></p></th>
 </tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>0</p></td>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>1</p></td>
-<td><p>1</p></td>
-<td><p>1</p></td>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>1</p></td>
-<td><p>0</p></td>
-<td><p>1</p></td>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><span class="math notranslate nohighlight">\(\overline{A+B+C}\)</span> をド・モルガンの法則に基づいて展開する．</p></li>
+</ol>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.2. </span>論理関数<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>論理関数：論理変数を論理演算で結びつけたもの．</p>
+<section id="id4">
+<h3><span class="section-number">3.2.1. </span>論理関数の表現<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>用語</p></th>
+<th class="head"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>加法標準形</p></td>
+<td><p>論理変数の論理積の論理和</p></td>
+</tr>
+<tr class="row-odd"><td><p>乗法標準形</p></td>
+<td><p>論理変数の論理和の論理積</p></td>
+</tr>
+<tr class="row-even"><td><p>最小項 (min term)</p></td>
+<td><p>使用する全ての論理変数またはその否定の<span style="color:red">論理積</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>最大項 (max term)</p></td>
+<td><p>使用する全ての論理変数またはその否定の<span style="color:red">論理和</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>用語</p></th>
+<th class="head"><p>意味</p></th>
+<th class="head"><p>例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>主加法標準形<br>(sum of products)</p></td>
+<td><p>最小項の論理和</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{A\cdot B \cdot C + A \cdot \overline{B} \cdot C + A \cdot \overline{B} \cdot \overline{C}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>主乗法標準形<br>(product of sums)</p></td>
+<td><p>最大項の論理積</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mathrm{(A+B+C)\cdot(A+B+\overline{C})\cdot(\overline{A}+B+C)\cdot(\overline{A}+\overline{B}+C)}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">3.2.2. </span>構成方法<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>主加法標準形</strong> ← 出力が1となる行の<strong>最小項</strong>の和</p></li>
+<li><p><strong>主乗法標準形</strong> ← 出力が0となる行の<strong>最大項</strong>の積</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>論理変数 <span class="math notranslate nohighlight">\(F=F(A,B,C)\)</span> の真理値表が下表のようになっており，<span class="math notranslate nohighlight">\(F(A,B,C)=1\)</span> となる行が (001, 010, 110, 111)のとき，<span class="math notranslate nohighlight">\(F\)</span> の主加法標準形と主乗法標準形は次のように表される．
+また，0となる行は (000, 011, 100, 101) である．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F(A,B,C)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <ul class="simple">
-<li><p>SOP：<span class="math notranslate nohighlight">\(F=\overline{A},\overline{B}C , + , \overline{A}B\overline{C} , + , AB\overline{C} , + , ABC\)</span></p></li>
-<li><p>POS：0となる行（(000,011,100,101)）から導く。</p></li>
+<li><p>主加法標準形：<span class="math notranslate nohighlight">\(F = \overline{A} \cdot \overline{B} \cdot C + \overline{A} \cdot B \cdot \overline{C} + A \cdot B \cdot \overline{C} + A \cdot B \cdot C\)</span></p></li>
+<li><p>主乗法標準形：<span class="math notranslate nohighlight">\(F = (\overline{A}+\overline{B}+\overline{C}) \cdot (\overline{A}+B+C) \cdot (A+\overline{B}+\overline{C}) \cdot (A+\overline{B}+C)\)</span></p></li>
 </ul>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<ol class="arabic simple">
+<li><p>次の真理値表を満たす論理変数 <span class="math notranslate nohighlight">\(F=F(A,B)\)</span> の主加法標準形と主乗法標準形を求めよ．</p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F(A,B)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>次の真理値表を満たす論理変数 <span class="math notranslate nohighlight">\(G=G(A,B)\)</span> の主加法標準形と主乗法標準形を求めよ．</p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(G(A,B)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="id6">
+<h2><span class="section-number">3.3. </span>完備性<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>ある論理関数の組み合わせ<span class="math notranslate nohighlight">\(X\)</span>が<span style="color:red">完備性</span>を有す：任意の論理関数を<span class="math notranslate nohighlight">\(X\)</span>の論理関数の組み合わせで表現可能であること</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>基本論理関数の組み <span class="math notranslate nohighlight">\(\{\text{AND, OR, NOT}\}\)</span> は完備性を有す．</p>
+<p>ド・モルガンの法則より <span class="math notranslate nohighlight">\(A+B = \overline{\overline{A}\cdot\overline{B}}\)</span> であるから <span class="math notranslate nohighlight">\(\{\text{OR}\}\)</span> は <span class="math notranslate nohighlight">\(\{\text{AND, NOT}\}\)</span> の組みに置き換えることができる．
+従って論理関数の組み <span class="math notranslate nohighlight">\(\{\text{AND, NOT}\}\)</span> は完備性を有す．</p>
+<p>一方で <span class="math notranslate nohighlight">\(A \cdot B = \overline{\overline{A}+\overline{B}}\)</span> であるから <span class="math notranslate nohighlight">\(\{\text{AND}\}\)</span> は <span class="math notranslate nohighlight">\(\{\text{OR, NOT}\}\)</span> の組みに置き換えることができ，論理関数の組み <span class="math notranslate nohighlight">\(\{\text{OR, NOT}\}\)</span> は完備性を有す．</p>
+</div>
+<ul class="simple">
+<li><p>否定論理積 (NAND) は完備性を有す．つまり<span style="color:red">否定論理積のみの組み合わせで全ての論理関数を表現することができる</span>．</p></li>
+<li><p>否定論理和 (NOR) は完備性を有す．つまり<span style="color:red">否定論理和のみの組み合わせで全ての論理関数を表現することができる</span>．</p></li>
+</ul>
+<p>論理積・論理和・論理否定 (AND・OR・NOT) は，次のように否定論理積 (NAND) のみの組み合わせで表現できる．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A \cdot B = \overline{(\overline{A \cdot B})\cdot(\overline{A \cdot B})}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A + B = \overline{(\overline{A \cdot A})\cdot(\overline{B \cdot B})}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\overline{A} = \overline{A \cdot A}\)</span></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2</strong></p>
+<p>論理積・論理和・論理否定を否定論理積の組みで表現した次式において，右辺を式変形あるいは右辺の真理値表を作成して，左辺に一致することを確かめよ．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A \cdot B = \overline{(\overline{A \cdot B})\cdot(\overline{A \cdot B})}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A + B = \overline{(\overline{A \cdot A})\cdot(\overline{B \cdot B})}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\overline{A} = \overline{A \cdot A}\)</span></p></li>
+</ul>
+</div>
+<p>論理積・論理和・論理否定 (AND・OR・NOT) は，次のように否定論理和 (NOR) のみの組み合わせで表現できる．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A \cdot B = \overline{(\overline{A + A})+(\overline{B + B})}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A + B = \overline{(\overline{A + B})+(\overline{A + B})}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\overline{A} = \overline{A + A}\)</span></p></li>
+</ul>
+</section>
+<section id="id7">
+<h2><span class="section-number">3.4. </span>論理ゲート<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>論理ゲート</strong> (logic gate)：基本的な論理演算機能を持つ論理回路</p></li>
+<li><p>MIL規格に基づくMIL記法では論理関数の論理ゲートは次のように図示される．</p></li>
+</ul>
+<p><img alt="論理ゲート一覧" src="../_images/logic.png" /></p>
+<section id="id8">
+<h3><span class="section-number">3.4.1. </span>論理回路の構成<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>論理式<span class="math notranslate nohighlight">\(X = A + (B \cdot C) + C\)</span>を実現する論理回路は次のように構成される．</p>
+<p><img alt="例" src="../_images/eg1.png" /></p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>論理式<span class="math notranslate nohighlight">\(X = A + (A \cdot B)\)</span>を実現する論理回路をNANDゲートのみを用いて構成する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+X &amp;= A + (A \cdot B)\\
+&amp;= \overline{(\overline{A \cdot A})\cdot(\overline{(A \cdot B) \cdot (A \cdot B)})}\\
+&amp;= \overline{(\overline{A \cdot A})\cdot(\overline{(\overline{(\overline{A \cdot B})\cdot(\overline{A \cdot B})}) \cdot (\overline{(\overline{A \cdot B})\cdot(\overline{A \cdot B})})})}
+\end{align}
+\end{split}\]</div>
+<p>であるから</p>
+<p><img alt="論理式を実現する論理回路の構成" src="../_images/eg2.png" /></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習3</strong></p>
+<p>次の論理式を実現する論理回路について</p>
+<div class="math notranslate nohighlight">
+\[
+X = (A \cdot B) + (B \cdot C)
+\]</div>
+<ol class="arabic simple">
+<li><p>ANDゲートとORゲートを用いて構成せよ．</p></li>
+<li><p>NANDゲートのみを用いて構成せよ．</p></li>
+</ol>
+</div>
+<!-- - 加法標準形はNANDゲートのみで表現することが可能である． -->
+<!-- - 乗法標準形はNORゲートのみで表現することが可能である． -->
+</section>
+<section id="id9">
+<h3><span class="section-number">3.4.2. </span>加法標準形と乗法標準形との変換<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>次の分配則に基づいて展開すれば良い．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A \cdot (B+C) = A \cdot B + A \cdot C\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A+B \cdot C = (A+B) \cdot (A+C)\)</span></p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>加法標準形 <span class="math notranslate nohighlight">\((A \cdot B) + (A \cdot \overline{B})\)</span> を分配則 <span class="math notranslate nohighlight">\(A+B \cdot C = (A+B) \cdot (A+C)\)</span> に従って展開すると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+(A \cdot B) + (A \cdot \overline{B})
+&amp;= ((A \cdot B) + A) \cdot ((A \cdot B) + \overline{B})\\
+&amp;= ((A + A) \cdot (A + B)) \cdot ((A + \overline{B}) \cdot (B + \overline{B}))\\
+&amp;= (A \cdot (A+B)) \cdot (A + \overline{B})\\
+&amp;= A \cdot (A+B) \cdot (A + \overline{B})
+%&amp;= A \cdot (A + \overline{B})\\
+%&amp;= A
+\end{align}
+\end{split}\]</div>
+<p>乗法標準形 <span class="math notranslate nohighlight">\((A + B) \cdot (A + \overline{B})\)</span> を分配則 <span class="math notranslate nohighlight">\(A \cdot (B + C) = (A \cdot B) + (A \cdot C)\)</span> に従って展開すると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+(A + B) \cdot (A + \overline{B})
+&amp;= ((A+B) \cdot A) + ((A+B) \cdot \overline{B})\\
+&amp;= ((A \cdot A) + (A \cdot B)) + ((A \cdot \overline{B}) + (B \cdot \overline{B}))\\
+&amp;= A + (A \cdot B) + (A \cdot \overline{B})
+%&amp;= A + (A \cdot \overline{B})
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2><span class="section-number">3.5. </span>まとめ<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<section id="id11">
+<h3><span class="section-number">3.5.1. </span>復習<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>「主加法標準形」と「主乗法標準形」との違いを説明してください．</p></li>
+<li><p>AND・OR・NANDを表す論理ゲートの記号を書いてください．</p></li>
+</ol>
 </section>
 </section>
 </section>
@@ -504,6 +874,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="2_bool.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>ブール代数，論理演算，真理値表</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -520,8 +899,20 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">論理関数</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">論理関数の表現</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.1. 復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.2. 論理関数</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.2.1. 論理関数の表現</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.2.2. 構成方法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.3. 完備性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.4. 論理ゲート</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.4.1. 論理回路の構成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.4.2. 加法標準形と乗法標準形との変換</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.5. まとめ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">3.5.1. 復習</a></li>
 </ul>
 </li>
 </ul>

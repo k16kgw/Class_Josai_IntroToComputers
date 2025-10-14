@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/2_bool';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. 主加法標準形，主乗法標準形，論理ゲート" href="3_normal_form.html" />
     <link rel="prev" title="1. アナログとデジタル，数値表現" href="1_digital.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,6 +185,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. ブール代数，論理演算，真理値表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
 </ul>
 
     </div>
@@ -379,28 +381,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.1. 復習と準備</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.1. 前回の復習</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2. ブール代数</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2.1. 基本記号と演算</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.2.2. 公理</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.2.3. 基本定理（よく使う等式）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-duality">2.2.4. 2.3 双対性の原理（Principle of Duality）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3">2.2.5. 3.3 例題B（3変数：吸収）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">2.2.6. 3.4 例題C（コンセンサス）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-sop">2.2.7. 3.5 例題D（SOP→簡約）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-duality">2.2.4. 双対性の原理 （Principle of Duality）</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.3. 4. 例題演習（後半その2）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sop-pos">2.3.1. 4.1 例題1：真理値表→SOP/POS</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#majority">2.3.2. 4.2 例題2：多数決（majority）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.3.3. 4.3 例題3：ハザードに注意した冗長項</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2.4. 5. ミニ確認テスト（5問・その場採点）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2.5. 6. まとめ・次回予告</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.6. 論理関数</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.7. 付録：等式 “チートシート”</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.8. 宿題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.3. 論理式の簡略化</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.4. 復習</a></li>
 </ul>
             </nav>
         </div>
@@ -417,12 +407,45 @@ document.write(`
 <p>到達目標</p>
 <ul class="simple">
 <li><p>論理演算の基本となるブール代数および真理値表について理解する．</p></li>
-<li><p><strong>ブール代数の公理・基本定理</strong>を用いて論理式を変形できる。</p></li>
-<li><p>**双対性（duality）**の概念を説明し、双対式を導出できる。</p></li>
-<li><p>基本的な<strong>論理式の簡略化</strong>（代数的手法、吸収・冗長項の削除、合意（コンセンサス）など）ができる。</p></li>
 </ul>
 <section id="id2">
-<h2><span class="section-number">2.1. </span>復習と準備<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>前回の復習<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>次の計算結果を2進数で答えよ．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((101)_2+(11)_2 = (1000)_2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((1.011)_2+(0.11)_2 = (10.001)_2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\mathrm{A})_{16}+(\mathrm{C})_{16} = (16)_{16}\)</span></p></li>
+</ul>
+</li>
+<li><p>次の数を2進数に基数変換せよ．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((9)_{10} = (1001)_{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((54)_{10} = (110110)_{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((\mathrm{F})_{16} = (1111)_{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((1\mathrm{A})_{16} = (11010)_{2}\)</span></p></li>
+</ul>
+</li>
+<li><p>次の数を10進数に基数変換せよ．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((1111)_{2} = (15)_{10}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((2\mathrm{C})_{16} = (44)_{16}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((10)_{16} = (16)_{10}\)</span></p></li>
+</ul>
+</li>
+<li><p>2進数で4桁までしか表せないものとする．このとき <span class="math notranslate nohighlight">\((101)_{2} - (11)_{2}\)</span> を <span class="math notranslate nohighlight">\((11)_{2}\)</span> の補数を用いた足し算で計算せよ．</p>
+<p><span class="math notranslate nohighlight">\((11)_{2}\)</span> の補数は <span class="math notranslate nohighlight">\((1101)_{2}\)</span> である．</p>
+<div class="math notranslate nohighlight">
+\[
+    (101)_{2} + (1101)_{2} = (10010)_{2}
+    \]</div>
+<p>であるから，繰り上がった項を無視して</p>
+<div class="math notranslate nohighlight">
+\[
+    (101)_{2} - (11)_{2} = (10)_{2}
+    \]</div>
+</li>
+</ol>
 </section>
 <section id="id3">
 <h2><span class="section-number">2.2. </span>ブール代数<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
@@ -433,16 +456,17 @@ document.write(`
 <li><p>変数を <span class="math notranslate nohighlight">\(A,B,C\)</span> とし，これらは<code class="docutils literal notranslate"><span class="pre">0</span></code>か<code class="docutils literal notranslate"><span class="pre">1</span></code>の値しか取らない．</p></li>
 <li><p>基本的な演算は次の3つ</p>
 <ul>
-<li><p>否定（NOT）：<span class="math notranslate nohighlight">\(\lnot A\)</span>, <span class="math notranslate nohighlight">\(\overline{A}\)</span></p></li>
-<li><p>論理積（AND）：<span class="math notranslate nohighlight">\(A \land B\)</span>, <span class="math notranslate nohighlight">\(A\cdot B\)</span>, <span class="math notranslate nohighlight">\(AB\)</span></p></li>
-<li><p>論理和（OR）：<span class="math notranslate nohighlight">\(A \lor B\)</span>, <span class="math notranslate nohighlight">\(A + B\)</span></p></li>
+<li><p>否定（NOT）：<span class="math notranslate nohighlight">\(\lnot A\)</span>，<span style="color:red"><span class="math notranslate nohighlight">\(\overline{A}\)</span></span></p></li>
+<li><p>論理積（AND）：<span class="math notranslate nohighlight">\(A \land B\)</span>，<span style="color:red"><span class="math notranslate nohighlight">\(A\cdot B\)</span></span>，<span class="math notranslate nohighlight">\(AB\)</span></p></li>
+<li><p>論理和（OR）：<span class="math notranslate nohighlight">\(A \lor B\)</span>，<span style="color:red"><span class="math notranslate nohighlight">\(A + B\)</span></span></p></li>
+<li><p>演算の順序は<code class="docutils literal notranslate"><span class="pre">()</span></code>，<code class="docutils literal notranslate"><span class="pre">・</span></code>，<code class="docutils literal notranslate"><span class="pre">+</span></code>の順．</p></li>
 </ul>
 </li>
 <li><p>これらを組み合わせて，他に次の演算を定義できる．</p>
 <ul>
 <li><p>排他的論理和（XOR）：<span class="math notranslate nohighlight">\(A \oplus B\)</span></p></li>
 <li><p>否定論理和（NOR）：<span class="math notranslate nohighlight">\(\overline{A+B}\)</span></p></li>
-<li><p>否定論理積（NAND）：<span class="math notranslate nohighlight">\(\overline{A\cdot B}\)</span>, <span class="math notranslate nohighlight">\(\overline{AB}\)</span></p></li>
+<li><p>否定論理積（NAND）：<span class="math notranslate nohighlight">\(\overline{A\cdot B}\)</span></p></li>
 </ul>
 </li>
 </ul>
@@ -514,19 +538,19 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td><p>単位元</p></td>
-<td><p><span class="math notranslate nohighlight">\(A+0=A\)</span>，<span class="math notranslate nohighlight">\(A \cdot 1=A\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(A+0=A\)</span> <br> <span class="math notranslate nohighlight">\(A \cdot 1=A\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>交換則</p></td>
-<td><p><span class="math notranslate nohighlight">\(A+B=B+A\)</span>，<span class="math notranslate nohighlight">\(A \cdot B = B \cdot A\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(A+B=B+A\)</span> <br> <span class="math notranslate nohighlight">\(A \cdot B = B \cdot A\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>結合則</p></td>
-<td><p><span class="math notranslate nohighlight">\((A+B)+C=A+(B+C)\)</span>，<span class="math notranslate nohighlight">\((A \cdot B) \cdot C=A \cdot (B \cdot C)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((A+B)+C=A+(B+C)\)</span> <br> <span class="math notranslate nohighlight">\((A \cdot B) \cdot C=A \cdot (B \cdot C)\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>分配則</p></td>
-<td><p><span class="math notranslate nohighlight">\(A \cdot (B+C) = A \cdot B + A \cdot C\)</span>，<span class="math notranslate nohighlight">\(A+B \cdot C = (A+B) \cdot (A+C)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(A \cdot (B+C) = A \cdot B + A \cdot C\)</span> <br> <span style="color:red"><span class="math notranslate nohighlight">\(A+B \cdot C = (A+B) \cdot (A+C)\)</span></span></p></td>
 </tr>
 <tr class="row-even"><td><p>補元</p></td>
-<td><p><span class="math notranslate nohighlight">\(A+\overline{A}=1\)</span>，<span class="math notranslate nohighlight">\(A\cdot\overline{A}=0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(A+\overline{A}=1\)</span> <br> <span class="math notranslate nohighlight">\(A\cdot\overline{A}=0\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -534,151 +558,198 @@ document.write(`
 </section>
 <section id="id6">
 <h3><span class="section-number">2.2.3. </span>基本定理（よく使う等式）<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>名前</p></th>
+<th class="head"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>冪等則（べきとうそく，巾等則）</p></td>
+<td><p><span class="math notranslate nohighlight">\(A+A=A\)</span> <br> <span class="math notranslate nohighlight">\(A \cdot A=A\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>帰無則</p></td>
+<td><p><span class="math notranslate nohighlight">\(A + 1 = 1\)</span> <br> <span class="math notranslate nohighlight">\(A \cdot 0 = 0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>復元則</p></td>
+<td><p><span class="math notranslate nohighlight">\(\overline{\overline{A}}=A\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>吸収則</p></td>
+<td><p><span class="math notranslate nohighlight">\(A+A \cdot B=A\)</span> <br> <span class="math notranslate nohighlight">\(A \cdot (A+B)=A\)</span> <br> <span class="math notranslate nohighlight">\(A+\overline{A} \cdot B=A + B\)</span> <br> <span class="math notranslate nohighlight">\(A \cdot (\overline{A}+B)=A \cdot B\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>ド・モルガンの法則（De Morgan’s laws）</p></td>
+<td><p><span class="math notranslate nohighlight">\(\overline{A+B}=\overline{A} \cdot \overline{B}\)</span> <br> <span class="math notranslate nohighlight">\(\overline{A \cdot B}=\overline{A}+\overline{B}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>合意定理（consensus theorem）</p></td>
+<td><p><span class="math notranslate nohighlight">\(A \cdot B + \overline{A} \cdot C + B \cdot C = A \cdot B + \overline{A} \cdot C\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <ul class="simple">
-<li><p>べき等律：$<span class="math notranslate nohighlight">\(A+A=A,,\ AA=A\)</span>$</p></li>
-<li><p>吸収律：$<span class="math notranslate nohighlight">\(A+AB=A,,\ A(A+B)=A\)</span>$</p></li>
-<li><p>反転同値：$<span class="math notranslate nohighlight">\(\overline{\overline{A}}=A\)</span>$</p></li>
-<li><p>ド・モルガン：$<span class="math notranslate nohighlight">\(\overline{A+B}=\overline{A},\overline{B},,\quad \overline{AB}=\overline{A}+\overline{B}\)</span>$</p></li>
-<li><p>コンセンサス（合意）定理：$<span class="math notranslate nohighlight">\(AB + \overline{A}C + BC = AB + \overline{A}C\)</span>$</p></li>
+<li><p>論理式の簡略化に当たって，公理と基本定理を活用して式変形を行う．</p></li>
 </ul>
-<blockquote>
-<div><p><strong>使いどころ</strong>：冗長項（例えば $<span class="math notranslate nohighlight">\(BC\)</span>$）を削ってゲート数・段数を減らす。</p>
-</div></blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>合意定理 <span class="math notranslate nohighlight">\(A \cdot B + \overline{A} \cdot C + B \cdot C = A \cdot B + \overline{A} \cdot C\)</span> を示す．</p>
+<p><u>証明</u></p>
+<p>取り得る値が<code class="docutils literal notranslate"><span class="pre">0</span></code>か<code class="docutils literal notranslate"><span class="pre">1</span></code>しかないため，真理値表を作成するだけでも証明になる．</p>
+<p><strong>方法1（真理値表の作成）</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>C</p></th>
+<th class="head"><p>左辺（<span class="math notranslate nohighlight">\(A \cdot B + \overline{A} \cdot C + B \cdot C\)</span>）</p></th>
+<th class="head"><p>右辺（<span class="math notranslate nohighlight">\(A \cdot B + \overline{A} \cdot C\)</span>）</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<p><strong>方法2（式変形）</strong></p>
+<p><span class="math notranslate nohighlight">\(A+\overline{A} = 1\)</span>より</p>
+<div class="math notranslate nohighlight">
+\[
+B \cdot C = B \cdot C \cdot (A+\overline{A}) = A\cdot B \cdot C + \overline{A} \cdot B \cdot C.
+\]</div>
+<p>ここで吸収則より</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A \cdot B + A \cdot B \cdot C = A \cdot B,
+\\
+\overline{A} \cdot B + \overline{A} \cdot B \cdot C = \overline{A} \cdot B.
+\end{split}\]</div>
+<p>従って右辺を変形すれば左辺を得る．</p>
+</div>
 </section>
 <section id="principle-of-duality">
-<h3><span class="section-number">2.2.4. </span>2.3 双対性の原理（Principle of Duality）<a class="headerlink" href="#principle-of-duality" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.2.4. </span>双対性の原理 （Principle of Duality）<a class="headerlink" href="#principle-of-duality" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>規則：「$<span class="math notranslate nohighlight">\(0\leftrightarrow 1\)</span><span class="math notranslate nohighlight">\( と \)</span><span class="math notranslate nohighlight">\(+\leftrightarrow \cdot\)</span>$ を同時に入れ替える」と<strong>常に真</strong>の等式は<strong>双対</strong>も真。</p></li>
-<li><p>例：$<span class="math notranslate nohighlight">\(A+0=A\)</span><span class="math notranslate nohighlight">\( の双対は \)</span><span class="math notranslate nohighlight">\(A\cdot 1=A\)</span>$。</p></li>
-<li><p>例：分配 $<span class="math notranslate nohighlight">\(A+BC=(A+B)(A+C)\)</span><span class="math notranslate nohighlight">\( の双対は \)</span><span class="math notranslate nohighlight">\(A(B+C)=AB+AC\)</span>$。</p></li>
+<li><p>双対：<span style="color:red"><span class="math notranslate nohighlight">\(0 \leftrightarrow 1\)</span></span> と <span style="color:red"><span class="math notranslate nohighlight">\(+ \leftrightarrow \cdot\)</span></span> を同時に入れ替える手続きによって得られる論理式．</p></li>
+<li><p>例</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(A+0=A\)</span> の双対は <span class="math notranslate nohighlight">\(A\cdot 1=A\)</span>．</p></li>
+<li><p>分配則 <span class="math notranslate nohighlight">\(A+B \cdot C=(A+B)\cdot(A+C)\)</span> の双対は，もう一方の分配則 <span class="math notranslate nohighlight">\(A\cdot(B+C)=A \cdot B+A \cdot C\)</span>．</p></li>
 </ul>
-<p><strong>演習（その場で口頭）</strong>：</p>
-<ol class="arabic">
-<li><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}A+\overline{A}B = A+B$$ を示せ（吸収＋分配）。
-2. 上式の双対を求めよ。\\## 3. 論理式の簡略化（後半その1）\\&gt; 第4回のカルノー図，第5回のQ-M法に先立ち，**代数的**にシンプルにするコツを学ぶ。\\### 3.1 代数的簡略化の手順例\\1. **共通因子**で括る／分配する。
-2. **吸収律**で項を削る。
-3. **ド・モルガン**で否定を外へ寄せる。
-4. **コンセンサス**で冗長項を落とす。\\### 3.2 例題A（2変数）\\与式：$$F(A,B)= A\overline{B} + AB\end{aligned}\end{align} \]</div>
 </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(A+\overline{A} \cdot B = A+B\)</span> を示せ．</p></li>
+<li><p>上式の双対を求めよ。</p></li>
 </ol>
-<ul class="simple">
-<li><p>因数分解：$<span class="math notranslate nohighlight">\(F=A(\overline{B}+B)=A\cdot 1= A\)</span>$
-→ <strong>最小</strong>：NOT/AND/OR不要（バッファ1つ）。</p></li>
-</ul>
-</section>
-<section id="b-3">
-<h3><span class="section-number">2.2.5. </span>3.3 例題B（3変数：吸収）<a class="headerlink" href="#b-3" title="Link to this heading">#</a></h3>
-<p>与式：$<span class="math notranslate nohighlight">\(F= AB + A\overline{B}C + AB\overline{C}\)</span>$</p>
-<ul class="simple">
-<li><p>まず $<span class="math notranslate nohighlight">\(AB\)</span><span class="math notranslate nohighlight">\( が他項を**吸収**：\)</span><span class="math notranslate nohighlight">\(F=AB + A\overline{B}C\)</span>$</p></li>
-<li><p>さらに因数分解：$<span class="math notranslate nohighlight">\(F=A(B+\overline{B}C)=A(B+C)\)</span>$
-→ ゲート段数・配線削減。</p></li>
-</ul>
-</section>
-<section id="c">
-<h3><span class="section-number">2.2.6. </span>3.4 例題C（コンセンサス）<a class="headerlink" href="#c" title="Link to this heading">#</a></h3>
-<p>与式：$<span class="math notranslate nohighlight">\(F= AB + \overline{A}C + BC\)</span>$</p>
-<ul class="simple">
-<li><p>合意定理より：$<span class="math notranslate nohighlight">\(F=AB + \overline{A}C\)</span><span class="math notranslate nohighlight">\(（\)</span><span class="math notranslate nohighlight">\(BC\)</span>$ は冗長）</p></li>
-</ul>
-</section>
-<section id="d-sop">
-<h3><span class="section-number">2.2.7. </span>3.5 例題D（SOP→簡約）<a class="headerlink" href="#d-sop" title="Link to this heading">#</a></h3>
-<p>与式（SOP）：$<span class="math notranslate nohighlight">\(F= \overline{A}BC + A\overline{B}C + ABC\)</span>$</p>
-<ul class="simple">
-<li><p>2項をまとめ：$<span class="math notranslate nohighlight">\(F=C(\overline{A}B + A\overline{B} + AB)=C(B\oplus A + AB)\)</span>$</p></li>
-<li><p>さらに：$<span class="math notranslate nohighlight">\(B\oplus A + AB = A+B\)</span>$（よく出る恒等式）</p></li>
-<li><p>よって：$<span class="math notranslate nohighlight">\(F=C(A+B)\)</span>$</p></li>
-</ul>
-<blockquote>
-<div><p>補足：$<span class="math notranslate nohighlight">\(A\oplus B = A\overline{B}+\overline{A}B\)</span>$ を起点に示せる。</p>
-</div></blockquote>
+</div>
 </section>
 </section>
-<hr class="docutils" />
 <section id="id7">
-<h2><span class="section-number">2.3. </span>4. 例題演習（後半その2）<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<section id="sop-pos">
-<h3><span class="section-number">2.3.1. </span>4.1 例題1：真理値表→SOP/POS<a class="headerlink" href="#sop-pos" title="Link to this heading">#</a></h3>
-<p><strong>仕様</strong>：2入力の<strong>少なくとも1つが1</strong>なら1。</p>
+<h2><span class="section-number">2.3. </span>論理式の簡略化<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>真理値表から：$<span class="math notranslate nohighlight">\(F(A,B)=A+B\)</span>$</p></li>
-<li><p>SOP：$<span class="math notranslate nohighlight">\(A\overline{B}+\overline{A}B+AB = A+B\)</span>$（吸収）</p></li>
-<li><p>POS：$<span class="math notranslate nohighlight">\((A+B)\)</span>$（最小形）</p></li>
+<li><p>簡略化：少ない項数，少ない論理積，少ない論理和で等価な論理式を導くこと．</p></li>
+<li><p>簡略化によって，実際に回路を実装する際の面積・遅延・消費電力の削減に直結する．</p></li>
+<li><p>補元・吸収則・合意定理などで項を減らすことを目指す．</p></li>
 </ul>
-</section>
-<section id="majority">
-<h3><span class="section-number">2.3.2. </span>4.2 例題2：多数決（majority）<a class="headerlink" href="#majority" title="Link to this heading">#</a></h3>
-<p><strong>仕様</strong>：3入力中<strong>2つ以上が1</strong>で1。</p>
-<ul class="simple">
-<li><p>SOP（機械的導出）：$<span class="math notranslate nohighlight">\(F=AB+BC+CA\)</span>$（最小）</p></li>
-<li><p>証明スケッチ：真理値表で1となる行を和で表し、吸収で簡約。</p></li>
-</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong>：
+<span class="math notranslate nohighlight">\(F(A,B)= A\overline{B} + A\cdot B\)</span> を簡略化する．</p>
+<p>次のように因数分解できる．</p>
+<div class="math notranslate nohighlight">
+\[
+F=A \cdot (\overline{B}+B)=A\cdot 1= A
+\]</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong>：
+<span class="math notranslate nohighlight">\(F= A \cdot B + A \cdot \overline{B} \cdot C + A \cdot B \cdot \overline{C}\)</span>を簡略化する．</p>
+<p>吸収則より</p>
+<div class="math notranslate nohighlight">
+\[
+A \cdot B + A \cdot \overline{B} \cdot C + A \cdot B \cdot \overline{C}
+= A \cdot B + A \cdot \overline{B} \cdot C
+\]</div>
+<p>因数分解して吸収則を適用すれば</p>
+<div class="math notranslate nohighlight">
+\[
+A \cdot B + A \cdot \overline{B} \cdot C
+= A \cdot (B + \overline{B} \cdot C)
+= A \cdot (B + C).
+\]</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2</strong></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\overline{A+B+C}\)</span> をド・モルガンの法則に従い展開せよ。</p></li>
+<li><p><span class="math notranslate nohighlight">\(A \cdot B + \overline{A} \cdot C + B \cdot C\)</span> を簡略化せよ。</p></li>
+</ol>
+</div>
 </section>
 <section id="id8">
-<h3><span class="section-number">2.3.3. </span>4.3 例題3：ハザードに注意した冗長項<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
-<p><strong>仕様</strong>：$<span class="math notranslate nohighlight">\(F=\overline{A}B + A\overline{B}\)</span>$（XOR）</p>
-<ul class="simple">
-<li><p>タイミングを考慮しない論理最小化ではOKだが、物理回路では<strong>静的ハザード</strong>回避のため $<span class="math notranslate nohighlight">\(AB\)</span><span class="math notranslate nohighlight">\( または \)</span><span class="math notranslate nohighlight">\(\overline{A},\overline{B}\)</span>$ を<strong>意図的に追加</strong>することがある（第9回で詳述）。</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="id9">
-<h2><span class="section-number">2.4. </span>5. ミニ確認テスト（5問・その場採点）<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<ol class="arabic">
-<li><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}A+\overline{A}B$$ を簡略化せよ。
-2. 双対性の原理に従い、$$A(B+C)=AB+AC$$ の双対を答えよ。
-3. $$\overline{A+B+C}$$ をド・モルガンで展開せよ。
-4. $$AB+\overline{A}C+BC$$ を簡略化せよ。
-5. 真理値表で1となる行が 3変数で (1,3,5,7) のときのSOPを答えよ。\\**解答例（配布・板書）**：\\1. $$A+\overline{A}B = (A+\overline{A})(A+B)=1\cdot(A+B)=A+B\end{aligned}\end{align} \]</div>
-</li>
-<li><div class="math notranslate nohighlight">
-\[A+BC=(A+B)(A+C)\]</div>
-</li>
-<li><div class="math notranslate nohighlight">
-\[\overline{A},\overline{B},\overline{C}\]</div>
-</li>
-<li><div class="math notranslate nohighlight">
-\[AB+\overline{A}C$$（合意定理）
-5. $$\overline{A},\overline{B}C + \overline{A}BC + A\overline{B}C + ABC = C(A+B)\]</div>
-</li>
+<h2><span class="section-number">2.4. </span>復習<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>復習</strong></p>
+<ol class="arabic simple">
+<li><p>否定論理積（NAND）の真理値表を作成すること．</p></li>
+<li><p>吸収則，ド・モルガンの法則，合意定理が主張する論理式を書き下すこと．</p></li>
+<li><p>本日学んだことを3つ箇条書きで挙げること．</p></li>
 </ol>
-</section>
-<hr class="docutils" />
-<section id="id10">
-<h2><span class="section-number">2.5. </span>6. まとめ・次回予告<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>キー等式</strong>：吸収、ド・モルガン、合意定理、双対。</p></li>
-<li><p><strong>実務観点</strong>：ゲート数と段数の削減＝面積・遅延・消費電力の削減に直結。</p></li>
-<li><p><strong>次回（第3回）</strong>：主加法標準形・主乗法標準形の体系化と<strong>論理ゲート実装</strong>（NAND-NAND, NOR-NOR）。</p></li>
-</ul>
-</section>
-<section id="id11">
-<h2><span class="section-number">2.6. </span>論理関数<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
-</section>
-<hr class="docutils" />
-<section id="id12">
-<h2><span class="section-number">2.7. </span>付録：等式 “チートシート”<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
-<ul>
-<li><div class="math notranslate nohighlight">
-\[A+\overline{A}B=A+B\]</div>
-</li>
-<li><div class="math notranslate nohighlight">
-\[AB+\overline{A}C+BC=AB+\overline{A}C$$（合意）
-* $$A+AB=A,,\ A(A+B)=A$$（吸収）
-* $$\overline{AB}=\overline{A}+\overline{B}$$, $$\overline{A+B}=\overline{A},\overline{B}$$（ド・モルガン）
-* $$A\oplus B = A\overline{B}+\overline{A}B$$, $$A\oplus B = (A+B)(\overline{A}+\overline{B})\]</div>
-</li>
-</ul>
-</section>
-<section id="id13">
-<h2><span class="section-number">2.8. </span>宿題<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>ワークシート（10問）：等式変形とSOP/POS導出。うち2問は自由記述で<strong>どの法則を使ったか</strong>明記。次回冒頭で回収。</p></li>
-</ul>
+</div>
 </section>
 </section>
 
@@ -721,6 +792,15 @@ document.write(`
         <p class="prev-next-title"><span class="section-number">1. </span>アナログとデジタル，数値表現</p>
       </div>
     </a>
+    <a class="right-next"
+       href="3_normal_form.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>主加法標準形，主乗法標準形，論理ゲート</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -737,28 +817,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.1. 復習と準備</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.1. 前回の復習</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2. ブール代数</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2.1. 基本記号と演算</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.2.2. 公理</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.2.3. 基本定理（よく使う等式）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-duality">2.2.4. 2.3 双対性の原理（Principle of Duality）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3">2.2.5. 3.3 例題B（3変数：吸収）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">2.2.6. 3.4 例題C（コンセンサス）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-sop">2.2.7. 3.5 例題D（SOP→簡約）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-duality">2.2.4. 双対性の原理 （Principle of Duality）</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.3. 4. 例題演習（後半その2）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sop-pos">2.3.1. 4.1 例題1：真理値表→SOP/POS</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#majority">2.3.2. 4.2 例題2：多数決（majority）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.3.3. 4.3 例題3：ハザードに注意した冗長項</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2.4. 5. ミニ確認テスト（5問・その場採点）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2.5. 6. まとめ・次回予告</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2.6. 論理関数</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2.7. 付録：等式 “チートシート”</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2.8. 宿題</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.3. 論理式の簡略化</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.4. 復習</a></li>
 </ul>
   </nav></div>
 
