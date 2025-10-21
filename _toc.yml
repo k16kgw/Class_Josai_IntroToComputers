@@ -11,7 +11,7 @@ parts:
       - file: contents/1_digital
       - file: contents/2_bool
       - file: contents/3_normal_form
-      # - file: contents/4_Karnaugh
+      - file: contents/4_Karnaugh
       # - file: contents/5_combinational_circuit
       # - file: contents/6_adder
       # - file: contents/8_state

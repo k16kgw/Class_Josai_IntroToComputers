@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Introduction to Computers I</title>
+    <title>4. カルノー図による組合せ回路の設計法 &#8212; Introduction to Computers I</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/4_Karnaugh';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="3. 主加法標準形，主乗法標準形，論理ゲート" href="3_normal_form.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,10 +181,11 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. カルノー図による組合せ回路の設計法</a></li>
 </ul>
 
     </div>
@@ -369,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>カルノー図による組合せ回路の設計法</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -378,9 +380,24 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1. 復習（第3回）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.1.1. 加法標準形と乗法標準形との変換</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#karnaugh-map">4.2. カルノー図 (Karnaugh map)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.2.1. グレイコード配置</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4.2.2. カルノー図の描き方</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">4.2.3. カルノー図を用いた論理式の簡略化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">4.2.4. 簡略化した論理式を用いたNAND回路の構成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4.3. 4. よくあるミスとハザードメモ（後半その1）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">4.4. まとめ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">4.4.1. 復習</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
@@ -391,7 +408,434 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">4. </span>カルノー図による組合せ回路の設計法<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>到達目標</p>
+<ul class="simple">
+<li><p>カルノー図（2〜4変数、拡張で5〜6変数）の描き方とグレイコード配置を説明できる。</p></li>
+<li><p>1,2,4,8セルの<strong>グルーピング</strong>規則と<strong>ドントケア</strong>の扱いを理解し、最小SOP/POSを導出できる。</p></li>
+<li><p>最小化結果をゲート実装（NAND–NAND / NOR–NOR）につなげられる。</p></li>
+</ul>
+<p>今日の問い</p>
+<ol class="arabic simple">
+<li><p>カルノー図は何を“視覚的に”最小化しているのか。</p></li>
+<li><p>どのようにセルをまとめれば項数・リテラル数を減らせるのか。</p></li>
+<li><p>ドントケアはいつ、どのように使うのが得か。</p></li>
+</ol>
+<p>キーワード</p>
+<ul class="simple">
+<li><p>カルノー図（K-map）</p></li>
+<li><p>グレイコード、隣接、折り返し</p></li>
+<li><p>グルーピング、素因子、本質素因子</p></li>
+<li><p>ドントケア（don’t care）</p></li>
+</ul>
+<hr class="docutils" />
+<section id="id2">
+<h2><span class="section-number">4.1. </span>復習（第3回）<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>用語</p></th>
+<th class="head"><p>意味</p></th>
+<th class="head"><p>例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>最小項 (min term)</p></td>
+<td><p>使用する全ての論理変数またはその否定の<span style="color:red">論理積</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>最大項 (max term)</p></td>
+<td><p>使用する全ての論理変数またはその否定の<span style="color:red">論理和</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>主加法標準形 (sum of products)</p></td>
+<td><p>最小項の論理和</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>主乗法標準形 (product of sums)</p></td>
+<td><p>最大項の論理積</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>主加法標準形</strong> ← 出力が1となる行の<strong>最小項</strong>の和</p></li>
+<li><p><strong>主乗法標準形</strong> ← 出力が0となる行の<strong>最大項</strong>の積</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>次の真理値表で与えられる論理変数<span class="math notranslate nohighlight">\(F\)</span>を主加法標準形・主乗法標準形で表すと，</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F(A,B,C)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="math notranslate nohighlight">
+\[
+F = (\overline{A} \cdot \overline{B} \cdot \overline{C})
+ + (\overline{A} \cdot \overline{B} \cdot C)
+ + (\overline{A} \cdot B \cdot C)
+ + (A \cdot \overline{B} \cdot C)
+ + (A \cdot B \cdot C)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+F = (A+\overline{B}+C)
+ \cdot(\overline{A}+B+C)
+ \cdot(\overline{A}+\overline{B}+\overline{C})
+\]</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>第3回演習3 - 解答例</strong></p>
+<p>次の論理式を実現する論理回路について</p>
+<div class="math notranslate nohighlight">
+\[
+X = (A \cdot B) + (B \cdot C)
+\]</div>
+<ol class="arabic simple">
+<li><p>ANDゲートとORゲートを用いて構成せよ．</p></li>
+</ol>
+<p><img alt="1の解答例" src="../_images/old3-1.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>NANDゲートのみを用いて構成せよ．</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    X &amp;= (A \cdot B) + (B \cdot C) = \overline{\overline{(A \cdot B) + (B \cdot C)}}
+    \\
+    &amp;= \overline{\overline{(A \cdot B)} \cdot \overline{(B \cdot C)}}
+\end{align}
+\end{split}\]</div>
+<p><img alt="2の解答例" src="../_images/old3-2.png" /></p>
+</div>
+<ul class="simple">
+<li><p>標準形は<strong>正しいが冗長</strong>になりがち → 簡略化する方法の一つが<span style="color:red">カルノー図</span></p></li>
+</ul>
+<section id="id3">
+<h3><span class="section-number">4.1.1. </span>加法標準形と乗法標準形との変換<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>次の分配則に基づいて展開すれば良い．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A \cdot (B+C) = A \cdot B + A \cdot C\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A+B \cdot C = (A+B) \cdot (A+C)\)</span></p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>加法標準形 <span class="math notranslate nohighlight">\((A \cdot B) + (A \cdot \overline{B})\)</span> を分配則 <span class="math notranslate nohighlight">\(A+B \cdot C = (A+B) \cdot (A+C)\)</span> に従って展開すると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+(A \cdot B) + (A \cdot \overline{B})
+&amp;= ((A \cdot B) + A) \cdot ((A \cdot B) + \overline{B})\\
+&amp;= ((A + A) \cdot (A + B)) \cdot ((A + \overline{B}) \cdot (B + \overline{B}))\\
+&amp;= (A \cdot (A+B)) \cdot (A + \overline{B})\\
+&amp;= A \cdot (A+B) \cdot (A + \overline{B})
+%&amp;= A \cdot (A + \overline{B})\\
+%&amp;= A
+\end{align}
+\end{split}\]</div>
+<p>乗法標準形 <span class="math notranslate nohighlight">\((A + B) \cdot (A + \overline{B})\)</span> を分配則 <span class="math notranslate nohighlight">\(A \cdot (B + C) = (A \cdot B) + (A \cdot C)\)</span> に従って展開すると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+(A + B) \cdot (A + \overline{B})
+&amp;= ((A+B) \cdot A) + ((A+B) \cdot \overline{B})\\
+&amp;= ((A \cdot A) + (A \cdot B)) + ((A \cdot \overline{B}) + (B \cdot \overline{B}))\\
+&amp;= A + (A \cdot B) + (A \cdot \overline{B})
+%&amp;= A + (A \cdot \overline{B})
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+</section>
+<section id="karnaugh-map">
+<h2><span class="section-number">4.2. </span>カルノー図 (Karnaugh map)<a class="headerlink" href="#karnaugh-map" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>カルノー図</strong>：論理回路を簡単化するための図表</p></li>
+</ul>
+<section id="id4">
+<h3><span class="section-number">4.2.1. </span>グレイコード配置<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>カルノー図では<span style="color:red">グレイコード配置</span>に従って表を作成する．</p>
+<ul>
+<li><p><strong>ハミング距離</strong>：同じ長さのビット列について，同じ位置の符号が異なってる箇所の数．</p>
+<ul class="simple">
+<li><p>例：<code class="docutils literal notranslate"><span class="pre">01</span></code>と<code class="docutils literal notranslate"><span class="pre">00</span></code>のハミング距離は1</p></li>
+<li><p>例：<code class="docutils literal notranslate"><span class="pre">010101</span></code>と<code class="docutils literal notranslate"><span class="pre">001001</span></code>のハミング距離は2</p></li>
+</ul>
+</li>
+<li><p><strong>グレイコード配置</strong>：前後に隣接する符号間のハミング距離が必ず1となるような，数値の符号化法．</p>
+<ul>
+<li><p>2変数：行を<span class="math notranslate nohighlight">\(A=0,1\)</span>，列を<span class="math notranslate nohighlight">\(B=0,1\)</span>とする．</p>
+<!-- ![2変数の場合のKarnaugh図の描き方](/contents/figs/4/Karnaugh_AB.png) -->
+<img src="./figs/Karnaugh_AB.png" width="50%">
+</li>
+<li><p>3変数：行を<span class="math notranslate nohighlight">\(A=0,1\)</span>，列を<span class="math notranslate nohighlight">\(BC=00,01,11,10\)</span>とする．<span class="math notranslate nohighlight">\(BC\)</span>の<strong>隣接は1ビット差</strong>が原則．
+<img alt="3変数の場合のKarnaugh図の描き方" src="../_images/Karnaugh_ABC.png" /></p></li>
+<li><p>4変数：行を<span class="math notranslate nohighlight">\(AB=00,01,11,10\)</span>，列を<span class="math notranslate nohighlight">\(CD=00,01,11,10\)</span>とする．
+<img alt="4変数の場合のKarnaugh図の描き方" src="../_images/Karnaugh_ABCD.png" /></p></li>
+<li><p>四辺は<strong>周期的に隣接</strong>している（上下・左右・四隅も隣接）．</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h3><span class="section-number">4.2.2. </span>カルノー図の描き方<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>与えられた論理式が<strong>加法標準形</strong>か<strong>乗法標準形</strong>かで分類する．</p></li>
+</ul>
+<p>加法標準形の場合</p>
+<ol class="arabic simple">
+<li><p>主加法標準形に変換する．</p></li>
+<li><p>各最小項に対応する区画に1を入れる．</p></li>
+</ol>
+<p>乗法標準形の場合</p>
+<ol class="arabic simple">
+<li><p>加法標準形に変換する．（分配則）</p></li>
+<li><p>以下，加法標準形の場合と同様．</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>次の論理式<span class="math notranslate nohighlight">\(F\)</span>のカルノー図を作成する．</p>
+<div class="math notranslate nohighlight">
+\[
+F = \overline{A} \cdot B \cdot C
+ + A \cdot B \cdot \overline{C}
+ + \overline{A} \cdot B \cdot \overline{C}
+ + A \cdot C
+\]</div>
+<ol class="arabic simple">
+<li><p>加法標準形なので主加法標準形に変換する．
+<span class="math notranslate nohighlight">\(A \cdot C = A \cdot (B+\overline{B}) \cdot C = A \cdot B \cdot C + A \cdot \overline{B} \cdot C\)</span>であるから，</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+F = \overline{A} \cdot B \cdot C
+ + A \cdot B \cdot \overline{C}
+ + \overline{A} \cdot B \cdot \overline{C}
+ + A \cdot B \cdot C 
+ + A \cdot \overline{B} \cdot C
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>カルノー図は</p></li>
+</ol>
+<p><img alt="例1" src="../_images/eg11.png" /></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<p>次の論理式<span class="math notranslate nohighlight">\(G\)</span>のカルノー図を作成せよ．</p>
+<div class="math notranslate nohighlight">
+\[
+G = \overline{A} \cdot B \cdot \overline{C} \cdot D
+ + \overline{A} \cdot B \cdot C
+ + A \cdot B \cdot C \cdot \overline{D}
+ + A \cdot B \cdot D
+\]</div>
+<!-- 
+1. 加法標準形なので主加法標準形に変換する．
+
+    $$
+    \begin{align}
+    G &= \overline{A} \cdot B \cdot \overline{C} \cdot D
+    + \overline{A} \cdot B \cdot C
+    + A \cdot B \cdot C \cdot \overline{D}
+    + A \cdot B \cdot D
+    \\
+    &= \overline{A} \cdot B \cdot \overline{C} \cdot D
+    + \overline{A} \cdot B \cdot C \cdot D
+    + \overline{A} \cdot B \cdot C \cdot \overline{D}
+    + A \cdot B \cdot C \cdot \overline{D}
+    \\
+    &\quad + A \cdot B \cdot C \cdot D
+    + A \cdot B \cdot \overline{C} \cdot D
+    \end{align}
+    $$
+
+2. カルノー図は
+
+![演習1](/contents/figs/4/exc1.png)
+-->
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">4.2.3. </span>カルノー図を用いた論理式の簡略化<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>与えられた論理式のカルノー図を作成する．（前節）</p></li>
+<li><p>1の区画をなるべく大きいグループで区分けする．</p>
+<ul class="simple">
+<li><p>グループは含む区画の数が <strong>2の冪（1,2,4,8,16）</strong> となるような，長方形または正方形をした区画のまとまり</p></li>
+</ul>
+</li>
+<li><p>グループの大きさを順に小さくし，区分けされなかった区画を含むようにグループによる区分けを行う．ただし，区画は複数のグループに属しても良い．</p></li>
+<li><p>得られたグループを表す論理式の和として元の論理式の簡略化が得られる．</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>グループによる区分けは一意ではなく，複数の区分けの仕方が存在する．</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>1以外の区画（0の区画）をグループで区分けすると，乗法標準形としての表現を得る．</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>論理式
+<span class="math notranslate nohighlight">\(F = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} \cdot B \cdot \overline{C} + A \cdot C\)</span>
+のカルノー図は次のように描ける．</p>
+<p><img alt="例1" src="../_images/eg11.png" /></p>
+<p>このとき論理式<span class="math notranslate nohighlight">\(F\)</span>の簡略化を試みる．
+このカルノー図は例えば次のように区分けでき，対応する論理式の和として簡略化できる．</p>
+<p><img alt="例2" src="../_images/eg21.png" /></p>
+<p>従って，<span class="math notranslate nohighlight">\(F = A \cdot C + B\)</span>となる．</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2</strong></p>
+<p>演習1で作成した，論理式
+<span class="math notranslate nohighlight">\(G = \overline{A} \cdot B \cdot \overline{C} \cdot D + \overline{A} \cdot B \cdot C + A \cdot B \cdot C \cdot \overline{D} + A \cdot B \cdot D\)</span>
+のカルノー図を元に，この論理式<span class="math notranslate nohighlight">\(G\)</span>の簡略化を試みよ．</p>
+<!-- 
+カルノー図は次のように区分けできる．
+
+![演習2](/contents/figs/4/exc2.png)
+
+従って，$G = B \cdot C + B \cdot D = B \cdot (C + D)$となる．
+ -->
+</div>
+</section>
+<section id="nand">
+<h3><span class="section-number">4.2.4. </span>簡略化した論理式を用いたNAND回路の構成<a class="headerlink" href="#nand" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>簡略化した論理式に2重否定を施し，内側の否定についてド・モルガンの法則を適用する．</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>論理式
+<span class="math notranslate nohighlight">\(F = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} \cdot B \cdot \overline{C} + A \cdot C\)</span>
+は
+<span class="math notranslate nohighlight">\(F = A \cdot C + B\)</span>
+と簡略化できたが，これをNAND回路として実装する．</p>
+<p>右辺の二重否定を取り，ド・モルガンの法則に従って展開すれば</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+F &amp;= A \cdot C + B
+\\
+&amp;= \overline{\overline{A \cdot C + B}}
+\\
+&amp;= \overline{\overline{A \cdot C} \cdot \overline{B}}
+\end{split}\]</div>
+<p>これを論理回路に実装すれば次のようになる．</p>
+<p><img alt="例3" src="../_images/eg3.png" /></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習3</strong></p>
+<p>論理式
+<span class="math notranslate nohighlight">\(G = \overline{A} \cdot B \cdot \overline{C} \cdot D + \overline{A} \cdot B \cdot C + A \cdot B \cdot C \cdot \overline{D} + A \cdot B \cdot D\)</span>
+は
+<span class="math notranslate nohighlight">\(G = B \cdot C + B \cdot D = B \cdot (C + D)\)</span>
+と簡略化できたが，これをNAND回路として実装せよ．</p>
+<p><span class="math notranslate nohighlight">\(G = B \cdot C + B \cdot D\)</span>の二重否定を取り，ド・モルガンの法則に従って展開すれば</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+F &amp;= A \cdot C + B
+\\
+&amp;= \overline{\overline{A \cdot C + B}}
+\\
+&amp;= \overline{\overline{A \cdot C} \cdot \overline{B}}
+\end{split}\]</div>
+<p>これを論理回路に実装すれば次のようになる．</p>
+<p><img alt="例3" src="../_images/eg3.png" /></p>
+</div>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">4.3. </span>4. よくあるミスとハザードメモ（後半その1）<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>2の冪でないサイズでグループ化してしまう。</p></li>
+<li><p>角の折り返しを忘れている。</p></li>
+<li><p>論理最小化だけに気を取られて<strong>静的ハザード</strong>に無配慮（実装時には合意項の付加を検討：第9回）。</p></li>
+</ul>
+<!-- 
+## 5. K-map → ゲート実装（後半その2）
+
+- SOP 最小形 → **NAND–NAND** 実装が直結。
+- POS 最小形 → **NOR–NOR** 実装が直結。
+- 実装時の注意：ファンイン制約、配線のうねり、等長化の必要性。
+
+```{tip}
+**手を動かす⑥（10分）**
+- 手を動かす③で得た最小形 \(F=C(A+B)\) を  
+  1) NAND–NAND、2) NOR–NOR でブロック図化し、段数と推定遅延を比較せよ。
+```
+-->
+</section>
+<section id="id8">
+<h2><span class="section-number">4.4. </span>まとめ<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h3><span class="section-number">4.4.1. </span>復習<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>加法標準形の論理式が与えられたときに，これを簡略化してNAND回路を構成するまでの一連の手続きを箇条書きしてください．</p></li>
+<li><p>グレイコードを使う理由を考えてみてください．例えばグレイコードではない例として，行を<span class="math notranslate nohighlight">\(A=0,1\)</span>，列を<span class="math notranslate nohighlight">\(BC=00,01,10,11\)</span>としたときの図表ではどのような不便が生じるでしょうか．</p></li>
+</ol>
+</section>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -422,6 +866,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="3_normal_form.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>主加法標準形，主乗法標準形，論理ゲート</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -437,9 +890,24 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.1. 復習（第3回）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">4.1.1. 加法標準形と乗法標準形との変換</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#karnaugh-map">4.2. カルノー図 (Karnaugh map)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4.2.1. グレイコード配置</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">4.2.2. カルノー図の描き方</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">4.2.3. カルノー図を用いた論理式の簡略化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">4.2.4. 簡略化した論理式を用いたNAND回路の構成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4.3. 4. よくあるミスとハザードメモ（後半その1）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">4.4. まとめ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">4.4.1. 復習</a></li>
+</ul>
+</li>
+</ul>
   </nav></div>
 
 </div></div>
