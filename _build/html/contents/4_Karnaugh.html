@@ -392,9 +392,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">4.2.4. 簡略化した論理式を用いたNAND回路の構成</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4.3. 4. よくあるミスとハザードメモ（後半その1）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">4.4. まとめ</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">4.4.1. 復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4.3. まとめ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">4.3.1. 復習</a></li>
 </ul>
 </li>
 </ul>
@@ -551,11 +550,9 @@ X = (A \cdot B) + (B \cdot C)
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{align}
-    X &amp;= (A \cdot B) + (B \cdot C) = \overline{\overline{(A \cdot B) + (B \cdot C)}}
-    \\
-    &amp;= \overline{\overline{(A \cdot B)} \cdot \overline{(B \cdot C)}}
-\end{align}
+X &amp;= (A \cdot B) + (B \cdot C) = \overline{\overline{(A \cdot B) + (B \cdot C)}}
+\\
+&amp;= \overline{\overline{(A \cdot B)} \cdot \overline{(B \cdot C)}}
 \end{split}\]</div>
 <p><img alt="2の解答例" src="../_images/old3-2.png" /></p>
 </div>
@@ -792,24 +789,15 @@ F &amp;= A \cdot C + B
 <p><span class="math notranslate nohighlight">\(G = B \cdot C + B \cdot D\)</span>の二重否定を取り，ド・モルガンの法則に従って展開すれば</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-F &amp;= A \cdot C + B
+G &amp;= B \cdot C + B \cdot D
 \\
-&amp;= \overline{\overline{A \cdot C + B}}
+&amp;= \overline{\overline{B \cdot C + B \cdot D}}
 \\
-&amp;= \overline{\overline{A \cdot C} \cdot \overline{B}}
+&amp;= \overline{\overline{B \cdot C} \cdot \overline{B \cdot D}}
 \end{split}\]</div>
 <p>これを論理回路に実装すれば次のようになる．</p>
-<p><img alt="例3" src="../_images/eg3.png" /></p>
+<p><img alt="演習3" src="../_images/exc3.png" /></p>
 </div>
-</section>
-</section>
-<section id="id7">
-<h2><span class="section-number">4.3. </span>4. よくあるミスとハザードメモ（後半その1）<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>2の冪でないサイズでグループ化してしまう。</p></li>
-<li><p>角の折り返しを忘れている。</p></li>
-<li><p>論理最小化だけに気を取られて<strong>静的ハザード</strong>に無配慮（実装時には合意項の付加を検討：第9回）。</p></li>
-</ul>
 <!-- 
 ## 5. K-map → ゲート実装（後半その2）
 
@@ -824,10 +812,11 @@ F &amp;= A \cdot C + B
 ```
 -->
 </section>
+</section>
+<section id="id7">
+<h2><span class="section-number">4.3. </span>まとめ<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <section id="id8">
-<h2><span class="section-number">4.4. </span>まとめ<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<section id="id9">
-<h3><span class="section-number">4.4.1. </span>復習<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.3.1. </span>復習<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>加法標準形の論理式が与えられたときに，これを簡略化してNAND回路を構成するまでの一連の手続きを箇条書きしてください．</p></li>
 <li><p>グレイコードを使う理由を考えてみてください．例えばグレイコードではない例として，行を<span class="math notranslate nohighlight">\(A=0,1\)</span>，列を<span class="math notranslate nohighlight">\(BC=00,01,10,11\)</span>としたときの図表ではどのような不便が生じるでしょうか．</p></li>
@@ -902,9 +891,8 @@ F &amp;= A \cdot C + B
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">4.2.4. 簡略化した論理式を用いたNAND回路の構成</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4.3. 4. よくあるミスとハザードメモ（後半その1）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">4.4. まとめ</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">4.4.1. 復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4.3. まとめ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">4.3.1. 復習</a></li>
 </ul>
 </li>
 </ul>

@@ -80,11 +80,9 @@ $$
 2. NANDゲートのみを用いて構成せよ．
 
 $$
-\begin{align}
-    X &= (A \cdot B) + (B \cdot C) = \overline{\overline{(A \cdot B) + (B \cdot C)}}
-    \\
-    &= \overline{\overline{(A \cdot B)} \cdot \overline{(B \cdot C)}}
-\end{align}
+X &= (A \cdot B) + (B \cdot C) = \overline{\overline{(A \cdot B) + (B \cdot C)}}
+\\
+&= \overline{\overline{(A \cdot B)} \cdot \overline{(B \cdot C)}}
 $$
 
 ![2の解答例](/contents/figs/4/old3-2.png)
@@ -316,24 +314,17 @@ $G = B \cdot C + B \cdot D = B \cdot (C + D)$
 $G = B \cdot C + B \cdot D$の二重否定を取り，ド・モルガンの法則に従って展開すれば
 
 $$
-F &= A \cdot C + B
+G &= B \cdot C + B \cdot D
 \\
-&= \overline{\overline{A \cdot C + B}}
+&= \overline{\overline{B \cdot C + B \cdot D}}
 \\
-&= \overline{\overline{A \cdot C} \cdot \overline{B}}
+&= \overline{\overline{B \cdot C} \cdot \overline{B \cdot D}}
 $$
 
 これを論理回路に実装すれば次のようになる．
 
-![例3](/contents/figs/4/eg3.png)
-
+![演習3](/contents/figs/4/exc3.png)
 ```
-
-## 4. よくあるミスとハザードメモ（後半その1）
-
-- 2の冪でないサイズでグループ化してしまう。
-- 角の折り返しを忘れている。
-- 論理最小化だけに気を取られて**静的ハザード**に無配慮（実装時には合意項の付加を検討：第9回）。
 
 <!-- 
 ## 5. K-map → ゲート実装（後半その2）

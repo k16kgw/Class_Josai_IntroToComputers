@@ -310,7 +310,7 @@ $G = \overline{A} \cdot B \cdot \overline{C} \cdot D + \overline{A} \cdot B \cdo
 は
 $G = B \cdot C + B \cdot D = B \cdot (C + D)$
 と簡略化できたが，これをNAND回路として実装せよ．
-
+<!-- 
 $G = B \cdot C + B \cdot D$の二重否定を取り，ド・モルガンの法則に従って展開すれば
 
 $$
@@ -324,6 +324,7 @@ $$
 これを論理回路に実装すれば次のようになる．
 
 ![演習3](/contents/figs/4/exc3.png)
+ -->
 ```
 
 <!-- 
