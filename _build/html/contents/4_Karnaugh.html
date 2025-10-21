@@ -786,17 +786,21 @@ F &amp;= A \cdot C + B
 は
 <span class="math notranslate nohighlight">\(G = B \cdot C + B \cdot D = B \cdot (C + D)\)</span>
 と簡略化できたが，これをNAND回路として実装せよ．</p>
-<p><span class="math notranslate nohighlight">\(G = B \cdot C + B \cdot D\)</span>の二重否定を取り，ド・モルガンの法則に従って展開すれば</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-G &amp;= B \cdot C + B \cdot D
+<!-- 
+$G = B \cdot C + B \cdot D$の二重否定を取り，ド・モルガンの法則に従って展開すれば
+
+$$
+G &= B \cdot C + B \cdot D
 \\
-&amp;= \overline{\overline{B \cdot C + B \cdot D}}
+&= \overline{\overline{B \cdot C + B \cdot D}}
 \\
-&amp;= \overline{\overline{B \cdot C} \cdot \overline{B \cdot D}}
-\end{split}\]</div>
-<p>これを論理回路に実装すれば次のようになる．</p>
-<p><img alt="演習3" src="../_images/exc3.png" /></p>
+&= \overline{\overline{B \cdot C} \cdot \overline{B \cdot D}}
+$$
+
+これを論理回路に実装すれば次のようになる．
+
+![演習3](/contents/figs/4/exc3.png)
+ -->
 </div>
 <!-- 
 ## 5. K-map → ゲート実装（後半その2）
