@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. ドントケアの扱い（前半その3） &#8212; Introduction to Computers I</title>
+    <title>5. クワイン・マクラスキー法による組合せ回路の設計法 &#8212; Introduction to Computers I</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/5_combinational_circuit';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="4. カルノー図による組合せ回路の設計法" href="4_Karnaugh.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,11 +181,12 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_Karnaugh.html">4. カルノー図による組合せ回路の設計法</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. クワイン・マクラスキー法による組合せ回路の設計法</a></li>
 </ul>
 
     </div>
@@ -357,7 +359,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -368,11 +372,26 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>3. ドントケアの扱い（前半その3）</h1>
+    <h1>クワイン・マクラスキー法による組合せ回路の設計法</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.1. 復習（第4回）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">5.2. クワイン・マクラスキー法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">5.3. ドントケア</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.3.1. ドントケアを含む場合のカルノー図</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">5.3.2. ドントケアを含む場合のクワイン・マクラスキー法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">5.4. まとめ</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -382,25 +401,776 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="id1">
-<h1>3. ドントケアの扱い（前半その3）<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">5. </span>クワイン・マクラスキー法による組合せ回路の設計法<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>到達目標</p>
+<!-- 
+- 組合せ回路の設計法としての**クワイン・マクラスキー（Q–M）法**を理解し，主加法標準形から**最小SOP**を系統的に導出できる．
+- **Q–M法**で主加法標準形から**最小SOP**を機械的に求められる。
+- **don’t care（ドントケア）**の意味を説明し、最小化に正しく活用できる。
+- **ペトリック法**で残りカバーの最小集合を選べる。
+- 最小SOPを**NAND–NAND**で実装できる。
+ -->
+<p>今日の問い</p>
 <ul class="simple">
-<li><p>入力の<strong>ありえない/無関心</strong>組合せを (X)（don’t care）として追加できる。</p></li>
-<li><p>目的：<strong>より大きいグループ</strong>を作ることで項を減らす。</p></li>
-<li><p>ただし <strong>必要なときだけ 1 とみなす</strong>。カバーに不要なら使わない（0として扱う）。</p></li>
+<li><p>カルノー図では煩雑な場合に，どのように系統的に論理式を簡略化できるか？</p></li>
+<li><p>論理式の簡略化においてドントケアはどのような役割を果たすか？</p></li>
+</ul>
+<!-- - ペトリック法はどんな“代数”で何を最小化している？ -->
+<p>キーワード</p>
+<ul class="simple">
+<li><p>クワイン・マクラスキー法（Quine–McCluskey algorithm，Q–M法）</p></li>
+<li><p>ドントケア（don’t care）</p></li>
+<li><p>ペトリック法（Petrick’s method）</p></li>
+</ul>
+<section id="id2">
+<h2><span class="section-number">5.1. </span>復習（第4回）<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>論理式が与えられたときに，これを簡略化してNAND回路を構成するまでの一連の手続き</p>
+<ol class="arabic simple">
+<li><p>（乗法標準形の場合）分配則を用いて加法標準形に変換する．</p></li>
+<li><p><strong>主加法標準形</strong> に変換する．</p></li>
+<li><p>各最小項に対応する区画に1を入れ， <strong>カルノー図</strong> を作成する．</p></li>
+<li><p>1の区画をなるべく大きい <strong>グループで区分け</strong> する．</p>
+<ul class="simple">
+<li><p>グループは含む区画の数が <strong>2の冪（1,2,4,8,16）</strong> となるような，長方形または正方形をした区画のまとまり</p></li>
+</ul>
+</li>
+<li><p>グループの大きさを順に小さくし，区分けされなかった区画を含むようにグループによる区分けを行う．ただし，区画は複数のグループに属しても良い．</p></li>
+<li><p>得られたグループを表す論理式の和として元の論理式の簡略化を得る．</p></li>
+<li><p>簡略化した論理式に <strong>2重否定</strong> を施し，内側の否定について <strong>ド・モルガンの法則</strong> を適用する．</p></li>
+<li><p>NAND回路に実装する．</p></li>
+</ol>
+<p>グレイコード（隣接する符号間のハミング距離は1）を使う理由</p>
+<ul class="simple">
+<li><p>隣接セルが常に1ビット差になるように並ぶため，カルノー図でグループを作成した場合にグループが簡略化された論理式になる．</p></li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><strong>手を動かす④（6分）</strong></p>
-<ul class="simple">
-<li><p>4変数関数：(F=\sum m(1,3,7,11,15)), don’t care: (d=\sum m(0,2))。</p></li>
-<li><p>K-map に 1 と d を配置し、d を活用して最小 SOP を求めよ。</p></li>
-</ul>
+<p><strong>例</strong></p>
+<p>主加法標準形で表された次の論理式<span class="math notranslate nohighlight">\(F\)</span>のカルノー図を作成する．</p>
+<div class="math notranslate nohighlight">
+\[
+F = \overline{A} \cdot B \cdot C
+ + A \cdot B \cdot \overline{C}
+ + \overline{A} \cdot B \cdot \overline{C}
+ + A \cdot B \cdot C 
+ + A \cdot \overline{B} \cdot C
+\]</div>
+<p>カルノー図は次の通り．</p>
+<p><img alt="例0" src="../_images/eg21.png" /></p>
+<p>列の2進数の順をグレイコード配列でないものにした場合．</p>
+<p><img alt="例0-1" src="../_images/eg_old.png" /></p>
 </div>
-<p><strong>解答例（板書）</strong></p>
+</section>
+<section id="id3">
+<h2><span class="section-number">5.2. </span>クワイン・マクラスキー法<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>カルノー図の欠点</p>
 <ul class="simple">
-<li><p>例えば (F= B D + A C)（一例）。d を使わない場合より項が減ることを確認。</p></li>
+<li><p>入力数が5つ程度までにしか適用できない．（図表が大きくなりすぎるため）</p></li>
+<li><p>アルゴリズム化できない．（コンピュータプログラムとして実装できない）</p></li>
 </ul>
+<p>手続き</p>
+<p><strong>I. 圧縮表の作成（主項の導出）</strong></p>
+<ol class="arabic simple">
+<li><p>与えられた論理式を主加法標準形に変換する．</p></li>
+<li><p>否定でない変数を1，否定された変数を0として，最小項を2進数で表記する．</p></li>
+<li><p><strong>1の個数</strong>ごとに最小項をグループ分けする．</p></li>
+<li><p>隣接グループ同士で<strong>1ビットだけ異なる</strong>組を結合し，異なる桁を <strong>“–”</strong> で表す（ダッシュ表記）．（<strong>圧縮</strong>）</p></li>
+<li><p>結合した要素について同様に結合し，これ以上結合できなくなるまで繰り返す．</p></li>
+<li><p>これ以上結合できなくなった項を<span style="color:red">主項</span>と呼ぶ．</p></li>
+</ol>
+<p><strong>II. 主項表の作成</strong></p>
+<ol class="arabic simple">
+<li><p>行を主項，列をIで求めた最小項とする表を作成する．</p></li>
+<li><p>主項が最小項を包含している要素に <strong>⚪︎印</strong> をつける．</p></li>
+<li><p>各最小項の列で⚪︎印が一つしかない場合，その⚪︎印を <strong>◎印</strong> に書き換える．◎印のついた主項を<span style="color:red">必須項</span>と呼ぶ．</p></li>
+<li><p>◎印のついた主項の行の⚪︎印を全て◎印に書き換える．</p></li>
+<li><p>⚪︎印しかない主項を省くことで簡略化された論理式を得る．</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>次の真理値表で表される論理式<span class="math notranslate nohighlight">\(F\)</span>の簡略化された論理式をクワイン・マクラスキー法を用いて導出する．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F(A,B,C)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>圧縮表は</p>
+<p><img alt="例1" src="../_images/eg1-1.png" /></p>
+<p>主項表は</p>
+<p><img alt="例1" src="../_images/eg1-2.png" /></p>
+<p>従って<span class="math notranslate nohighlight">\(F(A,B,C) = A \cdot C + B\)</span>．</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<p>次の真理値表で定義される論理式<span class="math notranslate nohighlight">\(G\)</span>の簡略化された論理式をクワイン・マクラスキー法を用いて導出せよ．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p>D</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(G(A,B,C,D)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 
+圧縮表は
+
+![演習1](/contents/figs/5/exc1-1.png)
+
+主項表は
+
+![演習1](/contents/figs/5/exc1-2.png)
+
+従って$G(A,B,C,D) = B \cdot C + B \cdot D$．
+ -->
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">5.3. </span>ドントケア<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>物理的に生じない</strong>，または <strong>出力が0, 1のどちらでも構わない</strong> 項をドントケアと呼ぶ．</p></li>
+<li><p>ドントケアの項は1として扱うことが可能である．ただし<strong>必要なときだけ</strong>使用し、不要なら 0 と同様に扱う．</p></li>
+<li><p>ドントケアの出力は<code class="docutils literal notranslate"><span class="pre">*</span></code>で表す．</p></li>
+</ul>
+<p>利点</p>
+<ul class="simple">
+<li><p>カルノー図やクワイン・マクラスキー法で <strong>大きいグループ（2,4,8セル）</strong> が作れるようになり，<strong>項数</strong> を減らせる．</p></li>
+</ul>
+<section id="id5">
+<h3><span class="section-number">5.3.1. </span>ドントケアを含む場合のカルノー図<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>次の真理値表で表される論理式<span class="math notranslate nohighlight">\(F'\)</span>のカルノー図を作成する．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F'(A,B,C)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="例2" src="../_images/eg2-1.png" /></p>
+<p>ドントケアを1と見做してグループの区画分けを行うと，</p>
+<p><img alt="例2" src="../_images/eg2-2.png" /></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2</strong></p>
+<p>次の真理値表で定義される論理式<span class="math notranslate nohighlight">\(G'\)</span>のカルノー図を作成し，簡略化された論理式を得よ．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p>D</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(G'(A,B,C,D)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 
+カルノー図は次のように区分けできる．
+
+![演習2](/contents/figs/5/exc2-1.png)
+
+ここでグループによる区画分けを行うと，
+
+![演習2](/contents/figs/5/exc2-2.png)
+
+従って，$G' = B + \overline{A} \cdot C \cdot D$となる．
+ -->
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">5.3.2. </span>ドントケアを含む場合のクワイン・マクラスキー法<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>手順は通常のクワイン・マクラスキー法と同じ．</p></li>
+<li><p>ドントケアは結合候補に<strong>含めてよい</strong>．</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<p>次の真理値表で表される論理式<span class="math notranslate nohighlight">\(F'\)</span>の簡略化された論理式をクワイン・マクラスキー法を用いて導出する．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(F'(A,B,C)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>圧縮表は</p>
+<p><img alt="例1" src="../_images/eg3-1.png" /></p>
+<p>主項表は</p>
+<p><img alt="例1" src="../_images/eg3-2.png" /></p>
+<p>従って<span class="math notranslate nohighlight">\(F'(A,B,C) = A + B\)</span>．</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習3</strong></p>
+<p>次の真理値表で定義される論理式<span class="math notranslate nohighlight">\(G'\)</span>の簡略化された論理式をクワイン・マクラスキー法を用いて導出せよ．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p>D</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(G'(A,B,C,D)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- 
+## ペトリック法（最小被覆の代数）
+
+- 各ミン項列 j について、その列を覆う PI の“和” (S_j) を作る（例：(S_j=P_1+P_3)）。
+- 全体の条件は (\prod_j S_j)（**和の積**）として表せる。
+- 分配と吸収で簡約し、**項数最小**（ついでに**リテラル数**も少ない）な PI 組を選ぶ。
+
+```{note}
+**ミニ演習（10分）**
+- 3列×4行の小さなカバレッジ表を配布。\(S_1,S_2,S_3\) を書き、\(S_1S_2S_3\) を展開→吸収で最小集合を決めよ。途中式を明記。
+```
+ -->
+<!-- 
+## 5. NAND回路としての実装
+
+- **SOP → NAND–NAND** が直結。インバータは (\operatorname{NAND}(X,X)) で実現し**共有**する。
+- 例：(F=A + C\overline{D}) を NAND 化
+
+$$
+F = A + C\overline{D}
+= \overline{\overline{A} \cdot \overline{C\overline{D}}}
+= \overline{\overline{A} \cdot \overline{\overline{\overline{C}} + D}}
+$$
+
+- 実装スケッチ
+
+  - 反転を一度だけ生成：(\overline{A},\overline{C},\overline{D})
+  - (C\overline{D}) を NAND で作成（内部 NOT を活用）
+  - 最終段 NAND で ORを実現
+- **注意**：ハザードが問題となる場所では、**合意項**を追加しても**定常論理は変わらない**（静的1ハザード対策）。
+
+```{tip}
+**手を動かす4（7分）**
+- \(F=\overline{B}C + B\overline{C}\) を 2入力NANDのみで実装せよ（最短3ゲート）。段数・ゲート数を数える。
+```
+ -->
+<!-- 
+## 6. よくある落とし穴
+
+- 2ビット以上違う項を結合してしまう（ダッシュ位置の誤り）。
+- 結合済みの minterm を PI に残す。
+- EPI を取り切らずにペトリック法へ進む。
+- don’t care を常に 1 と誤解（**必要なときだけ 1 扱い**）。
+ -->
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">5.4. </span>まとめ<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>クワイン・マクラスキー法の手続き</p>
+<ol class="arabic simple">
+<li><p>圧縮表を作成する．</p></li>
+<li><p>主項表を作成する．</p></li>
+</ol>
+</li>
+<li><p>ドントケア：0,1のどちらでも良い項を用いて，より簡略化することが可能になる．</p></li>
+</ul>
+<!-- 
+## 2. 例1（ウォームアップ：3変数）
+
+**仕様**：(F(A,B,C)=\sum m(1,2,5,6))，(d=\varnothing)
+
+- グループ分け（1の個数）
+
+  - 1個：(001(m_1),010(m_2))
+  - 2個：(101(m_5),110(m_6))
+- 第1結合
+
+  - (001)–(101) → (-01)（Aがダッシュ）
+  - (010)–(110) → (-10)（Aがダッシュ）
+- これ以上結合不可 → **PI**：(-01=\overline{B}C)，(-10=B\overline{C})
+- カバレッジ表でどちらも**EPI** → 最小SOP：
+
+  - (\boxed{F=\overline{B}C+B\overline{C}})（= XOR）
+
+```{tip}
+**手を動かす1（5分）**
+- 上の表を自分のノートに作り，使用済チェック（✓）と PI を明示せよ．
+```
+
+---
+
+## 3. 例2（本格：4変数＋don’t care）
+
+**仕様**：(F(A,B,C,D)=\sum m(1,3,7,9,11,15))，(d=\sum m(0,2,8,10))
+
+- グループ分け
+
+  - 1個：(0001)
+  - 2個：(0011,1001) ＋ (d:0010,1000)
+  - 3個：(0111,1011,1111) ＋ (d:1010)
+  - 0個：(d:0000)
+- 結合ラウンド1（例）
+
+  - (0001)–(0011)→(00-1)，(0001)–(1001)→(-001)
+  - (0011)–(0111)→(0-11)，(1001)–(1011)→(10-1)
+  - (0111)–(1111)→(-111)，(1011)–(1111)→(1-11)
+  - don’t care との結合例：(0000)–(0001)→(000-) ほか
+- 結合ラウンド2（例）
+
+  - (00-1)–(10-1)→(-0-1)
+  - (0-11)–(1-11)→(--11)
+  - (-001)–(000-)→(0-0-)
+- PI 候補（簡約表現の例）
+
+  - (-0-1=\overline{B}D)，(--11=CD)，(0-0-=\overline{A},\overline{C}) など
+- カバレッジ表→EPI を先に選択，残りを目視 or ペトリック法で決定
+- 一例としての最小SOP：(\boxed{F= A + C\overline{D}})（同価解が複数あり得る）
+
+```{tip}
+**手を動かす2（12分）**
+- 上記仕様で自分たちの結合列を作り，PI を列挙→カバレッジ表→最小SOP。班ごとに“違うけど等価”な解を持ってきてOK。
+``` 
+-->
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -433,12 +1203,43 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="4_Karnaugh.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>カルノー図による組合せ回路の設計法</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.1. 復習（第4回）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">5.2. クワイン・マクラスキー法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">5.3. ドントケア</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.3.1. ドントケアを含む場合のカルノー図</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">5.3.2. ドントケアを含む場合のクワイン・マクラスキー法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">5.4. まとめ</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
