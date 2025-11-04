@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Introduction to Computers I</title>
+    <title>6. 半加算器・全加算器・減算器 &#8212; Introduction to Computers I</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/6_adder';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="5. クワイン・マクラスキー法による組合せ回路の設計法" href="5_combinational_circuit.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,11 +181,13 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_Karnaugh.html">4. カルノー図による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_combinational_circuit.html">5. クワイン・マクラスキー法による組合せ回路の設計法</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. 半加算器・全加算器・減算器</a></li>
 </ul>
 
     </div>
@@ -370,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>半加算器・全加算器・減算器</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -379,9 +382,25 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.1. 前回の復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#half-adder-ha">6.2. 半加算器（Half Adder, HA）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.2.1. 定義と真理値表</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-adder-fa">6.3. 全加算器（Full Adder, FA）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.3.1. 定義と真理値表</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-rca">6.4. nビット加算：リップルキャリー加算器（RCA）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.5. 減算の実現</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.5.1. 減算器の基本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">6.5.2. 2の補数による減算</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">6.6. 加減算器</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">6.7. まとめ</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -392,7 +411,499 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">6. </span>半加算器・全加算器・減算器<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>到達目標</p>
+<ul class="simple">
+<li><p>数値演算の基本である加算回路，減算回路の組合せ回路での構成を理解する．</p></li>
+<li><p><strong>半加算器（HA）／全加算器（FA）</strong> の真理値表・論理式・回路構成を説明できる．</p></li>
+<li><p><strong>リップルキャリー加算器（RCA）</strong> をnビットに拡張して構成できる．</p></li>
+<li><p><strong>減算</strong> を補数（2の補数）または <strong>減算器</strong> で実現できる．<strong>借位/桁上げ/オーバフロー</strong> の扱いを説明できる．</p></li>
+</ul>
+<!-- - 簡単な**最適化**（XORの合成，共通サブ式の再利用，NAND実装）を行える． -->
+<p>今日の問い</p>
+<ul class="simple">
+<li><p>1ビットの加算はどの論理で表現され，どのようにnビットへ拡張するか？</p></li>
+<li><p>減算は“引く”より“足す（補数化）”のが楽なのはなぜ？</p></li>
+</ul>
+<!-- - 符号（2の補数表現）の加算で **オーバフロー** はどう検出する？ -->
+<p>キーワード</p>
+<ul class="simple">
+<li><p>半加算器（HA），全加算器（FA）</p></li>
+<li><p>リップルキャリー（RCA），キャリー生成/伝搬</p></li>
+<li><p>減算，2の補数，オーバフロー</p></li>
+</ul>
+<!-- - XOR，NAND–NAND実装 -->
+<section id="id2">
+<h2><span class="section-number">6.1. </span>前回の復習<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>クワイン・マクラスキー法に基づく，主加法標準形からNAND–NAND回路実装への流れ．</p></li>
+<li><p>ドントケア（0,1のどちらでも良い項）を用いて，論理式をより簡略化することが可能になる．</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>第5回演習3</strong></p>
+<p>次の真理値表で定義される論理式<span class="math notranslate nohighlight">\(G'\)</span>の簡略化された論理式をクワイン・マクラスキー法を用いて導出せよ．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>A</p></th>
+<th class="head text-center"><p>B</p></th>
+<th class="head text-center"><p>C</p></th>
+<th class="head text-center"><p>D</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(G'(A,B,C,D)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="half-adder-ha">
+<h2><span class="section-number">6.2. </span>半加算器（Half Adder, HA）<a class="headerlink" href="#half-adder-ha" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(A,B\)</span>が<span class="math notranslate nohighlight">\(0,1\)</span>のとき，<span class="math notranslate nohighlight">\(A+B\)</span>の2進表示は次のようになる．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(A+B\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>この結果を2の位と1の位との2つの出力として扱う．</p>
+<section id="id3">
+<h3><span class="section-number">6.2.1. </span>定義と真理値表<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>入力：<span class="math notranslate nohighlight">\(A,B\)</span>（1ビット）</p></li>
+<li><p>出力：桁上げ<span class="math notranslate nohighlight">\(C\)</span> (carry)，和<span class="math notranslate nohighlight">\(S\)</span> (sum)</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(S\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>論理式</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(C=A \cdot B\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S = A \oplus B = \overline{A} \cdot B + A \cdot \overline{B}\)</span></p></li>
+</ul>
+</li>
+<li><p>これを実現する回路を<span style="color:red">半加算器</span>と呼ぶ．</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<ol class="arabic simple">
+<li><p>上の真理値表から<span class="math notranslate nohighlight">\(C\)</span>，<span class="math notranslate nohighlight">\(S\)</span>を出力する回路図をXOR回路とAND回路を用いて作成せよ．</p></li>
+<li><p><strong>NANDのみ</strong> で半加算器を構成する回路図を作成せよ．</p></li>
+</ol>
+<p><img alt="例1-1" src="../_images/eg1-11.png" /></p>
+<p><span class="math notranslate nohighlight">\(C\)</span>, <span class="math notranslate nohighlight">\(S\)</span>の主加法標準形から</p>
+<div class="math notranslate nohighlight">
+\[
+C = A \cdot B = \overline{\overline{A \cdot B}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+S &amp;= \overline{A} \cdot B + A \cdot \overline{B}
+\\
+&amp;= \overline{\overline{\overline{A} \cdot B + A \cdot \overline{B}}}
+\\
+&amp;= \overline{\overline{\overline{A} \cdot B} \cdot \overline{A \cdot \overline{B}}}
+\end{split}\]</div>
+<p><img alt="例1-2" src="../_images/eg1-21.png" /></p>
+<p>しかしながら，この回路は次の変形からより簡潔な回路図を作成できる．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+S &amp;= \overline{A} \cdot B + A \cdot \overline{B}
+\\
+&amp;= \overline{B} \cdot B + \overline{A} \cdot B + A \cdot \overline{B} + A \cdot \overline{A}
+\\
+&amp;= (\overline{B}+\overline{A}) \cdot B + A \cdot (\overline{A}+\overline{B})
+\\
+&amp;= \overline{\overline{(\overline{B}+\overline{A}) \cdot B + A \cdot (\overline{A}+\overline{B})}}
+\\
+&amp;= \overline{\overline{((\overline{B}+\overline{A}) \cdot B)} \cdot \overline{(A \cdot (\overline{A}+\overline{B}))}}
+\\
+&amp;= \overline{\overline{(\overline{A \cdot B}) \cdot B} \cdot \overline{A \cdot (\overline{A \cdot B})}}
+\end{split}\]</div>
+<p><img alt="例1-3" src="../_images/eg1-3.png" /></p>
+</div>
+<p>回路図では半加算器は次のように簡易的に表示する．</p>
+<p><img alt="半加算器" src="../_images/ha.png" /></p>
+</section>
+</section>
+<section id="full-adder-fa">
+<h2><span class="section-number">6.3. </span>全加算器（Full Adder, FA）<a class="headerlink" href="#full-adder-fa" title="Link to this heading">#</a></h2>
+<p>ある桁における和を考える場合，下の桁からの桁上がりも考慮する必要が出てくる．</p>
+<p><span class="math notranslate nohighlight">\(A\)</span>と<span class="math notranslate nohighlight">\(B\)</span>との和において，下からの桁上がりを<span class="math notranslate nohighlight">\(C_{in}\)</span>として，和を<span class="math notranslate nohighlight">\(S\)</span>，上の桁への桁上がりを<span class="math notranslate nohighlight">\(C_{out}\)</span>とする．</p>
+<section id="id4">
+<h3><span class="section-number">6.3.1. </span>定義と真理値表<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>入力：<span class="math notranslate nohighlight">\(A,B,C_{in}\)</span></p></li>
+<li><p>出力：桁上げ<span class="math notranslate nohighlight">\(C_{out}\)</span>，和<span class="math notranslate nohighlight">\(S\)</span></p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C_{in}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C_{out}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(S\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>論理式：</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(C_{out} = A \cdot B + C_{in} \cdot (A\oplus B)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S = A \oplus B \oplus C_{in}\)</span></p></li>
+</ul>
+</li>
+<li><p>構成：</p>
+<ul>
+<li><p>半加算器の出力として<span class="math notranslate nohighlight">\(A \cdot B\)</span>と<span class="math notranslate nohighlight">\(A \oplus B\)</span>が出力されるので，半加算器とOR回路のみを用いて回路図を作成することができる．</p></li>
+</ul>
+</li>
+<li><p>これを実現する回路を<span style="color:red">全加算器</span>と呼ぶ．</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<ol class="arabic simple">
+<li><p>全加算器の回路図をAND, OR, XOR回路を用いて作成せよ．</p></li>
+<li><p>全加算器の回路図を，半加算器とOR回路のみを用いて作成せよ．</p></li>
+</ol>
+<p><img alt="例2-1" src="../_images/eg2-11.png" /></p>
+<p><img alt="例2-2" src="../_images/eg2-21.png" /></p>
+</div>
+<p>回路図では全加算器は次のように簡易的に表示する．</p>
+<p><img alt="全加算器" src="../_images/fa.png" /></p>
+</section>
+</section>
+<section id="n-rca">
+<h2><span class="section-number">6.4. </span>nビット加算：リップルキャリー加算器（RCA）<a class="headerlink" href="#n-rca" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(i\)</span>桁目の計算による桁上げを<span class="math notranslate nohighlight">\(C_{out,i}\)</span>とし，<span class="math notranslate nohighlight">\(i\)</span>桁目の計算で考慮すべき下の桁からの桁上げを<span class="math notranslate nohighlight">\(C_{in,i}\)</span>とおく．</p></li>
+<li><p><strong>構成</strong>：全加算器を直列にn個配置し，<span class="math notranslate nohighlight">\(C_{out,i}\)</span>が次段の<span class="math notranslate nohighlight">\(C_{in,i+1}\)</span>へ“リップル (ripple)”するように接続する．</p></li>
+</ul>
+<p>※ ripple：波紋を広げる．</p>
+<!-- 
+- **遅延**：最悪 (O(n))．最下位から最上位へキャリーが伝搬．
+- **改良の入口**（紹介）：キャリー先読み（CLA）で (O(\log n)) へ短縮（生成/伝搬 (G_i=A_iB_i), (P_i=A_i\oplus B_i)）．
+ -->
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>例</strong></p>
+<ol class="arabic simple">
+<li><p>4ビットリップルキャリー加算器の回路図（FA×4）を作成せよ．</p></li>
+</ol>
+<p><img alt="4ビットリップルキャリー加算器" src="../_images/rca.png" /></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<p><span class="math notranslate nohighlight">\(A=0111, B=0101, C_{in}=0\)</span>のときの出力，5桁目への桁上げ<span class="math notranslate nohighlight">\(C_{out}\)</span>と各位<span class="math notranslate nohighlight">\(S_{i}\)</span>を求めよ．</p>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">6.5. </span>減算の実現<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h3><span class="section-number">6.5.1. </span>減算器の基本<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<!-- - 1ビット減算 $D = A - B$．出力：差 $D$，借位 $B_{out}$． -->
+<p><strong>加算器を流用</strong> して減算を実装する．</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">6.5.2. </span>2の補数による減算<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>2の補数：<span class="math notranslate nohighlight">\(-B = \overline{B} + 1\)</span>（ビット反転＋1）．</p></li>
+<li><p><span class="math notranslate nohighlight">\(A - B = A + (\overline{B} + 1)\)</span>．</p></li>
+<li><p><strong>実装</strong>：</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(B\)</span>を <strong>全ビット反転</strong> し，最下位の桁上げを<span class="math notranslate nohighlight">\(C_{in}=1\)</span>としてリップルキャリー加算器に入力する．</p></li>
+</ul>
+<!-- - 制御信号 $SUB\in{0,1}$ を用い，$SUB=1$ のとき **XOR** で (B) を反転，$C_{in}=SUB$． -->
+</li>
+</ul>
+<!-- 
+```{tip}
+**演習3**
+
+- 制御信号 $SUB$ を使って "加算/減算" を1本のRCAで切替える**加減算器**のブロック図を描け：
+  - 各ビットで $B_i' = B_i \oplus SUB$．
+  - 最下位 $C_{in}=SUB$．
+```
+ -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2</strong></p>
+<p>4ビット減算器の回路図（FA×4）を作成せよ．</p>
+<p><img alt="4ビット減算器" src="../_images/rcd.png" /></p>
+</div>
+<!-- 
+### オーバフローとキャリー
+
+- **符号なし**：最終キャリー $C_{out,n}$ が 1 なら桁あふれ．差分でも借位を同様に扱う．
+- **2の補数（符号付き）**：最上位ビットへの**入力キャリー**と**出力キャリー**が異なると**オーバフロー**．
+  - 判定：$OV = C_{n-1\to n}^{in} \oplus C_{n-1\to n}^{out}4．
+
+```{note}
+**演習2**
+
+- 4ビットでの2の補数で $A=0111(7), B=1001(-7)$ を加算．$OV$ を計算して結果を解釈せよ．
+```
+ -->
+</section>
+</section>
+<section id="id8">
+<h2><span class="section-number">6.6. </span>加減算器<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習3</strong></p>
+<p>全加算器4つと，必要に応じて基本的な回路を使用して加算と減算を実現する回路図を作成せよ．</p>
+<p>ヒント：最下位の<span class="math notranslate nohighlight">\(C_{in}\)</span>が<span class="math notranslate nohighlight">\(0\)</span>なら加算器，<span class="math notranslate nohighlight">\(1\)</span>なら減算器となるように回路を組む．</p>
+<p><img alt="4ビット減算器" src="../_images/rcad.png" /></p>
+</div>
+<!-- 
+## 5. 実装最適化の小ネタ（後半その2）
+
+- **XORの共有**：(X=A\oplus B) を1回だけ合成し，(S) と (C_{out}) 両方で使う．
+- **NAND–NAND**での実装：
+
+  - XOR は NAND/NOR の組み合わせで作成（演習1参照）．
+  - 反転は (\mathrm{NAND}(X,X)) で共有．ファンイン上限に合わせて分割．
+- **配線と遅延**：RCAは配線が素直で学習用に最適．速度が重要ならCLAやCSKAを概説．
+
+```{tip}
+**例4**
+- 1ビットFAの式から**NANDゲートのみ**で実装スケッチを描け．XORを2個どう配置するかがポイント．
+```
+ -->
+</section>
+<section id="id9">
+<h2><span class="section-number">6.7. </span>まとめ<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>1ビット加算の本質：<span class="math notranslate nohighlight">\(S=A\oplus B\oplus C_{in}\)</span>，<span class="math notranslate nohighlight">\(C_{out}=A \cdot B + C_{in} \cdot (A\oplus B)\)</span>．</p></li>
+<li><p>nビット加算：FAの直列（RCA）．</p></li>
+<li><p>減算：2の補数化で加算器を流用．</p></li>
+</ul>
+<!-- - オーバフロー検出：符号なしは最終キャリー，符号付きは$OV = C_{in}^{MSB}\oplus C_{out}^{MSB}$． -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>復習</strong></p>
+<ol class="arabic simple">
+<li><p>半加算器と全加算器の違いを述べよ．</p></li>
+</ol>
+<!-- 2. 4ビットリップルキャリー加算器で$A=1011, B=1101, C_{in}=0$ の和$S$と最終キャリー$C_{out}$を計算せよ． -->
+<!-- 3. 2の補数のオーバフロー条件を述べよ． -->
+</div>
+<!-- 
+## 付録：式の導出メモ
+
+- FAの式導出（SOP）
+
+  - (S) は3入力XOR：ミン項 (\sum m(1,2,4,7))．
+  - (C_{out}) は (\sum m(3,5,6,7)) → (AB + AC_{in} + BC_{in} = AB + C_{in}(A\oplus B))．
+- XORのSOP：(A\oplus B=\overline{A}B + A\overline{B})．
+- 2の補数：(\text{neg}(B)=\overline{B}+1)．最下位キャリーに1を注入する理由． 
+ -->
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -423,6 +934,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="5_combinational_circuit.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>クワイン・マクラスキー法による組合せ回路の設計法</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -438,9 +958,25 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.1. 前回の復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#half-adder-ha">6.2. 半加算器（Half Adder, HA）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.2.1. 定義と真理値表</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-adder-fa">6.3. 全加算器（Full Adder, FA）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.3.1. 定義と真理値表</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-rca">6.4. nビット加算：リップルキャリー加算器（RCA）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.5. 減算の実現</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.5.1. 減算器の基本</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">6.5.2. 2の補数による減算</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">6.6. 加減算器</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">6.7. まとめ</a></li>
+</ul>
   </nav></div>
 
 </div></div>
