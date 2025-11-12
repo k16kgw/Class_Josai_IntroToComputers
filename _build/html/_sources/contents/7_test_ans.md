@@ -23,7 +23,7 @@
 
 **問1-3.** 8ビットでの2の補数表現で $-37$ を表せ。（2点）
 
-<!-- 
+
 <span style="color:red">**解答**</span>
 
 **問1-1.** 次を2進数へ基数変換せよ。（各1点）
@@ -39,7 +39,7 @@
 (b) $(10)_{16}=(16)_{10}$
 
 **問1-3.** $(37)_{10}=(100101)_{2}$であるから$-37$は$(11011010)_{2}+(1)_{2}=(11011011)_{2}$．
- -->
+
 
 ---
 
@@ -58,7 +58,7 @@
 | 1 | 1 | 0 |      |      | 
 | 1 | 1 | 1 |      |      | 
 
-<!-- 
+
 <span style="color:red">**解答**</span>
 
 | A | B | C | 左辺（$A \cdot B + \overline{A} \cdot C + B \cdot C$） | 右辺（$A \cdot B + \overline{A} \cdot C$） |
@@ -71,7 +71,7 @@
 | 1 | 0 | 1 |   0   |   0   | 
 | 1 | 1 | 0 |   1   |   1   | 
 | 1 | 1 | 1 |   1   |   1   | 
- -->
+
 
 ---
 
@@ -90,7 +90,7 @@
 | 1 | 1 | 0 | 1 |
 | 1 | 1 | 1 | 0 |
 
-<!-- 
+
 <span style="color:red">**解答**</span>
 
 - 主加法標準形 
@@ -110,7 +110,7 @@
      \cdot (A+\overline{B}+C)
      \cdot (\overline{A}+\overline{B}+\overline{C})
     $$
- -->
+
 ---
 
 <u>**問4**（カルノー図による簡略化）〔6点〕</u>
@@ -124,7 +124,7 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 
 **問4-3.** 前問で簡略化した論理式$G$の回路図を作成せよ．（2点）
 
-<!-- 
+
 <span style="color:red">**解答**</span>
 
 ![例1](/contents/figs/4/eg1.png)
@@ -135,12 +135,12 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 ![例2](/contents/figs/4/eg2.png)
 
 従って，$G = A \cdot C + B$となる．
- -->
+
 ---
 
+<!-- <br><br><br><br><br>
 <br><br><br><br><br>
-<br><br><br><br><br>
-<br>
+<br> -->
 
 <u>**問5**（クワイン・マクラスキー法）〔6点〕</u>
 
@@ -162,7 +162,7 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 
 **問5-2.** 前問で得られた論理式を参考に$H$の回路図をNAND回路のみを用いて作成せよ．（3点）
 
-<!-- 
+
 <span style="color:red">**解答**</span>
 
 圧縮表は
@@ -175,10 +175,10 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 
 従って$H(A,B,C) = A + B \cdot \overline{C}$．
 
-二重否定を取れば$H = A + B = \overline{\overline{A+B}} = \overline{\overline{A}\cdot\overline{B}}$であるから，
+二重否定を取れば$H = A + B = \overline{\overline{A+B\cdot \overline{C}}} = \overline{\overline{A}\cdot\overline{B\cdot \overline{C}}}$であるから，
 
 ![問5-2](/contents/figs/7/q5.png)
- -->
+
 
 ---
 
@@ -191,7 +191,7 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 **問6-3.** 4ビットリップルキャリー加算器（FAを4つ）とNOT回路を用いて，$A-B$の演算を表す4ビット減算器の回路図を作成せよ．
 ただし入力値$A, B$は各ビットを$A_i, B_i$として$A=(A_3 A_2 A_1 A_0), B=(B_3 B_2 B_1 B_0)$と表し，入力値が固定値となる箇所はその値を具体的に記すこと．（2点）
 
-<!-- 
+
 <span style="color:red">**解答**</span>
 
 - $C=A \cdot B$
@@ -209,4 +209,4 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 |  1  |  1  |   1    |   1     |  1  |
 
 ![4ビット減算器](/contents/figs/6/rcd.png)
- -->
+

@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'contents/7_test';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contents/7_test_ans';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="6. 半加算器・全加算器・減算器" href="6_adder.html" />
@@ -260,7 +260,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/7_test.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/7_test_ans.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +290,7 @@
       
       
       
-      <li><a href="../_sources/contents/7_test.md" target="_blank"
+      <li><a href="../_sources/contents/7_test_ans.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -403,23 +403,14 @@ document.write(`
 <p>(a) <span class="math notranslate nohighlight">\((1111)_{2}\)</span></p>
 <p>(b) <span class="math notranslate nohighlight">\((10)_{16}\)</span></p>
 <p><strong>問1-3.</strong> 8ビットでの2の補数表現で <span class="math notranslate nohighlight">\(-37\)</span> を表せ。（2点）</p>
-<!-- 
-<span style="color:red">**解答**</span>
-
-**問1-1.** 次を2進数へ基数変換せよ。（各1点）
-
-(a) $(54)_{10}=(110110)_{2}$
-
-(b) $(\mathrm{1A})_{16}=(22)_{10}=(10110)_{2}$
-
-**問1-2.** 次を10進数へ基数変換せよ。（各1点）
-
-(a) $(1111)_{2}=(8+4+2+1)_{10}=(15)_{10}$
-
-(b) $(10)_{16}=(16)_{10}$
-
-**問1-3.** $(37)_{10}=(100101)_{2}$であるから$-37$は$(11011010)_{2}+(1)_{2}=(11011011)_{2}$．
- -->
+<p><span style="color:red"><strong>解答</strong></span></p>
+<p><strong>問1-1.</strong> 次を2進数へ基数変換せよ。（各1点）</p>
+<p>(a) <span class="math notranslate nohighlight">\((54)_{10}=(110110)_{2}\)</span></p>
+<p>(b) <span class="math notranslate nohighlight">\((\mathrm{1A})_{16}=(22)_{10}=(10110)_{2}\)</span></p>
+<p><strong>問1-2.</strong> 次を10進数へ基数変換せよ。（各1点）</p>
+<p>(a) <span class="math notranslate nohighlight">\((1111)_{2}=(8+4+2+1)_{10}=(15)_{10}\)</span></p>
+<p>(b) <span class="math notranslate nohighlight">\((10)_{16}=(16)_{10}\)</span></p>
+<p><strong>問1-3.</strong> <span class="math notranslate nohighlight">\((37)_{10}=(100101)_{2}\)</span>であるから<span class="math notranslate nohighlight">\(-37\)</span>は<span class="math notranslate nohighlight">\((11011010)_{2}+(1)_{2}=(11011011)_{2}\)</span>．</p>
 <hr class="docutils" />
 <p><u><strong>問2</strong> （ブール代数・等式変形）〔2点〕</u></p>
 <p>合意定理<span class="math notranslate nohighlight">\(A \cdot B + \overline{A} \cdot C + B \cdot C = A \cdot B + \overline{A} \cdot C\)</span>における左辺と右辺の出力を真理値表にまとめよ．</p>
@@ -484,20 +475,68 @@ document.write(`
 </tbody>
 </table>
 </div>
-<!-- 
-<span style="color:red">**解答**</span>
-
-| A | B | C | 左辺（$A \cdot B + \overline{A} \cdot C + B \cdot C$） | 右辺（$A \cdot B + \overline{A} \cdot C$） |
-| - | - | - | :---: | :---: |
-| 0 | 0 | 0 |   0   |   0   |
-| 0 | 0 | 1 |   1   |   1   |
-| 0 | 1 | 0 |   0   |   0   |
-| 0 | 1 | 1 |   1   |   1   |
-| 1 | 0 | 0 |   0   |   0   | 
-| 1 | 0 | 1 |   0   |   0   | 
-| 1 | 1 | 0 |   1   |   1   | 
-| 1 | 1 | 1 |   1   |   1   | 
- -->
+<p><span style="color:red"><strong>解答</strong></span></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>C</p></th>
+<th class="head text-center"><p>左辺（<span class="math notranslate nohighlight">\(A \cdot B + \overline{A} \cdot C + B \cdot C\)</span>）</p></th>
+<th class="head text-center"><p>右辺（<span class="math notranslate nohighlight">\(A \cdot B + \overline{A} \cdot C\)</span>）</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr class="docutils" />
 <p><u><strong>問3</strong>（主加法標準形/主乗法標準形・最小項/最大項）〔4点〕</u></p>
 <p>次の真理値表を満たす論理変数 <span class="math notranslate nohighlight">\(F=F(A,B,C)\)</span> の主加法標準形（2点）と主乗法標準形（2点）を求めよ．</p>
@@ -553,27 +592,27 @@ document.write(`
 </tbody>
 </table>
 </div>
-<!-- 
-<span style="color:red">**解答**</span>
-
-- 主加法標準形 
-
-    $$
+<p><span style="color:red"><strong>解答</strong></span></p>
+<ul>
+<li><p>主加法標準形</p>
+<div class="math notranslate nohighlight">
+\[
     F= \overline{A}\cdot\overline{B}\cdot\overline{C}
      + \overline{A}\cdot B \cdot C
      + A \cdot \overline{B}\cdot\overline{C}
      + A \cdot \overline{B}\cdot C
      + A \cdot B \cdot \overline{C}
-    $$
-
-- 主乗法標準形 
-
-    $$
+    \]</div>
+</li>
+<li><p>主乗法標準形</p>
+<div class="math notranslate nohighlight">
+\[
     F= (A+B+\overline{C})
      \cdot (A+\overline{B}+C)
      \cdot (\overline{A}+\overline{B}+\overline{C})
-    $$
- -->
+    \]</div>
+</li>
+</ul>
 <hr class="docutils" />
 <p><u><strong>問4</strong>（カルノー図による簡略化）〔6点〕</u></p>
 <p><strong>問4-1.</strong> 次の論理式</p>
@@ -581,22 +620,16 @@ document.write(`
 のカルノー図を描け．（2点）</p>
 <p><strong>問4-2.</strong> 前問で作成したカルノー図を元に論理式<span class="math notranslate nohighlight">\(G\)</span>を簡略化せよ．（演算の数を2つまで減らすことができる）（2点）</p>
 <p><strong>問4-3.</strong> 前問で簡略化した論理式<span class="math notranslate nohighlight">\(G\)</span>の回路図を作成せよ．（2点）</p>
-<!-- 
-<span style="color:red">**解答**</span>
-
-![例1](/contents/figs/4/eg1.png)
-
-このとき論理式$G$の簡略化を試みる．
-このカルノー図は例えば次のように区分けでき，対応する論理式の和として簡略化できる．
-
-![例2](/contents/figs/4/eg2.png)
-
-従って，$G = A \cdot C + B$となる．
- -->
+<p><span style="color:red"><strong>解答</strong></span></p>
+<p><img alt="例1" src="../_images/eg11.png" /></p>
+<p>このとき論理式<span class="math notranslate nohighlight">\(G\)</span>の簡略化を試みる．
+このカルノー図は例えば次のように区分けでき，対応する論理式の和として簡略化できる．</p>
+<p><img alt="例2" src="../_images/eg21.png" /></p>
+<p>従って，<span class="math notranslate nohighlight">\(G = A \cdot C + B\)</span>となる．</p>
 <hr class="docutils" />
-<p><br><br><br><br><br>
+<!-- <br><br><br><br><br>
 <br><br><br><br><br>
-<br></p>
+<br> -->
 <p><u><strong>問5</strong>（クワイン・マクラスキー法）〔6点〕</u></p>
 <p>次の真理値表で定義される論理変数<span class="math notranslate nohighlight">\(H=H(A,B,C)\)</span>について次の問に答えよ．
 ただし表中の「＊」はドントケアを意味する．</p>
@@ -654,48 +687,87 @@ document.write(`
 </div>
 <p><strong>問5-1.</strong> クワイン・マクラスキー法に基づいて簡略化せよ．（演算の数は2つで表現できる．ただしNOTは演算にカウントしない）（3点）</p>
 <p><strong>問5-2.</strong> 前問で得られた論理式を参考に<span class="math notranslate nohighlight">\(H\)</span>の回路図をNAND回路のみを用いて作成せよ．（3点）</p>
-<!-- 
-<span style="color:red">**解答**</span>
-
-圧縮表は
-
-![問5-1](/contents/figs/7/q5-1-1.png)
-
-主項表は
-
-![問5-1](/contents/figs/7/q5-1-2.png)
-
-従って$H(A,B,C) = A + B \cdot \overline{C}$．
-
-二重否定を取れば$H = A + B = \overline{\overline{A+B}} = \overline{\overline{A}\cdot\overline{B}}$であるから，
-
-![問5-2](/contents/figs/7/q5.png)
- -->
+<p><span style="color:red"><strong>解答</strong></span></p>
+<p>圧縮表は</p>
+<p><img alt="問5-1" src="../_images/q5-1-1.png" /></p>
+<p>主項表は</p>
+<p><img alt="問5-1" src="../_images/q5-1-2.png" /></p>
+<p>従って<span class="math notranslate nohighlight">\(H(A,B,C) = A + B \cdot \overline{C}\)</span>．</p>
+<p>二重否定を取れば<span class="math notranslate nohighlight">\(H = A + B = \overline{\overline{A+B\cdot \overline{C}}} = \overline{\overline{A}\cdot\overline{B\cdot \overline{C}}}\)</span>であるから，</p>
+<p><img alt="問5-2" src="../_images/q5.png" /></p>
 <hr class="docutils" />
 <p><u><strong>問6</strong>（半加算器・全加算器・減算器）〔6点〕</u></p>
 <p><strong>問6-1.</strong> 半加算器（HA）の出力である和と桁上げ<span class="math notranslate nohighlight">\((S, C)\)</span>の論理式を書け．（2点）</p>
 <p><strong>問6-2.</strong> 全加算器（FA）の真理値表を作成せよ．ただし1ビットの論理変数<span class="math notranslate nohighlight">\(A, B\)</span>に対する<span class="math notranslate nohighlight">\(A+B\)</span>の演算を扱い，下からの桁上げを<span class="math notranslate nohighlight">\(C_{in}\)</span>，演算の和を<span class="math notranslate nohighlight">\(S\)</span>，上への桁上げを<span class="math notranslate nohighlight">\(C_{out}\)</span>と記述することとする．（2点）</p>
 <p><strong>問6-3.</strong> 4ビットリップルキャリー加算器（FAを4つ）とNOT回路を用いて，<span class="math notranslate nohighlight">\(A-B\)</span>の演算を表す4ビット減算器の回路図を作成せよ．
 ただし入力値<span class="math notranslate nohighlight">\(A, B\)</span>は各ビットを<span class="math notranslate nohighlight">\(A_i, B_i\)</span>として<span class="math notranslate nohighlight">\(A=(A_3 A_2 A_1 A_0), B=(B_3 B_2 B_1 B_0)\)</span>と表し，入力値が固定値となる箇所はその値を具体的に記すこと．（2点）</p>
-<!-- 
-<span style="color:red">**解答**</span>
-
-- $C=A \cdot B$
-- $S = A \oplus B = \overline{A} \cdot B + A \cdot \overline{B}$
-
-| $A$ | $B$ |$C_{in}$|$C_{out}$| $S$ |
-| :-: | :-: | :---:  | :---:   | :-: |
-|  0  |  0  |   0    |   0     |  0  |
-|  0  |  0  |   1    |   0     |  1  |
-|  0  |  1  |   0    |   0     |  1  |
-|  0  |  1  |   1    |   1     |  0  |
-|  1  |  0  |   0    |   0     |  1  |
-|  1  |  0  |   1    |   1     |  0  |
-|  1  |  1  |   0    |   1     |  0  |
-|  1  |  1  |   1    |   1     |  1  |
-
-![4ビット減算器](/contents/figs/6/rcd.png)
- -->
+<p><span style="color:red"><strong>解答</strong></span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C=A \cdot B\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S = A \oplus B = \overline{A} \cdot B + A \cdot \overline{B}\)</span></p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C_{in}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C_{out}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(S\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="4ビット減算器" src="../_images/rcd.png" /></p>
 </section>
 
     <script type="text/x-thebe-config">
