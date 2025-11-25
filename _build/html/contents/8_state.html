@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Introduction to Computers I</title>
+    <title>8. 順序回路による状態の保持，状態遷移 &#8212; Introduction to Computers I</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/8_state';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="7. 中間試験" href="7_test_ans.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,11 +181,15 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_Karnaugh.html">4. カルノー図による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_combinational_circuit.html">5. クワイン・マクラスキー法による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_adder.html">6. 半加算器・全加算器・減算器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_test_ans.html">7. 中間試験</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. 順序回路による状態の保持，状態遷移</a></li>
 </ul>
 
     </div>
@@ -370,7 +375,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>順序回路による状態の保持，状態遷移</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -379,9 +384,27 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.1. 第6回の復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carry-lookahead-cla">8.2. 桁上げ先見回路（Carry Lookahead, CLA）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.2.1. 基本式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.2.2. 桁上げ先見回路付き4ビット加算器</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">8.3. エンコーダとデコーダ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bcd-104">8.3.1. BCDエンコーダ（10→4）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">8.3.2. デコーダ（4→10）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">8.4. 記憶</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not">8.4.1. 電子回路でのNOTゲートの実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">8.4.2. NOTゲートによる状態の記憶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">8.4.3. NANDゲートによる状態の記憶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">8.4.4. 電子回路での実装</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">8.5. まとめ</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -392,7 +415,899 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">8. </span>順序回路による状態の保持，状態遷移<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<!-- 桁上げ先見回路・エンコーダ/デコーダ・MUX/DEMUX・記憶（フリップフロップ） -->
+<p>到達目標</p>
+<ul class="simple">
+<li><p>桁上げ先見回路の計算時間が短くなるメカニズムを理解する．</p></li>
+<li><p>桁上げ先見回路付き4ビット加算器の回路構成を実装できる．</p></li>
+<li><p>データの記憶（保持）の原理を理解する．</p></li>
+</ul>
+<!-- - エンコーダ（優先・BCD）とデコーダ（$n\to2^n$）の入出力関係と代表式を導ける． -->
+<!-- - MUX/DEMUXの機能を理解し，MUXで任意の論理関数を実装できる． -->
+<!-- - NAND/NOTを用いたラッチ（SR, D）の基本原理を説明できる． -->
+<p>今日の問い</p>
+<ul class="simple">
+<li><p>リップルキャリー加算器より桁上げ先見回路の方が計算速度が速くなるのはなぜか？</p></li>
+</ul>
+<!-- - エンコーダ/デコーダ・MUX/DEMUXは何を“写像”している？ -->
+<ul class="simple">
+<li><p>NANDやNOTを使用した回路で“記憶”はどう作るのか？</p></li>
+</ul>
+<p>キーワード</p>
+<ul class="simple">
+<li><p>桁上げ先見回路</p></li>
+</ul>
+<!-- - エンコーダ，デコーダ -->
+<!-- - マルチプレクサ，デマルチプレクサ -->
+<ul class="simple">
+<li><p>フリップフロップ回路</p></li>
+</ul>
+<section id="id2">
+<h2><span class="section-number">8.1. </span>第6回の復習<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>半加算器：2つの1ビットの入力の加算を計算する回路</p>
+<ul>
+<li><p>入力：<span class="math notranslate nohighlight">\(A,B\)</span>（1ビット）</p></li>
+<li><p>出力：桁上げ<span class="math notranslate nohighlight">\(C\)</span> (carry)，和<span class="math notranslate nohighlight">\(S\)</span> (sum)</p></li>
+<li><p><span class="math notranslate nohighlight">\(C=A \cdot B\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S=A\oplus B\)</span>．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(S\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="半加算器" src="../_images/ha.png" /></p>
+</li>
+</ul>
+</li>
+<li><p>全加算器：下の桁からの桁上がりを考慮して，2つの1ビットの入力の加算を計算する回路</p>
+<ul>
+<li><p>入力：<span class="math notranslate nohighlight">\(A,B,C_{in}\)</span></p></li>
+<li><p>出力：桁上げ<span class="math notranslate nohighlight">\(C_{out}\)</span>，和<span class="math notranslate nohighlight">\(S\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(C_{out} = A \cdot B + C_{in} \cdot (A\oplus B)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S = A \oplus B \oplus C_{in}\)</span></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C_{in}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(C_{out}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(S\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="全加算器" src="../_images/fa.png" /></p>
+</li>
+</ul>
+</li>
+<li><p>リップルキャリー加算器</p>
+<p><img alt="4ビットリップルキャリー加算器" src="../_images/rca.png" /></p>
+</li>
+</ul>
+</section>
+<section id="carry-lookahead-cla">
+<h2><span class="section-number">8.2. </span>桁上げ先見回路（Carry Lookahead, CLA）<a class="headerlink" href="#carry-lookahead-cla" title="Link to this heading">#</a></h2>
+<p>リップルキャリー加算器では，ある桁の計算をするためにはそれ以下の桁での計算が完了して全ての桁上がりが判明している必要がある．
+→ 桁が増えるほど計算時間が長くなる問題</p>
+<p>桁上げ先見回路では<span style="color:red">各桁の桁上がりをあらかじめまとめて計算できる</span>ため，桁数が増えても計算スピードが長くなりにくい．</p>
+<section id="id3">
+<h3><span class="section-number">8.2.1. </span>基本式<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>和 (sum) <span class="math notranslate nohighlight">\(S_i = A_i\oplus B_i \oplus C_i\)</span></p></li>
+<li><p>キャリー (carry) <span class="math notranslate nohighlight">\(C_{i+1}=A_i\cdot B_i + (A_i\oplus B_i) \cdot C_i\)</span></p></li>
+</ul>
+</section>
+<section id="id4">
+<h3><span class="section-number">8.2.2. </span>桁上げ先見回路付き4ビット加算器<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_i\)</span>：<span class="math notranslate nohighlight">\(2^i\)</span>の位の桁上げ．特に<span class="math notranslate nohighlight">\(C_0\)</span>は1なら加算器，0なら減算器になる．</p></li>
+<li><p><span class="math notranslate nohighlight">\(G_i=A_i\cdot B_i\)</span>：<span class="math notranslate nohighlight">\(2^i\)</span>の位の計算で生じる桁上げ．carryの<strong>生成</strong>．</p></li>
+<li><p><span class="math notranslate nohighlight">\(P_i=A_i\oplus B_i\)</span>：<span class="math notranslate nohighlight">\(2^i\)</span>の位での和．これに下の桁からの桁上げがかかると，その位での桁上げを生じる．carryの<strong>伝播</strong>．</p></li>
+</ul>
+<p>各桁の桁上げは次のように展開できる．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_1 = G_0 + P_0 \cdot C_0\)</span> … 全加算器の桁上げそのもの</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_2 = G_1 + P_1 \cdot G_0 + P_1 \cdot P_0 \cdot C_0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(C_3 = G_2 + P_2 \cdot G_1 + P_2 \cdot P_1 \cdot G_0 + P_2 \cdot P_1 \cdot P_0 \cdot C_0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(C_4 = G_3 + P_3 \cdot G_2 + P_3 \cdot P_2 \cdot G_1 + P_3 \cdot P_2 \cdot P_1 \cdot G_0 + P_3 \cdot P_2 \cdot P_1 \cdot P_0 \cdot C_0\)</span></p></li>
+</ul>
+<p>全ての位の桁上げが分かれば，各桁の値は次で求まる．</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(S_i = P_i \oplus C_i\)</span></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<p>半加算器と基本的な回路素子を用いて桁上げ先見回路付き4ビット加算器の回路図を作成せよ．</p>
+<p><img alt="桁上げ先見回路付き4ビット加算器" src="../_images/CLA.png" /></p>
+</div>
+<!-- 
+### 実装上の視点
+
+- ゲート段数：RCAは“段数≈ビット幅”，CLAは“段数≈対数＋定数”に近づけられる（ブロック化）．
+- ファンイン制約：(P_3P_2P_1P_0) のような多入力積は実装時に**分割**が必要．
+
+```{note}
+**演習1**
+1. $G_i,P_i$ の真理値表を作り，SOPを導出せよ．
+2. 4ビットCLA×2で8ビット加算器を作るとき，上位ブロックの $C_4$ を“ブロック $G,P$”で書け．  
+   ヒント：$G^{(blk)}=G_3+P_3G_2+P_3P_2G_1+P_3P_2P_1G_0$，$P^{(blk)}=P_3P_2P_1P_0$．
+```
+ -->
+</section>
+</section>
+<section id="id5">
+<h2><span class="section-number">8.3. </span>エンコーダとデコーダ<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<!-- ### エンコーダ（1-of-$k$ → $\lceil\log_2 k\rceil$） -->
+<!-- ### エンコーダ
+
+- 8→3エンコーダ（入力 $D_7\ldots D_0$，出力 $Y_2,Y_1,Y_0$）
+
+  - $Y_2=D_4+D_5+D_6+D_7$
+  - $Y_1=D_2+D_3+D_6+D_7$
+  - $Y_0=D_1+D_3+D_5+D_7$
+- 優先エンコーダ（Priority）：複数“1”時に**優先順位**を適用．VALID信号を付けるのが定石．
+
+```{tip}
+**例（8→3優先エンコーダの $Y_2$ ）**
+
+- 最上位優先 $D_7>D_6>\dots>D_0$．  
+  $Y_2 = D_7 + (\overline{D_7}D_6) + (\overline{D_7}\overline{D_6}D_5) + (\overline{D_7}\overline{D_6}\overline{D_5}D_4)$．
+- VALID $= D_0+\cdots+D_7$．
+``` -->
+<section id="bcd-104">
+<h3><span class="section-number">8.3.1. </span>BCDエンコーダ（10→4）<a class="headerlink" href="#bcd-104" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>入力 <span class="math notranslate nohighlight">\(D_9\ldots D_0\)</span>（1-of-10），出力 <span class="math notranslate nohighlight">\(Y_3Y_2Y_1Y_0\)</span></p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(D_9\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_8\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_7\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_6\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_5\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_4\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_3\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_2\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_1\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_0\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y_3\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y_2\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y_1\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y_0\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y_3=D_8+D_9\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_2=D_4+D_5+D_6+D_7\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_1=D_2+D_3+D_6+D_7\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_0=D_1+D_3+D_5+D_7+D_9\)</span></p></li>
+</ul>
+<!-- ### デコーダ（$n\to 2^n$） -->
+</section>
+<section id="id6">
+<h3><span class="section-number">8.3.2. </span>デコーダ（4→10）<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>入力 <span class="math notranslate nohighlight">\(Y_3Y_2Y_1Y_0\)</span>，出力 <span class="math notranslate nohighlight">\(D_9\ldots D_0\)</span></p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(Y_3\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y_2\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y_1\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y_0\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_9\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_8\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_7\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_6\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_5\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_4\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_3\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_2\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_1\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(D_0\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+<td class="text-center"><p>＊</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+  <!-- - $Y_3=D_8+D_9$
+  - $Y_2=D_4+D_5+D_6+D_7$
+  - $Y_1=D_2+D_3+D_6+D_7$
+  - $Y_0=D_1+D_3+D_5+D_7+D_9$ -->
+<!-- - 3→8デコーダ（EN=1）：
+  $Y_0=\overline{A},\overline{B},\overline{C}$, $Y_1=\overline{A},\overline{B}C$, …, $Y_7=ABC$
+- EN端子で一括無効化：$Y_i = \text{EN}\cdot(\text{該当最小項})$ -->
+<!-- 
+## マルチプレクサ（MUX）とデマルチプレクサ（DEMUX）
+
+### MUX（$2^n\to 1$）
+
+- 4→1 MUX（選択 $S_1,S_0$，データ $I_0\sim I_3$）
+  - $Y=\overline{S_1},\overline{S_0}I_0+\overline{S_1}S_0I_1+S_1\overline{S_0}I_2+S_1S_0I_3$
+
+- 任意の論理関数を MUX で：選択線を**入力変数**に，データ線に**0/1**（または補助式）を固定して実現．
+
+```{tip}
+**例（MUXで関数実装）**
+
+- $F(A,B,C)=\sum m(1,2,5,7)$ を 8→1 MUX で．  
+  選択 $(A,B,C)$，データ線 $I_i$ は “1 の行だけ 1，他は 0”．  
+  より省ゲートにするには $I_i$ に $A$ や $\overline{A}$ などの**単純式**を割り当てる方法も検討．
+```
+
+### DEMUX（$1\to 2^n$）
+
+- 1→4 DEMUX（選択 $S_1,S_0$，入力 $D$）
+  - $Y_0=\overline{S_1},\overline{S_0}D$, $Y_1=\overline{S_1}S_0D$, $Y_2=S_1\overline{S_0}D$, $Y_3=S_1S_0D$
+- 応用：DEMUX＋固定 1/0 でデコーダを合成．
+
+```{note}
+**演習3**
+
+1. 1→4 DEMUX を用いて 2→4デコーダを構成するブロック図を描け（EN端子付き）．  
+2. 4→1 MUX だけで XOR（$A\oplus B$）を実装せよ（選択線 $A$，データ線に $B$ と $\overline{B}$ を適切に配置）．
+```
+ -->
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">8.4. </span>記憶<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="not">
+<h3><span class="section-number">8.4.1. </span>電子回路でのNOTゲートの実装<a class="headerlink" href="#not" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>電源（電圧<span class="math notranslate nohighlight">\(V+\)</span>）を1，アース（電圧<span class="math notranslate nohighlight">\(0\)</span>）を0と扱う．</p></li>
+<li><p>入力が電圧<span class="math notranslate nohighlight">\(0\)</span>(0)であればトランジスタは上下の導線を通さず，出力は電圧<span class="math notranslate nohighlight">\(V+\)</span>(1)となる．</p></li>
+<li><p>入力が電圧<span class="math notranslate nohighlight">\(V+\)</span>(1)であればトランジスタは上下の導線を通し，電源からアースへ電流が流れ，出力は電圧<span class="math notranslate nohighlight">\(0\)</span>(0)となる．</p></li>
+</ul>
+<p><img alt="not回路" src="../_images/not.png" /></p>
+</section>
+<section id="id8">
+<h3><span class="section-number">8.4.2. </span>NOTゲートによる状態の記憶<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p><img alt="NOTゲート" src="../_images/not_memory.png" /></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P=0\)</span>のとき，<span class="math notranslate nohighlight">\(Q=1\)</span>でないと矛盾</p></li>
+<li><p><span class="math notranslate nohighlight">\(P=1\)</span>のとき，<span class="math notranslate nohighlight">\(Q=0\)</span>でないと矛盾</p></li>
+<li><p><span class="math notranslate nohighlight">\(P=0\)</span>であれば<span class="math notranslate nohighlight">\(Q=1\)</span>が，<span class="math notranslate nohighlight">\(P=1\)</span>であれば<span class="math notranslate nohighlight">\(Q=0\)</span>が保持（記憶）される．</p></li>
+</ul>
+</section>
+<section id="nand">
+<h3><span class="section-number">8.4.3. </span>NANDゲートによる状態の記憶<a class="headerlink" href="#nand" title="Link to this heading">#</a></h3>
+<p><img alt="NANDゲート" src="../_images/nand_memory1.png" /></p>
+<p><img alt="NANDゲート" src="../_images/nand_memory2.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2</strong></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(A,B\)</span>の全ての組み合わせに対して<span class="math notranslate nohighlight">\(P,Q\)</span>はどの値を取れば良いか考えよ．</p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(P\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Q\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>※ <span class="math notranslate nohighlight">\((A,B)=(1,1)\)</span>のときは2通りの可能性がある．</p>
+<ol class="arabic simple" start="2">
+<li><p>入力の値が<span class="math notranslate nohighlight">\((A,B)=(0,1)\)</span>から<span class="math notranslate nohighlight">\((1,1)\)</span>に変わったとき，出力<span class="math notranslate nohighlight">\((P,Q)\)</span>の値はどうなるか．</p></li>
+<li><p>入力の値が<span class="math notranslate nohighlight">\((A,B)=(0,0)\)</span>から<span class="math notranslate nohighlight">\((1,1)\)</span>に変わったとき，出力<span class="math notranslate nohighlight">\((P,Q)\)</span>の値はどうなると予想されるか．</p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(P\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Q\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span class="math notranslate nohighlight">\((A,B)=(1,1)\)</span>のときは前の<span class="math notranslate nohighlight">\((P,Q)\)</span>の状態が<span class="math notranslate nohighlight">\((0,1)\)</span>であれば<span class="math notranslate nohighlight">\((0,1)\)</span>を，<span class="math notranslate nohighlight">\((1,0)\)</span>であれば<span class="math notranslate nohighlight">\((1,0)\)</span>を保持する．</p>
+</div>
+</section>
+<section id="id9">
+<h3><span class="section-number">8.4.4. </span>電子回路での実装<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習3</strong></p>
+<p>NANDゲートは電子回路では次のように構成される．</p>
+<p><img alt="NAND" src="../_images/nand.png" /></p>
+<p>これを参考にNANDゲートを用いた記憶の回路を電子回路として構成せよ．</p>
+</div>
+<!-- 
+### SRフリップフロップ
+
+- 入力：$\overline{S},\overline{R}$，出力：$Q,\overline{Q}$
+- 動作：
+
+  - $\overline{S}=0$ で Set（$Q\gets 1$）
+  - $\overline{R}=0$ で Reset（$Q\gets 0$）
+  - $\overline{S}=\overline{R}=1$ で保持
+  - $\overline{S}=\overline{R}=0$ は**禁止**
+- 連立式：$Q=\overline{\overline{S}\cdot\overline{Q}},\ \overline{Q}=\overline{\overline{R}\cdot Q}$
+ -->
+<!-- 
+### 4.3 Dラッチ（レベル感度・イネーブルE）
+
+- (S=E\cdot D,\ R=E\cdot\overline{D}) をSRに供給
+- E=1：透過（(Q\leftarrow D)），E=0：保持
+- 次状態方程式：(Q_{next}=\overline{E},Q + E D)
+
+```{tip}
+**例（式確認）**
+- Dラッチの真理値表から K-map を描き，$Q_{next}=\overline{E}\,Q + E D$ を導出せよ．
+```
+ -->
+<!-- 
+```{note}
+**演習4**
+1. NAND×2 の交差結合で SRラッチを描き，**禁止入力**を明記せよ．  
+2. Dラッチに $D=Q\oplus T$ を与える“トグル動作（Tラッチ相当）”をスケッチせよ（T=1の時だけ反転）．
+```
+ -->
+</section>
+</section>
+<section id="id10">
+<h2><span class="section-number">8.5. </span>まとめ<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>桁上げ先見回路：<span class="math notranslate nohighlight">\(C_{i+1}=G_i+P_i \cdot C_i\)</span>．4ビット展開で上位キャリーを<strong>先読み</strong>し，遅延を短縮する．</p></li>
+<li><p>エンコーダ/デコーダ：10進数を2進数のビットに，ビットを10進数に変換する．</p></li>
+<li><p>記憶：NOTやNANDを使用して，情報を保持する回路を構成できる．</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>復習</strong></p>
+<ul class="simple">
+<li><p>リップルキャリー加算器より桁上げ先見回路の方が計算速度が速くなるのはなぜか？</p></li>
+</ul>
+<!-- - NANDを用いてデータを保持する回路では$(P,Q)=(1,1)$を保持することは現実？ -->
+</div>
+<!-- 
+## 付録：発展課題（早く終わる学生向け）
+
+- 発展1（CLAブロック化）：4ビットCLAを2段（下位・上位）に分け，上位の (C_4) を
+  (C_4=G^{(blk)}*{upper} + P^{(blk)}*{upper}C_0) の形で記述せよ．
+- 発展2（優先エンコーダ）：8→3優先エンコーダの (Y_1,Y_0) を，優先条件つきで最小化せよ（VALID付）．
+- 発展3（MUX実装の省コスト化）：(F(A,B,C)=\sum m(0,2,6,7)) を 8→1 MUX で，データ線に単純式（(A), (B), (\overline{C}) など）を割り当ててゲート数を減らせ．
+- 発展4（ハザードとレベルラッチ）：DラッチのE=1期間にグリッチが通るケースを例示し，Eのデューティ比を変えた時の影響を言語化せよ．
+ -->
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -423,6 +1338,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="7_test_ans.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>中間試験</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -438,9 +1362,27 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.1. 第6回の復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carry-lookahead-cla">8.2. 桁上げ先見回路（Carry Lookahead, CLA）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.2.1. 基本式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.2.2. 桁上げ先見回路付き4ビット加算器</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">8.3. エンコーダとデコーダ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bcd-104">8.3.1. BCDエンコーダ（10→4）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">8.3.2. デコーダ（4→10）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">8.4. 記憶</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not">8.4.1. 電子回路でのNOTゲートの実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">8.4.2. NOTゲートによる状態の記憶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">8.4.3. NANDゲートによる状態の記憶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">8.4.4. 電子回路での実装</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">8.5. まとめ</a></li>
+</ul>
   </nav></div>
 
 </div></div>

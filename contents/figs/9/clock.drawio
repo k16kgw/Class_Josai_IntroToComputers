@@ -1,0 +1,55 @@
+<mxfile host="65bd71144e">
+    <diagram id="vc7kv1pUtUdvoCo_G7vw" name="ページ1">
+        <mxGraphModel dx="966" dy="665" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="30" value="0" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="425" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="時刻" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="395" y="460" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="335" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="" style="pointerEvents=1;verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;shape=mxgraph.electrical.waveforms.pulse_1;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="350" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="200" y="460" as="sourcePoint"/>
+                        <mxPoint x="680" y="460" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="41" value="" style="endArrow=classic;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="199" y="460" as="sourcePoint"/>
+                        <mxPoint x="200" y="320" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="42" value="" style="pointerEvents=1;verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;shape=mxgraph.electrical.waveforms.pulse_1;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="350" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="" style="pointerEvents=1;verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;shape=mxgraph.electrical.waveforms.pulse_1;" vertex="1" parent="1">
+                    <mxGeometry x="380" y="350" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="" style="pointerEvents=1;verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;shape=mxgraph.electrical.waveforms.pulse_1;" vertex="1" parent="1">
+                    <mxGeometry x="470" y="350" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="" style="pointerEvents=1;verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;shape=mxgraph.electrical.waveforms.pulse_1;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="350" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="47" value="" style="endArrow=classic;startArrow=classic;html=1;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="405" y="335" as="sourcePoint"/>
+                        <mxPoint x="495" y="335" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="48" value="1周期" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="420" y="305" width="60" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

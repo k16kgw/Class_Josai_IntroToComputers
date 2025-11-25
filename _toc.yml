@@ -14,8 +14,10 @@ parts:
       - file: contents/4_Karnaugh
       - file: contents/5_combinational_circuit
       - file: contents/6_adder
-      # - file: contents/8_state
-      # - file: contents/9_clock
+      # - file: contents/7_test
+      - file: contents/7_test_ans
+      - file: contents/8_state
+      - file: contents/9_clock
       # - file: contents/10_flip-flop
       # - file: contents/11_sequential_curcuit
       # - file: contents/12_multiplier
