@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Introduction to Computers I</title>
+    <title>9. クロックの役割，同期回路と非同期回路 &#8212; Introduction to Computers I</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/9_clock';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="8. 順序回路による状態の保持，状態遷移" href="8_state.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,11 +181,16 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_Karnaugh.html">4. カルノー図による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_combinational_circuit.html">5. クワイン・マクラスキー法による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_adder.html">6. 半加算器・全加算器・減算器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_test_ans.html">7. 中間試験</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_state.html">8. 順序回路による状態の保持，状態遷移</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. クロックの役割，同期回路と非同期回路</a></li>
 </ul>
 
     </div>
@@ -370,7 +376,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>クロックの役割，同期回路と非同期回路</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -379,9 +385,29 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.1. 第8回の復習と続き（記憶）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notnand">9.1.1. 電子回路でのNOTゲート・NANDゲートの実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not">9.1.2. NOTゲートによる状態の記憶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">9.1.3. NANDゲートによる状態の記憶</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sr">9.2. SRフリップフロップ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.2.1. 状態遷移</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.3. クロック</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.3.1. 同期回路と非同期回路</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.3.2. 同期付きSRフリップフロップ回路</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">9.4. 順序回路</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">9.5. 順序回路の設計</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">9.5.1. 例：3枚入れるとコーヒーが出る自動販売機</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">9.6. まとめ</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -392,7 +418,424 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">9. </span>クロックの役割，同期回路と非同期回路<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>到達目標</p>
+<ul class="simple">
+<li><p>記憶の役割を果たすSRフリップフロップを実装できる．</p></li>
+<li><p>順序回路における<strong>クロック</strong>の役割を説明できる．</p></li>
+<li><p><strong>同期回路</strong>と<strong>非同期回路</strong>の違いを，利点・注意点とともに述べられる．</p></li>
+<li><p>状態遷移の考え方を理解する．</p></li>
+</ul>
+<!-- - 状態遷移の考え方を理解し，**順序回路の基本設計手順**（状態遷移図→符号化→遷移表→フリップフロップ＋組合せ回路）を実施できる． -->
+<!-- - **セットアップ/ホールド**・**クロック遅延/スキュー/ジッタ**の用語・基本式を扱える． -->
+<!-- - 簡単な**同期設計フロー**（次状態方程式→FF→タイミング検証）と**非同期入力の同期化**（2段FF）を示せる． -->
+<p>今日の問い</p>
+<ul class="simple">
+<li><p>なぜクロックがあると安全に状態を更新できるのか？</p></li>
+<li><p>同期回路と非同期回路，それぞれのメリットとデメリットは何か？</p></li>
+</ul>
+<p>キーワード</p>
+<ul class="simple">
+<li><p>クロック</p></li>
+<li><p>同期回路，非同期回路</p></li>
+<li><p>状態遷移</p></li>
+</ul>
+<hr class="docutils" />
+<section id="id2">
+<h2><span class="section-number">9.1. </span>第8回の復習と続き（記憶）<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="notnand">
+<h3><span class="section-number">9.1.1. </span>電子回路でのNOTゲート・NANDゲートの実装<a class="headerlink" href="#notnand" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>電源（電圧<span class="math notranslate nohighlight">\(V+\)</span>）を1，アース（電圧<span class="math notranslate nohighlight">\(0\)</span>）を0と扱う．</p></li>
+</ul>
+<p>NOTゲートは電子回路では次のように実装される．</p>
+<p><img alt="NOT回路" src="../_images/not.png" /></p>
+<ul class="simple">
+<li><p>入力が電圧<span class="math notranslate nohighlight">\(0\)</span>(0)であればトランジスタは上下の導線を通さず，出力は電圧<span class="math notranslate nohighlight">\(V+\)</span>(1)となる．</p></li>
+<li><p>入力が電圧<span class="math notranslate nohighlight">\(V+\)</span>(1)であればトランジスタは上下の導線を通し，電源からアースへ電流が流れ，出力は電圧<span class="math notranslate nohighlight">\(0\)</span>(0)となる．</p></li>
+</ul>
+<p>NANDゲートは電子回路では次のように実装される．</p>
+<p><img alt="NAND回路" src="../_images/nand.png" /></p>
+<ul class="simple">
+<li><p>入力A・Bの片方だけでも電圧<span class="math notranslate nohighlight">\(0\)</span>(0)であればトランジスタは上下の導線を通さず，出力は電圧<span class="math notranslate nohighlight">\(V+\)</span>(1)となる．</p></li>
+<li><p>入力A・Bの両方が電圧<span class="math notranslate nohighlight">\(V+\)</span>(1)であればトランジスタは上下の導線を通し，電源からアースへ電流が流れ，出力は電圧<span class="math notranslate nohighlight">\(0\)</span>(0)となる．</p></li>
+</ul>
+</section>
+<section id="not">
+<h3><span class="section-number">9.1.2. </span>NOTゲートによる状態の記憶<a class="headerlink" href="#not" title="Link to this heading">#</a></h3>
+<p><img alt="NOTゲート" src="../_images/not_memory.png" /></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P=0\)</span>のとき，<span class="math notranslate nohighlight">\(Q=1\)</span>でないと矛盾</p></li>
+<li><p><span class="math notranslate nohighlight">\(P=1\)</span>のとき，<span class="math notranslate nohighlight">\(Q=0\)</span>でないと矛盾</p></li>
+<li><p><span class="math notranslate nohighlight">\(P=0\)</span>であれば<span class="math notranslate nohighlight">\(Q=1\)</span>が，<span class="math notranslate nohighlight">\(P=1\)</span>であれば<span class="math notranslate nohighlight">\(Q=0\)</span>が保持（記憶）される．</p></li>
+</ul>
+</section>
+<section id="nand">
+<h3><span class="section-number">9.1.3. </span>NANDゲートによる状態の記憶<a class="headerlink" href="#nand" title="Link to this heading">#</a></h3>
+<p>NOTゲートをNANDゲートに置き換え，片方を入力として外に配線すれば次のようになる．</p>
+<p><img alt="NANDゲート" src="../_images/nand_memory1.png" /></p>
+<p>記憶される部分を出力として外に配線すれば次のようになる．</p>
+<p><img alt="NANDゲート" src="../_images/nand_memory2.png" /></p>
+<p>この回路は出力に状態（0 or 1）を記憶でき，この回路を<span style="color:red">フリップフロップ</span>と呼ぶ．</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>第8回演習2</strong></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(A,B\)</span>の全ての組み合わせに対して<span class="math notranslate nohighlight">\(P,Q\)</span>はどの値を取れば良いか考えよ．</p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(P\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Q\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>※ <span class="math notranslate nohighlight">\((A,B)=(1,1)\)</span>のときは2通りの可能性がある．</p>
+<ol class="arabic simple" start="2">
+<li><p>入力の値が<span class="math notranslate nohighlight">\((A,B)=(0,1)\)</span>から<span class="math notranslate nohighlight">\((1,1)\)</span>に変わったとき，出力<span class="math notranslate nohighlight">\((P,Q)\)</span>の値はどうなるか．</p></li>
+<li><p>入力の値が<span class="math notranslate nohighlight">\((A,B)=(0,0)\)</span>から<span class="math notranslate nohighlight">\((1,1)\)</span>に変わったとき，出力<span class="math notranslate nohighlight">\((P,Q)\)</span>の値はどうなると予想されるか．</p></li>
+</ol>
+<!-- 
+**解答例**
+
+| $A$ | $B$ | $P$ | $Q$ |
+| :-: | :-: | :-: | :-: |
+|  0  |  0  |  1  |  1  |
+|  0  |  1  |  1  |  0  |
+|  1  |  0  |  0  |  1  |
+|  1  |  1  |  1  |  0  |
+|  1  |  1  |  0  |  1  |
+
+※ $(A,B)=(1,1)$のときは2通りの可能性がある．
+
+$(A,B)=(1,1)$のとき，前の$(P,Q)$の状態が$(0,1)$であれば$(0,1)$を，$(1,0)$であれば$(1,0)$を保持する．
+
+現実的に$(A,B)=(0,0)$から$(1,1)$に変わるのに，$A$と$B$を厳密に同時に$1$に変えることは難しい．
+どちらかが先に$1$になるため，結局前の$(P,Q)$の状態は$(0,1)$か$(1,0)$のどちらかとなる．
+ -->
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="sr">
+<h2><span class="section-number">9.2. </span>SRフリップフロップ<a class="headerlink" href="#sr" title="Link to this heading">#</a></h2>
+<p>NANDゲートを使用した記憶の回路を実装する場合には，次のようにNOTゲートを挟んで実装する．
+この回路を<span style="color:red">SRフリップフロップ</span>と呼ぶ．
+ここでは出力は<span class="math notranslate nohighlight">\(Q\)</span>とその否定<span class="math notranslate nohighlight">\(\overline{Q}\)</span>のみであるとする．</p>
+<p><img alt="SRflipflop" src="../_images/SRflipflop.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<p>SRフリップフロップではNOTゲートを挟むことで状態を記憶する入力を<span class="math notranslate nohighlight">\((S,R)=(0,0)\)</span>とする．
+NOTゲートを挟まない場合の<span class="math notranslate nohighlight">\((S,R)=(1,1)\)</span>を記憶する入力しないのはなぜだと思うか．</p>
+<p>ヒント：0は電圧が低いことに，1は電圧が高いことに対応している．</p>
+</div>
+<section id="id3">
+<h3><span class="section-number">9.2.1. </span>状態遷移<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>記憶を考えることで，状態の時間変化を考慮する必要が生じる．
+そこで状態<span class="math notranslate nohighlight">\(Q\)</span>が入力に対してどのように変化するか，次の状態<span class="math notranslate nohighlight">\(Q'\)</span>の値を調べる．
+これを次のように<span style="color:red">状態遷移表</span>として考える．</p>
+<p><img alt="状態遷移" src="../_images/state_shift.png" /></p>
+<p><span class="math notranslate nohighlight">\(S=1\)</span>とすれば<strong>セット</strong>(set)され，<span class="math notranslate nohighlight">\(R=1\)</span>とすれば<strong>リセット</strong>(reset)される．</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2><span class="section-number">9.3. </span>クロック<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>同期</strong>：様々な作業の相対的な順番を決めて手続きを実行する必要があり，この順番を決めることを「<strong>同期を取る</strong>」と呼ぶ．</p>
+<ul class="simple">
+<li><p>作業の順番が回ってくるまでデータを記憶しておく必要があり，これにフリップフロップのような回路を使用する．</p></li>
+</ul>
+</li>
+<li><p><strong>クロック</strong>：同期を取るための合図となるもの．回路全体の<strong>時間のものさし</strong>であり，一定周期で規則的に0と1を繰り返すことで実現される．</p>
+<ul class="simple">
+<li><p>周期の逆数である<strong>周波数</strong>が単位時間あたりの0・1の繰り返しの回数を表し，クロック数を表現する量として使用される．</p></li>
+<li><p>1周期<span class="math notranslate nohighlight">\(T\)</span>[秒]／周波数 <span class="math notranslate nohighlight">\(f=\frac{1}{T}\)</span>[Hz]</p></li>
+<li><p><span class="math notranslate nohighlight">\(f\)</span>が高いほど<strong>1サイクルが短く高性能</strong>だが，タイミング制約が厳しい．</p></li>
+</ul>
+<p><img alt="クロック" src="../_images/clock.png" /></p>
+</li>
+</ul>
+<!-- - 役割：各フリップフロップが**同じタイミング**で入力を観測 → ばらつくゲート遅延の影響を**クロック境界で区切る**． -->
+<!-- - 角周波数 $\omega=2\pi f$[rad/s] -->
+<!-- - デューティ比（High比率），**ジッタ**（周期の揺れ），**スキュー**（配線差での到達時刻差） -->
+<!-- - **可変周波数**：実CPUは状況により周波数と電圧を変える（省電力・熱設計）．
+固定の1値ではなく，**ベースクロック／ブースト**などの概念で把握する． -->
+<section id="id5">
+<h3><span class="section-number">9.3.1. </span>同期回路と非同期回路<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>同期回路</strong>：クロックに同期して動作する回路．</p></li>
+<li><p><strong>非同期回路</strong>：クロックの動作に縛られず，入力信号の伝達に任せて出力信号が決まる回路．</p></li>
+</ul>
+<!-- - 実チップのゲート・配線遅延は**ばらつく**．同期がないと，**競合（レース）**・**グリッチ**が出やすい． -->
+<!-- - クロックで**観測の瞬間**を決めるから，多少の遅延差があっても**同時刻の安定値**で動作できる． -->
+<!-- 
+- 基本のタイミング不等式：
+
+  - 最大遅延（セットアップ）
+
+    $$
+    T_{clk} \ge t_{CQ}^{max} + t_{comb}^{max} + t_{setup} + \text{skew}^{max}
+    $$
+
+  - 最小遅延（ホールド）
+    $$
+    t_{CQ}^{min} + t_{comb}^{min} \ge t_{hold} + \text{skew}^{min}
+    $$
+ -->
+<!-- - **同期回路**：共通のクロックで**状態更新**を行う．設計・検証が容易． -->
+  <!-- 例：CPUのパイプライン，同期式カウンタ，ほぼ全てのSoCの基本． -->
+<!-- - **非同期回路**：クロックを用いず，**イベント**や**ハンドシェイク**で動作． -->
+  <!-- 例：ボタン入力，異なるクロック領域間のFIFO，低消費電力ロジックの一部． -->
+<p><strong>メリットとデメリット</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>種類</p></th>
+<th class="head"><p>メリット</p></th>
+<th class="head"><p>デメリット</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>同期回路</p></td>
+<td><p>動作が安定しやすい．</p></td>
+<td><p>クロックを待つ時間だけ動作が遅くなる．</p></td>
+</tr>
+<tr class="row-odd"><td><p>非同期回路</p></td>
+<td><p>高速に動作する．</p></td>
+<td><p>タイミングによっては動作が不安定になりやすい．</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- - **非同期入力の扱い**：2段FF同期器／デバウンス（機械スイッチ）／パルスストレッチ等． -->
+</section>
+<section id="id6">
+<h3><span class="section-number">9.3.2. </span>同期付きSRフリップフロップ回路<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>クロック（<span class="math notranslate nohighlight">\(\mathrm{CLK}\)</span>）が1のときのみ入力を許可する．</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mathrm{CLK}=1\)</span>のとき，<span class="math notranslate nohighlight">\(S=0\)</span>なら<span class="math notranslate nohighlight">\(0\)</span>を，<span class="math notranslate nohighlight">\(S=1\)</span>なら<span class="math notranslate nohighlight">\(1\)</span>とする．（<span class="math notranslate nohighlight">\(R\)</span>も同様）</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathrm{CLK}=0\)</span>のとき，<span class="math notranslate nohighlight">\(S,R\)</span>の値によらず<span class="math notranslate nohighlight">\(0\)</span>とする．</p></li>
+</ul>
+</li>
+<li><p>従って<span class="math notranslate nohighlight">\(\mathrm{CLK}\)</span>と<span class="math notranslate nohighlight">\(S,R\)</span>をANDで接続すれば良い．</p></li>
+</ul>
+<p><img alt="クロックSRフリップフロップ" src="../_images/clockSRflipflop.png" /></p>
+<p>これはNANDゲートに置き換えることができる．</p>
+<p><img alt="クロックSRフリップフロップ" src="../_images/clockSRflipflop_NAND.png" /></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2><span class="section-number">9.4. </span>順序回路<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>順序回路</strong>：初期状態から始まり，決まった順序で状態遷移を行う機能を実現する回路．</p></li>
+</ul>
+<!-- - **順序回路**：出力が**現在の入力**だけでなく**内部状態**にも依存して決まる回路． -->
+  <!-- 形式：$Q^+ = f(Q, X)$, $Y = g(Q, X)$（Mealy）／ $Y = g(Q)$（Moore） -->
+<ul class="simple">
+<li><p><strong>状態遷移図</strong>：状態ノードと，入力条件付きの矢印（次状態）で表す．</p></li>
+</ul>
+<!-- - **設計での選択**：Moore（出力が安定しやすい）／Mealy（状態数が少なくできることが多い）． -->
+</section>
+<section id="id8">
+<h2><span class="section-number">9.5. </span>順序回路の設計<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>状態遷移図の作成</strong>：初期状態と終了状態を含む<u>複数の状態を定義</u>し，次に各状態への入力とそれにより生じる状態遷移と出力を定義する．</p></li>
+<li><p><strong>2進コード化</strong>：各状態と入出力を表する2進数の値を決め，1で作成した状態遷移図を2進数の値で描き直す．</p></li>
+<li><p><strong>状態遷移表の作成</strong>：現在の状態から入力により次の状態へ遷移し，出力する様子を状態遷移表にまとめる．</p></li>
+<li><p><strong>回路化</strong>：状態遷移表に従い，状態遷移図と同様の動作を行う順序回路を，フリップフロップと組合せ回路を用いて設計する．</p></li>
+</ol>
+  <!-- （SOP/POS→K-map/Q-Mで簡略化→NAND/NOR/MUXで実装） -->
+<section id="id9">
+<h3><span class="section-number">9.5.1. </span>例：3枚入れるとコーヒーが出る自動販売機<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<!-- ### 例1：パターン“01”検出器（出力は1クロックだけ1） -->
+<p>1種類の硬貨のみを考え，硬貨を3枚入れるとコーヒーが出てくる自動販売機を実装する．</p>
+<p><strong>Step 1：状態遷移図の作成</strong></p>
+<p><img alt="状態遷移図" src="../_images/state_graph.png" /></p>
+<p><strong>Step 2：2進コード化</strong></p>
+<ul class="simple">
+<li><p>入力：硬貨を投入する/しない → 1,0</p></li>
+<li><p>出力：コーヒーを出す/出さない → 1,0</p></li>
+<li><p>現在の状態：硬貨の枚数0,1,2枚 → 00,01,10</p></li>
+</ul>
+<p><img alt="2進コード化" src="../_images/bit_graph.png" /></p>
+<p><strong>Step 3：状態遷移表の作成</strong></p>
+<p><img alt="状態遷移表" src="../_images/state_table.png" /></p>
+<p><strong>Step 4：回路化</strong></p>
+<ul>
+<li><p>入力：硬貨を投入する/しない(1,0) → <span class="math notranslate nohighlight">\(S\)</span>, 1bit</p></li>
+<li><p>出力：コーヒーを出す/出さない(1,0) → <span class="math notranslate nohighlight">\(G\)</span>, 1bit</p></li>
+<li><p>現在の状態：硬貨の枚数0,1,2枚(00,01,10) → <span class="math notranslate nohighlight">\(C_1, C_0\)</span>, 2bit
+※ 現在の状態は記憶されないといけない．</p></li>
+<li><p>次の状態：硬貨の枚数0,1,2枚(00,01,10) → <span class="math notranslate nohighlight">\(N_1, N_0\)</span>, 2bit</p></li>
+<li><p>状態の(11)は使用されていないため，ドントケアとして扱える．</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_1\)</span>のカルノー図は</p>
+<p><img alt="Karnaugh" src="../_images/Karnaugh_N1.png" /></p>
+<p>となるから</p>
+<div class="math notranslate nohighlight">
+\[
+  N_1 = C_1 \cdot \overline{S} + C_0 \cdot S
+  \]</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2</strong></p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(N_0\)</span>のカルノー図を作成し，<span class="math notranslate nohighlight">\(N_0\)</span>を加法標準形で表せ．</p></li>
+<li><p><span class="math notranslate nohighlight">\(G\)</span>のカルノー図を作成し，<span class="math notranslate nohighlight">\(G\)</span>を加法標準形で表せ．</p></li>
+</ol>
+<!-- 
+![Karnaugh](/contents/figs/9/Karnaugh_N0.png)
+
+$$
+N_0 = C_0 \cdot \overline{S} + \overline{C_0} \cdot \overline{C_1} \cdot S
+$$
+
+![Karnaugh](/contents/figs/9/Karnaugh_G.png)
+
+$$
+G = C_1 \cdot S
+$$
+ -->
+</div>
+<p>この後の回路の構成には「Dフリップフロップ」を使用するため，第11回に続きを解説する．</p>
+<!-- 
+- 入力：$X$（1ビット），出力：$Y$
+- 仕様：直前の2ビットが“01”なら次クロックで $Y=1$（以降は0）
+- **状態遷移図（Moore）**
+
+  - $S_0$：何も検出していない
+  - $S_1$：直前が0
+  - $S_2$：“01”検出直後（出力1），次で必ず $S_0$
+  - 遷移：
+
+    - $S_0 \xrightarrow{X=0} S_1,\quad S_0 \xrightarrow{X=1} S_0$
+    - $S_1 \xrightarrow{X=0} S_1,\quad S_1 \xrightarrow{X=1} S_2$
+    - $S_2 \xrightarrow{X=*} S_0$
+- **2. 二進コード化**（2ビット状態）
+
+  - $S_0=00,\ S_1=01,\ S_2=10$（11は未使用）
+- **3. 状態遷移表**（現状態 $Q_1Q_0$, 入力 $X$ → 次状態 $Q_1^+Q_0^+$, 出力 $Y$）
+
+| (Q_1Q_0) | (X) | (Q_1^+Q_0^+) | (Y) |
+| :------: | :-: | :----------: | :-: |
+|    00    |  0  |      01      |  0  |
+|    00    |  1  |      00      |  0  |
+|    01    |  0  |      01      |  0  |
+|    01    |  1  |      10      |  0  |
+|    10    |  0  |      00      |  1  |
+|    10    |  1  |      00      |  1  |
+
+- **4. 次状態方程式・出力方程式（K-mapで簡略化）**
+
+  - $Q_1^+ = \overline{Q_1},Q_0,X$
+  - $Q_0^+ = \overline{Q_1},\overline{Q_0},\overline{X} + \overline{Q_1},Q_0,\overline{X}$
+    $\ \Rightarrow\ Q_0^+ = \overline{Q_1},\overline{X}$
+  - $Y = Q_1\ \overline{Q_0}$（= 状態 (10) のときのみ1）
+- **回路化**
+
+  - D-FF×2で $Q_1,Q_0$ を格納
+  - $D_1 = Q_1^+,\ D_0 = Q_0^+$ を与える組合せ回路を実装
+  - 出力 $Y$ は $Q_1$ と $\overline{Q_0}$ のAND
+
+```{tip}
+**設計メモ**
+- 未使用状態“11”には**安全遷移**を割り当て（例えば S0=00）ると，リセット後の安全性が増す．
+```
+
+---
+
+```{note}
+**演習1**  
+
+D-FFのパス：FF1 → 組合せ回路($t_{comb}^{max}=1.8\text{ns}$) → FF2．  
+$t_{CQ}^{max}=120\text{ps},\ t_{setup}=80\text{ps},\ \text{skew}^{max}=100\text{ps}$．  
+満たすべき最小クロック周期 $T_{clk}^{min}$ と最大クロック周波数 $f_{max}$ を求めよ．
+```
+
+**解答例**
+$T_{clk}^{min}=0.12+1.8+0.08+0.10=2.10\text{ns}$ → $f_{max}\approx 476\text{MHz}$．
+
+```{note}
+**演習2**  
+
+非同期ボタン入力を2段FFで同期化し，1クロック幅の立上りパルスを生成せよ．  
+```
+
+**解答例（要点）**
+
+- FF1: (D=BTN\to Q=SYNC1)，FF2: (D=SYNC1\to Q=SYNC2)（同一クロック）
+- パルス：(PULSE = SYNC2 \cdot \overline{SYNC2_{prev}})（前サイクル値との差分）
+
+```{note}
+**演習3（設計・25分）**  
+次の仕様の**Mealy機械**を設計せよ（最小状態でOK）．  
+「入力 \(X\) が “011” と連続で現れた瞬間に \(Y=1\) を出し，それ以外は0」  
+手順：1) 状態遷移図 → 2) 二進コード化 → 3) 遷移表 → 4) 次状態・出力方程式 → 5) D-FF実装．
+```
+
+**解答例（概略）**
+
+- 状態語：S0（なし），S1（直前0），S2（直前01）．Mealyなので S2 で (X=1) 見た瞬間 (Y=1)．
+- 符号化例：S0=00, S1=01, S2=10．
+- 次状態・出力式（要約）：
+
+  - $Q_1^+ = \overline{Q_1}Q_0X + \overline{Q_1}\overline{Q_0}\overline{X}$（一例）
+  - $Q_0^+ = \overline{Q_1}\overline{Q_0}X + \overline{Q_1}Q_0\overline{X}$（一例）
+  - $Y = \overline{Q_1}Q_0X$（S2到達直前の遷移で1を出す形）
+    ※ 実際はK-mapで簡略化して提示．状態割当が違っても同価なら可．
+ -->
+</section>
+</section>
+<hr class="docutils" />
+<section id="id10">
+<h2><span class="section-number">9.6. </span>まとめ<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>復習</strong></p>
+<p>次の問いに対する自分なりの答えを述べよ．</p>
+<ol class="arabic simple">
+<li><p>なぜクロックがあると安全に状態を更新できるのか？</p></li>
+<li><p>同期回路と非同期回路，それぞれのメリットとデメリットは何か？</p></li>
+</ol>
+</div>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -423,6 +866,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="8_state.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>順序回路による状態の保持，状態遷移</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -438,9 +890,29 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.1. 第8回の復習と続き（記憶）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notnand">9.1.1. 電子回路でのNOTゲート・NANDゲートの実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not">9.1.2. NOTゲートによる状態の記憶</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nand">9.1.3. NANDゲートによる状態の記憶</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sr">9.2. SRフリップフロップ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.2.1. 状態遷移</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">9.3. クロック</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">9.3.1. 同期回路と非同期回路</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">9.3.2. 同期付きSRフリップフロップ回路</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">9.4. 順序回路</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">9.5. 順序回路の設計</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">9.5.1. 例：3枚入れるとコーヒーが出る自動販売機</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">9.6. まとめ</a></li>
+</ul>
   </nav></div>
 
 </div></div>

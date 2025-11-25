@@ -127,14 +127,16 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 
 <span style="color:red">**解答**</span>
 
-![例1](/contents/figs/4/eg1.png)
+![問4-1](/contents/figs/4/eg1.png)
 
 このとき論理式$G$の簡略化を試みる．
 このカルノー図は例えば次のように区分けでき，対応する論理式の和として簡略化できる．
 
-![例2](/contents/figs/4/eg2.png)
+![問4-2](/contents/figs/4/eg2.png)
 
 従って，$G = A \cdot C + B$となる．
+
+![問4-3](/contents/figs/7/q4.png)
 
 ---
 
@@ -209,4 +211,5 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 |  1  |  1  |   1    |   1     |  1  |
 
 ![4ビット減算器](/contents/figs/6/rcd.png)
+
 
