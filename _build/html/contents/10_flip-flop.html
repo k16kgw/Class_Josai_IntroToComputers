@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>様々なフリップフロップ &#8212; Introduction to Computers I</title>
+    <title>10. 様々なフリップフロップ &#8212; Introduction to Computers I</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/10_flip-flop';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="9. クロックの役割，同期回路と非同期回路" href="9_clock.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,7 +181,7 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
@@ -190,6 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="7_test_ans.html">7. 中間試験</a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_state.html">8. 順序回路による状態の保持，状態遷移</a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_clock.html">9. クロックの役割，同期回路と非同期回路</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. 様々なフリップフロップ</a></li>
 </ul>
 
     </div>
@@ -385,37 +387,33 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">0. 前回の復習（5分）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-d-ff-1-20">1. Dフリップフロップ（D-FF）（前半その1：20分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.1 定義と動作</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.2 特性方程式・励起表</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.3 メモ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t">10.1. Tフリップフロップ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.1.1. 弱点</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jk-2-15">2. JKフリップフロップ（前半その2：15分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.1 定義と動作</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.2 特性方程式・励起表</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.3 メモ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jk">10.2. JKフリップフロップ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.2.1. 2.2 特性方程式・励起表</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.2.2. 2.3 メモ</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-3-15">3. Tフリップフロップ（前半その3：15分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.1 定義と動作</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.2 特性方程式・励起表</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">3.3 メモ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-d-ff-1-20">10.3. 1. Dフリップフロップ（D-FF）（前半その1：20分）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.3.1. 1.1 定義と動作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.3.2. 1.2 特性方程式・励起表</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">10.3.3. 1.3 メモ</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">4. フリップフロップの相互変換（後半その1：15分）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">5. 例で学ぶ：2ビット<strong>同期</strong>バイナリカウンタ（後半その2：20分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">5.1 仕様</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-ff">5.2 D-FFで設計</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jk-ff">5.3 JK-FFで設計</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#t-ff">5.4 T-FFで設計（最短）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">10.4. 4. フリップフロップの相互変換（後半その1：15分）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">10.5. 5. 例で学ぶ：2ビット<strong>同期</strong>バイナリカウンタ（後半その2：20分）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">10.5.1. 5.1 仕様</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-ff">10.5.2. 5.2 D-FFで設計</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jk-ff">10.5.3. 5.3 JK-FFで設計</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#t-ff">10.5.4. 5.4 T-FFで設計（最短）</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">6. よくある用途と注意</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">7. 例題・演習（後半その2：15分）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">8. まとめ（5分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">板書用チートシート</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">10.6. 6. よくある用途と注意</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">10.7. 7. 例題・演習（後半その2：15分）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">10.8. 8. まとめ（5分）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">10.8.1. 板書用チートシート</a></li>
 </ul>
 </li>
 </ul>
@@ -430,119 +428,132 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>様々なフリップフロップ<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>様々なフリップフロップ<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>到達目標</p>
 <ul class="simple">
-<li><p>Tフリップフロップ</p></li>
-<li><p>JKフリップフロップ</p></li>
-<li><p>Dフリップフロップ</p></li>
+<li><p>各フリップフロップ（Tフリップフロップ・JKフリップフロップ・Tフリップフロップ）の<strong>動作（真理値表）<strong>と</strong>特性方程式</strong>を説明できる．</p></li>
+<li><p>Dフリップフロップ⇄JKフリップフロップ⇄Tフリップフロップの<strong>相互変換</strong>を導ける．</p></li>
 </ul>
-<p>到達目標</p>
-<ul class="simple">
-<li><p>各フリップフロップ（D・JK・T）の<strong>動作（真理値表）<strong>と</strong>特性方程式</strong>を説明できる．</p></li>
-<li><p>D⇄JK⇄T の<strong>相互変換</strong>（入力変換式・小回路）を導ける．</p></li>
-<li><p>簡単な<strong>カウンタ／トグル</strong>などを，D/JK/T を使って設計できる．</p></li>
-<li><p>**励起表（excitation table）**を用いて，所望の状態遷移から入力を合成できる．</p></li>
-</ul>
+<!-- - 簡単な**カウンタ／トグル**などを，D/JK/T を使って設計できる． -->
+<!-- - **励起表**（excitation table）を用いて，所望の状態遷移から入力を合成できる． -->
 <p>今日の問い</p>
 <ul class="simple">
-<li><p>D・JK・T で「何が同じ」で「何が違う」？</p></li>
-<li><p>「トグル」はどのFFで一番作りやすい？</p></li>
-<li><p>2ビット同期カウンタを D／JK／T それぞれで作ると，式はどう変わる？</p></li>
+<li><p>Tフリップフロップ・JKフリップフロップ・Tフリップフロップの共通点と異なる点は何か？</p></li>
 </ul>
+<!-- - 「トグル」はどのFFで一番作りやすい？ -->
+<!-- - 2ビット同期カウンタを D／JK／T それぞれで作ると，式はどう変わる？ -->
 <p>キーワード</p>
 <ul class="simple">
 <li><p>特性方程式（characteristic equation）</p></li>
-<li><p>励起表（excitation table）</p></li>
-<li><p>トグル（toggle），同期カウンタ</p></li>
-<li><p>JK の多義入力（J=K=1 でトグル）</p></li>
 </ul>
-<p>タイムテーブル</p>
-<ul class="simple">
-<li><p>前半50分：総復習とD-FF（20）→ JK-FF（15）→ T-FF（15）</p></li>
-<li><p>休憩5分</p></li>
-<li><p>後半50分：FF相互変換（15）→ カウンタ設計（20）→ 例題・演習（15）</p></li>
-</ul>
+<!-- - 励起表（excitation table） -->
+<!-- - トグル（toggle），同期カウンタ -->
+<!-- - JK の多義入力（J=K=1 でトグル） -->
+<!-- ## 第9回の復習
+
+- クロックは**状態確定のものさし**．順序回路は「現在状態+入力」から「次状態・出力」を決める．
+- 基本FF（D-FF）で，立上り時に (Q^+=D) を保持． -->
 <hr class="docutils" />
-<section id="id2">
-<h2>0. 前回の復習（5分）<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="t">
+<h2><span class="section-number">10.1. </span>Tフリップフロップ<a class="headerlink" href="#t" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>クロックは<strong>状態確定のものさし</strong>．順序回路は「現在状態+入力」から「次状態・出力」を決める．</p></li>
-<li><p>基本FF（D-FF）で，立上り時に (Q^+=D) を保持．</p></li>
+<li><p>TはToggleまたはTriggerを意味する．</p></li>
+<li><p>ボタンを押すたびに記憶された値が反転する状況を考える．</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>ミニ問</strong></p>
-<ul class="simple">
-<li><p>組合せ回路と順序回路の違いを1行で説明せよ．</p></li>
-</ul>
-</div>
-</section>
-<hr class="docutils" />
-<section id="d-d-ff-1-20">
-<h2>1. Dフリップフロップ（D-FF）（前半その1：20分）<a class="headerlink" href="#d-d-ff-1-20" title="Link to this heading">#</a></h2>
-<section id="id3">
-<h3>1.1 定義と動作<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>立上りトリガD-FF：<strong>クロック立上り</strong>に入力 (D) をサンプリングし，出力 (Q) を更新．</p></li>
-<li><p>真理値（クロック縦線は省略）：
-(Q^+=D)</p></li>
-</ul>
-</section>
-<section id="id4">
-<h3>1.2 特性方程式・励起表<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>特性方程式</strong>：(Q^+=D)</p></li>
-<li><p><strong>励起表</strong>（所望の遷移に必要な D）：</p></li>
-</ul>
+<p><span class="math notranslate nohighlight">\(T\)</span>を入力，<span class="math notranslate nohighlight">\(Q\)</span>を出力とし，次のタイミングチャートのような挙動を実現する．</p>
+<p><img alt="TFFタイミングチャート" src="../_images/tff.png" /></p>
+<p>状態遷移表は次のようになる．</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>現在 (Q)</p></th>
-<th class="head text-center"><p>目標 (Q^+)</p></th>
-<th class="head text-center"><p>必要な (D)</p></th>
+<tr class="row-odd"><th class="head text-center"><p>入力<span class="math notranslate nohighlight">\(T\)</span></p></th>
+<th class="head text-center"><p>現在の状態<span class="math notranslate nohighlight">\(Q\)</span></p></th>
+<th class="head text-center"><p>次の状態<span class="math notranslate nohighlight">\(Q'\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0 （状態を維持）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1 （状態を維持）</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1 （状態を反転）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0 （状態を反転）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>この状態遷移表を実現するための<span class="math notranslate nohighlight">\(Q'\)</span>の論理式は次のようになる．</p>
+<div class="math notranslate nohighlight">
+\[
+Q' = \overline{T} \cdot Q + T \cdot \overline{Q} = T \oplus Q
+\]</div>
+<p>これを回路として構成すると次のようになる．ただし<span class="math notranslate nohighlight">\(Q\)</span>と<span class="math notranslate nohighlight">\(Q'\)</span>は同じ出力の違うタイミングに過ぎないことに注意する．</p>
+<p><img alt="TFF回路" src="../_images/tff_circuit.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<p><span class="math notranslate nohighlight">\(Q\)</span>の初期値を<span class="math notranslate nohighlight">\(0\)</span>として，入力<span class="math notranslate nohighlight">\(T\)</span>が<code class="docutils literal notranslate"><span class="pre">1,0,1,1,0</span></code>と変化するときの<span class="math notranslate nohighlight">\(Q\)</span>の変化を記せ．</p>
+</div>
+<section id="id2">
+<h3><span class="section-number">10.1.1. </span>弱点<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(T=1\)</span>となって<span class="math notranslate nohighlight">\(Q\)</span>の状態の反転が完了したときに，まだ<span class="math notranslate nohighlight">\(T=1\)</span>のままであれば<span class="math notranslate nohighlight">\(Q\)</span>の状態の反転が再び起きてしまう．
+そのため入力<span class="math notranslate nohighlight">\(T\)</span>は<span class="math notranslate nohighlight">\(Q\)</span>の反転が起きる前に即座に終えないといけない．</p>
+<p>この弱点を克服するためにSRフリップフロップ回路を組み込んだTフリップフロップ回路を考える．</p>
+<p><img alt="SRTFF回路" src="../_images/sr_tff_circuit.png" /></p>
+<p>この回路のタイミングチャートは次のようになる．</p>
+<p><img alt="SRTFFタイミングチャート" src="../_images/sr_tff.png" /></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="jk">
+<h2><span class="section-number">10.2. </span>JKフリップフロップ<a class="headerlink" href="#jk" title="Link to this heading">#</a></h2>
+<p>クロックを入力側に加えることで安定な出力を得る．</p>
+<p>状態遷移表は次のようになる．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>入力<span class="math notranslate nohighlight">\(T\)</span></p></th>
+<th class="head text-center"><p>入力<span class="math notranslate nohighlight">\(T\)</span></p></th>
+<th class="head text-center"><p>入力<span class="math notranslate nohighlight">\(T\)</span></p></th>
+<th class="head text-center"><p>現在の状態<span class="math notranslate nohighlight">\(Q\)</span></p></th>
+<th class="head text-center"><p>次の状態<span class="math notranslate nohighlight">\(Q'\)</span><br><span class="math notranslate nohighlight">\(CLK=1\)</span></p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0 （状態を維持）</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
 <td class="text-center"><p>1</p></td>
-<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1 （状態を維持）</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
 <td class="text-center"><p>0</p></td>
-<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1 （状態を反転）</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0 （状態を反転）</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>→ つまり <strong>(D=Q^+)</strong>（最も単純）</p>
-</section>
-<section id="id5">
-<h3>1.3 メモ<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>実装では非同期 <strong>CLR/PR</strong>（クリア／プリセット）端子をもつ場合が多い（立上りに関係なく強制0/1）．</p></li>
-</ul>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><strong>手を動かす1（5分）</strong></p>
-<ul class="simple">
-<li><p>与えたタイミング図（D と CLK）から，(Q) の波形を描け（立上りの黒点でサンプリング）．</p></li>
-</ul>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="jk-2-15">
-<h2>2. JKフリップフロップ（前半その2：15分）<a class="headerlink" href="#jk-2-15" title="Link to this heading">#</a></h2>
-<section id="id6">
-<h3>2.1 定義と動作<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>入力 (J,K)．立上り時の規則：</p>
 <ul>
@@ -553,9 +564,8 @@ document.write(`
 </ul>
 </li>
 </ul>
-</section>
-<section id="id7">
-<h3>2.2 特性方程式・励起表<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h3><span class="section-number">10.2.1. </span>2.2 特性方程式・励起表<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>特性方程式</strong>（代表形）
 [
@@ -592,8 +602,8 @@ Q^+ = J\overline{Q} + \overline{K}Q
 </div>
 <p>（X は “どちらでもよい”）</p>
 </section>
-<section id="id8">
-<h3>2.3 メモ<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3><span class="section-number">10.2.2. </span>2.3 メモ<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>(J=K=1) で自動トグル．<strong>トグル回路</strong>や<strong>カウンタ</strong>に向く．</p></li>
 </ul>
@@ -607,69 +617,69 @@ Q^+ = J\overline{Q} + \overline{K}Q
 </section>
 </section>
 <hr class="docutils" />
-<section id="t-3-15">
-<h2>3. Tフリップフロップ（前半その3：15分）<a class="headerlink" href="#t-3-15" title="Link to this heading">#</a></h2>
-<section id="id9">
-<h3>3.1 定義と動作<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<section id="d-d-ff-1-20">
+<h2><span class="section-number">10.3. </span>1. Dフリップフロップ（D-FF）（前半その1：20分）<a class="headerlink" href="#d-d-ff-1-20" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h3><span class="section-number">10.3.1. </span>1.1 定義と動作<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>入力 (T)（Toggle）．</p>
-<ul>
-<li><p>(T=0) … <strong>保持</strong>（(Q^+=Q)）</p></li>
-<li><p>(T=1) … <strong>反転</strong>（(Q^+=\overline{Q})）</p></li>
-</ul>
-</li>
+<li><p>立上りトリガD-FF：<strong>クロック立上り</strong>に入力 (D) をサンプリングし，出力 (Q) を更新．</p></li>
+<li><p>真理値（クロック縦線は省略）：
+(Q^+=D)</p></li>
 </ul>
 </section>
-<section id="id10">
-<h3>3.2 特性方程式・励起表<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3><span class="section-number">10.3.2. </span>1.2 特性方程式・励起表<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>特性方程式</strong>
-[
-Q^+ = T\oplus Q
-]</p></li>
-<li><p><strong>励起表</strong>（所望遷移に必要な (T)）：</p></li>
+<li><p><strong>特性方程式</strong>：(Q^+=D)</p></li>
+<li><p><strong>励起表</strong>（所望の遷移に必要な D）：</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-center"><p>(Q\to Q^+)</p></th>
-<th class="head text-center"><p>(T)</p></th>
+<tr class="row-odd"><th class="head text-center"><p>現在 (Q)</p></th>
+<th class="head text-center"><p>目標 (Q^+)</p></th>
+<th class="head text-center"><p>必要な (D)</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-center"><p>0→0</p></td>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p>0→1</p></td>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
 </tr>
-<tr class="row-even"><td class="text-center"><p>1→0</p></td>
-<td class="text-center"><p>1</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>1→1</p></td>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
 <td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>→ <strong>“変えたいとき1，保持は0”</strong> で直観的．</p>
+<p>→ つまり <strong>(D=Q^+)</strong>（最も単純）</p>
 </section>
-<section id="id11">
-<h3>3.3 メモ<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h3><span class="section-number">10.3.3. </span>1.3 メモ<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>1ビット<strong>トグル</strong>の最短パス．カウンタの設計が簡単（下位ビットが1のとき上位をトグル等）．</p></li>
+<li><p>実装では非同期 <strong>CLR/PR</strong>（クリア／プリセット）端子をもつ場合が多い（立上りに関係なく強制0/1）．</p></li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><strong>手を動かす3（3分）</strong></p>
+<p><strong>手を動かす1（5分）</strong></p>
 <ul class="simple">
-<li><p>(Q) を 0 初期として，(T) 入力が <code class="docutils literal notranslate"><span class="pre">1,0,1,1,0</span></code> と変化するときの (Q) を書け．</p></li>
+<li><p>与えたタイミング図（D と CLK）から，(Q) の波形を描け（立上りの黒点でサンプリング）．</p></li>
 </ul>
 </div>
+<hr class="docutils" />
 </section>
 </section>
 <hr class="docutils" />
-<section id="id12">
-<h2>4. フリップフロップの相互変換（後半その1：15分）<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h2><span class="section-number">10.4. </span>4. フリップフロップの相互変換（後半その1：15分）<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>JK → T</strong>：(T = J\oplus K) ではない点に注意（そのままは不可）
 実用は <strong>(J=K=T)</strong> と置くと <strong>T-FF 動作</strong>（0:保持，1:トグル）を実現できる．</p></li>
@@ -691,17 +701,17 @@ Q^+ = T\oplus Q
 </div>
 </section>
 <hr class="docutils" />
-<section id="id13">
-<h2>5. 例で学ぶ：2ビット<strong>同期</strong>バイナリカウンタ（後半その2：20分）<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
-<section id="id14">
-<h3>5.1 仕様<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h2><span class="section-number">10.5. </span>5. 例で学ぶ：2ビット<strong>同期</strong>バイナリカウンタ（後半その2：20分）<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h3><span class="section-number">10.5.1. </span>5.1 仕様<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>入力なし，出力は状態 (Q_1Q_0)（00→01→10→11→00…）．</p></li>
 <li><p>立上りトリガ，同期更新．</p></li>
 </ul>
 </section>
 <section id="d-ff">
-<h3>5.2 D-FFで設計<a class="headerlink" href="#d-ff" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.5.2. </span>5.2 D-FFで設計<a class="headerlink" href="#d-ff" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>目標遷移：
 (Q_0^+ = \overline{Q_0})（毎回反転）
@@ -711,14 +721,14 @@ Q^+ = T\oplus Q
 </ul>
 </section>
 <section id="jk-ff">
-<h3>5.3 JK-FFで設計<a class="headerlink" href="#jk-ff" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.5.3. </span>5.3 JK-FFで設計<a class="headerlink" href="#jk-ff" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>(Q_0)：毎回トグル → <strong>(J_0=1,\ K_0=1)</strong></p></li>
 <li><p>(Q_1)：(Q_0=1) の時だけトグル → <strong>(J_1=Q_0,\ K_1=Q_0)</strong></p></li>
 </ul>
 </section>
 <section id="t-ff">
-<h3>5.4 T-FFで設計（最短）<a class="headerlink" href="#t-ff" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.5.4. </span>5.4 T-FFで設計（最短）<a class="headerlink" href="#t-ff" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>(T_0=1)</strong>（常にトグル）</p></li>
 <li><p><strong>(T_1=Q_0)</strong>（下位1のときトグル）</p></li>
@@ -734,8 +744,8 @@ Q^+ = T\oplus Q
 </section>
 </section>
 <hr class="docutils" />
-<section id="id15">
-<h2>6. よくある用途と注意<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<section id="id11">
+<h2><span class="section-number">10.6. </span>6. よくある用途と注意<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>D-FF</strong>：レジスタ，パイプライン，シリアル入出力など<strong>汎用</strong>．</p></li>
 <li><p><strong>JK-FF</strong>：古典回路・教科書的に頻出（トグルを含む多機能）．現代LSIでは D-FF 優位．</p></li>
@@ -744,8 +754,8 @@ Q^+ = T\oplus Q
 </ul>
 </section>
 <hr class="docutils" />
-<section id="id16">
-<h2>7. 例題・演習（後半その2：15分）<a class="headerlink" href="#id16" title="Link to this heading">#</a></h2>
+<section id="id12">
+<h2><span class="section-number">10.7. </span>7. 例題・演習（後半その2：15分）<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>例題1（励起表）</strong></p>
@@ -799,8 +809,8 @@ Q^+ = T\oplus Q
 </ul>
 </section>
 <hr class="docutils" />
-<section id="id17">
-<h2>8. まとめ（5分）<a class="headerlink" href="#id17" title="Link to this heading">#</a></h2>
+<section id="id13">
+<h2><span class="section-number">10.8. </span>8. まとめ（5分）<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>D</strong>：(Q^+=D)（最もシンプル），<strong>JK</strong>：保持/セット/リセット/トグルを一手に，<strong>T</strong>：(Q^+=Q\oplus T) でトグルが簡単．</p></li>
 <li><p>励起表を使えば<strong>所望の遷移→入力</strong>が機械的に求まる．</p></li>
@@ -808,8 +818,8 @@ Q^+ = T\oplus Q
 <li><p>次回は <strong>フリップフロップのハザードと同期設計上の注意</strong>（非同期入力の扱い・同期器の再確認）を扱う．</p></li>
 </ul>
 <hr class="docutils" />
-<section id="id18">
-<h3>板書用チートシート<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<section id="id14">
+<h3><span class="section-number">10.8.1. </span>板書用チートシート<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>D：(Q^+=D)，励起 (D=Q^+)</p></li>
 <li><p>JK：(Q^+=J\overline{Q}+\overline{K}Q)，励起（0→1で (J=1)，1→0で (K=1)）</p></li>
@@ -863,6 +873,15 @@ Q^+ = T\oplus Q
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="9_clock.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>クロックの役割，同期回路と非同期回路</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -879,37 +898,33 @@ Q^+ = T\oplus Q
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">0. 前回の復習（5分）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-d-ff-1-20">1. Dフリップフロップ（D-FF）（前半その1：20分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.1 定義と動作</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.2 特性方程式・励起表</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.3 メモ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t">10.1. Tフリップフロップ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.1.1. 弱点</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jk-2-15">2. JKフリップフロップ（前半その2：15分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.1 定義と動作</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.2 特性方程式・励起表</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.3 メモ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jk">10.2. JKフリップフロップ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.2.1. 2.2 特性方程式・励起表</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.2.2. 2.3 メモ</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-3-15">3. Tフリップフロップ（前半その3：15分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.1 定義と動作</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.2 特性方程式・励起表</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">3.3 メモ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-d-ff-1-20">10.3. 1. Dフリップフロップ（D-FF）（前半その1：20分）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.3.1. 1.1 定義と動作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.3.2. 1.2 特性方程式・励起表</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">10.3.3. 1.3 メモ</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">4. フリップフロップの相互変換（後半その1：15分）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">5. 例で学ぶ：2ビット<strong>同期</strong>バイナリカウンタ（後半その2：20分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">5.1 仕様</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-ff">5.2 D-FFで設計</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jk-ff">5.3 JK-FFで設計</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#t-ff">5.4 T-FFで設計（最短）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">10.4. 4. フリップフロップの相互変換（後半その1：15分）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">10.5. 5. 例で学ぶ：2ビット<strong>同期</strong>バイナリカウンタ（後半その2：20分）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">10.5.1. 5.1 仕様</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-ff">10.5.2. 5.2 D-FFで設計</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jk-ff">10.5.3. 5.3 JK-FFで設計</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#t-ff">10.5.4. 5.4 T-FFで設計（最短）</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">6. よくある用途と注意</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">7. 例題・演習（後半その2：15分）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">8. まとめ（5分）</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">板書用チートシート</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">10.6. 6. よくある用途と注意</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">10.7. 7. 例題・演習（後半その2：15分）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">10.8. 8. まとめ（5分）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">10.8.1. 板書用チートシート</a></li>
 </ul>
 </li>
 </ul>
