@@ -422,6 +422,7 @@ document.write(`
 <!-- - 2ビット同期カウンタを D／JK／T それぞれで作ると，式はどう変わる？ -->
 <p>キーワード</p>
 <ul class="simple">
+<li><p>状態遷移表</p></li>
 <li><p>特性方程式（characteristic equation）</p></li>
 </ul>
 <!-- - 励起表（excitation table） -->
@@ -435,6 +436,8 @@ document.write(`
 <section id="d">
 <h2><span class="section-number">10.1. </span>Dフリップフロップ<a class="headerlink" href="#d" title="Link to this heading">#</a></h2>
 <p>クロックによる同期を導入することで，<span class="math notranslate nohighlight">\(D=1\)</span>のときに<span class="math notranslate nohighlight">\(CLK=1\)</span>となればセットし，<span class="math notranslate nohighlight">\(D=0\)</span>のときに<span class="math notranslate nohighlight">\(CLK=1\)</span>となればリセットするものとする．</p>
+<p>タイミングチャートは次のようになる．</p>
+<p><img alt="DFFタイミングチャート" src="../_images/dff.png" /></p>
 <p>同期付きSRフリップフロップ</p>
 <p><img alt="クロックSRフリップフロップ" src="../_images/clockSRflipflop_NAND.png" /></p>
 <p>を変形し，次のDフリップフロップ回路を構成する．</p>
@@ -485,8 +488,13 @@ document.write(`
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>演習1</strong></p>
-<p>上記の状態遷移表からカルノー図を作成し，論理式（<strong>特性方程式</strong>）を導け．</p>
+<p>上記の状態遷移表から次の状態<span class="math notranslate nohighlight">\(Q'\)</span>に関するカルノー図を作成し，<span class="math notranslate nohighlight">\(Q'\)</span>ほ表す論理式（<span style="color:red">特性方程式</span>と呼ぶ）を導け．</p>
+<p><img alt="カルノー図" src="../_images/dff_karnaugh.png" /></p>
+<p>解答例</p>
+<p><img alt="カルノー図" src="../_images/dff_karnaugh_sol.png" /></p>
 </div>
+<!-- この論理式を実現する論理回路は次のようになる． -->
+<p>クロックが1のときだけに注目すればDフリップフロップの論理式は<span class="math notranslate nohighlight">\(Q'=D\)</span>となる．</p>
 </section>
 <hr class="docutils" />
 <section id="t">
@@ -536,9 +544,8 @@ Q' = \overline{T} \cdot Q + T \cdot \overline{Q} = T \oplus Q
 <p class="admonition-title">Note</p>
 <p><strong>演習2</strong></p>
 <p><span class="math notranslate nohighlight">\(Q\)</span>の初期値を<span class="math notranslate nohighlight">\(0\)</span>として，入力<span class="math notranslate nohighlight">\(T\)</span>が<code class="docutils literal notranslate"><span class="pre">1,0,1,1,0</span></code>と変化するときの<span class="math notranslate nohighlight">\(Q\)</span>の変化を記せ．</p>
-<!-- 
-$T=1$で反転し，$T=0$で維持するため，入力$T$の直後の$Q$の値は`1,1,0,1,1`となる．
- -->
+<p>解答例</p>
+<p><span class="math notranslate nohighlight">\(T=1\)</span>で反転し，<span class="math notranslate nohighlight">\(T=0\)</span>で維持するため，入力<span class="math notranslate nohighlight">\(T\)</span>の直後の<span class="math notranslate nohighlight">\(Q\)</span>の値は<code class="docutils literal notranslate"><span class="pre">1,1,0,1,1</span></code>となる．</p>
 </div>
 <section id="id2">
 <h3><span class="section-number">10.2.1. </span>弱点<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
@@ -561,7 +568,7 @@ $T=1$で反転し，$T=0$で維持するため，入力$T$の直後の$Q$の値�
 <th class="head text-center"><p>入力<br><span class="math notranslate nohighlight">\(K\)</span></p></th>
 <th class="head text-center"><p>現在の状態<span class="math notranslate nohighlight">\(Q\)</span></p></th>
 <th class="head text-center"><p>次の状態<span class="math notranslate nohighlight">\(Q'\)</span><br><span class="math notranslate nohighlight">\(CLK=0\)</span></p></th>
-<th class="head text-center"><p>次の状態<span class="math notranslate nohighlight">\(Q'\)</span><br><span class="math notranslate nohighlight">\(CLK=1\)</span></p></th>
+<th class="head text-left"><p>次の状態<span class="math notranslate nohighlight">\(Q'\)</span><br><span class="math notranslate nohighlight">\(CLK=1\)</span></p></th>
 </tr>
 </thead>
 <tbody>
@@ -569,49 +576,49 @@ $T=1$で反転し，$T=0$で維持するため，入力$T$の直後の$Q$の値�
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
-<td class="text-center"><p>0 （状態を維持）</p></td>
+<td class="text-left"><p>0 （状態を維持）</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
-<td class="text-center"><p>1 （状態を維持）</p></td>
+<td class="text-left"><p>1 （状態を維持）</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>0</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
-<td class="text-center"><p>0 （リセット）</p></td>
+<td class="text-left"><p>0 （リセット）</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>0</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
-<td class="text-center"><p>0 （リセット）</p></td>
+<td class="text-left"><p>0 （リセット）</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>1</p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
-<td class="text-center"><p>1 （セット）</p></td>
+<td class="text-left"><p>1 （セット）</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>1</p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
-<td class="text-center"><p>1 （セット）</p></td>
+<td class="text-left"><p>1 （セット）</p></td>
 </tr>
 <tr class="row-even"><td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>0</p></td>
 <td class="text-center"><p>0</p></td>
-<td class="text-center"><p>1 （状態を反転）</p></td>
+<td class="text-left"><p>1 （状態を反転）</p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
 <td class="text-center"><p>1</p></td>
-<td class="text-center"><p>0 （状態を反転）</p></td>
+<td class="text-left"><p>0 （状態を反転）</p></td>
 </tr>
 </tbody>
 </table>
@@ -619,7 +626,27 @@ $T=1$で反転し，$T=0$で維持するため，入力$T$の直後の$Q$の値�
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>演習3</strong></p>
-<p>JKフリップフロップのカルノー図を作成し，簡略化した論理式を求めよ．</p>
+<p>JKフリップフロップの<span class="math notranslate nohighlight">\(Q'\)</span>に関するカルノー図を作成し，<span class="math notranslate nohighlight">\(Q'\)</span>を表す論理式を求めよ．</p>
+<p><img alt="カルノー図" src="../_images/jkff_karnaugh.png" /></p>
+<p>解答例</p>
+<p><img alt="カルノー図" src="../_images/jkff_karnaugh_sol.png" /></p>
+</div>
+<p><span class="math notranslate nohighlight">\(Q'\)</span>の論理式は次のように簡略化できる．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Q' &amp;= \overline{K} \cdot Q + \overline{CLK} \cdot Q + J \cdot CLK \cdot \overline{Q}
+\\
+&amp;= (\overline{K} + \overline{CLK}) \cdot Q + J \cdot CLK \cdot \overline{Q}
+\\
+&amp;= \overline{K \cdot CLK} \cdot Q + J \cdot CLK \cdot \overline{Q}
+\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習4</strong></p>
+<p>次の論理回路の続きを描き，JKフリップフロップの論理回路を作成せよ．</p>
+<p><img alt="JKフリップフロップ" src="../_images/jkff_circuit.png" /></p>
+<p>解答例</p>
+<p><img alt="JKフリップフロップ" src="../_images/jkff_circuit_sol.png" /></p>
 </div>
 <hr class="docutils" />
 <!-- 
