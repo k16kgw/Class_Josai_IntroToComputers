@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>順序回路の設計法 &#8212; Introduction to Computers I</title>
+    <title>11. 順序回路の設計法 &#8212; Introduction to Computers I</title>
   
   
   
@@ -62,6 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/11_sequential_curcuit';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="10. 様々なフリップフロップ" href="10_flip-flop.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -182,7 +181,7 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
@@ -193,6 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="8_state.html">8. 順序回路による状態の保持，状態遷移</a></li>
 <li class="toctree-l1"><a class="reference internal" href="9_clock.html">9. クロックの役割，同期回路と非同期回路</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_flip-flop.html">10. 様々なフリップフロップ</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. 順序回路の設計法</a></li>
 </ul>
 
     </div>
@@ -388,9 +388,26 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">順序回路</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">順序回路の設計</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">例：3枚入れるとコーヒーが出る自動販売機</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">11.1. 順序回路</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">11.2. 順序回路の設計</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">11.2.1. 例：3枚入れるとコーヒーが出る自動販売機</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">11.2.2. 回路の構成（最小ブロック）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">11.2.3. 現実の回路における問題点</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">11.3. カウンタ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">11.3.1. 非同期カウンタ（リップルカウンタ）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">11.3.2. 同期カウンタ</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">11.4. レジスタ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">11.4.1. シフトレジスタ</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">11.5. 例で学ぶ：順序回路の設計（総合ミニ例）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">11.6. 例題と演習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">11.7. まとめ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">11.7.1. 付録：板書用チートシート</a></li>
 </ul>
 </li>
 </ul>
@@ -405,12 +422,30 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>順序回路の設計法<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">11. </span>順序回路の設計法<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>到達目標</p>
 <ul class="simple">
-<li><p>第9回Step4の回路の構成</p></li>
+<li><p>順序回路の<strong>設計手順</strong>（状態遷移図→2進コード化→遷移表→論理式）を一通り実施できる．</p></li>
+<li><p>代表的な<strong>回路構成</strong>（FF＋組合せ回路，クロック，リセット）を示せる．</p></li>
+<li><p>実回路で問題となる<strong>タイミング制約</strong>・<strong>メタスタビリティ</strong>・<strong>ハザード</strong>の要点を説明できる．</p></li>
+<li><p>**カウンタ（非同期・同期）<strong>と</strong>レジスタ（シフトレジスタ）**の基本構成を設計できる．</p></li>
+</ul>
+<p>今日の問い</p>
+<ul class="simple">
+<li><p>図で描いた状態機械を，どうやって<strong>ゲートとFF</strong>に落とす？</p></li>
+<li><p>なぜ「同期（クロック）」が設計を楽にする？どんな落とし穴がある？</p></li>
+<li><p>非同期カウンタと同期カウンタの違いは何？どちらをいつ使う？</p></li>
+</ul>
+<p>キーワード</p>
+<ul class="simple">
+<li><p>状態遷移図，二進コード化，状態遷移表</p></li>
+<li><p>次状態方程式，出力方程式，励起表</p></li>
+<li><p>セットアップ時間，ホールド時間，クロックスキュー，ジッタ</p></li>
+<li><p>非同期（リップル）カウンタ，同期カウンタ</p></li>
+<li><p>レジスタ，SISO/SIPO/PISO/PIPO，シフト</p></li>
 </ul>
 <section id="id2">
-<h2>順序回路<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.1. </span>順序回路<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>順序回路</strong>：初期状態から始まり，決まった順序で状態遷移を行う機能を実現する回路．</p></li>
 </ul>
@@ -422,7 +457,7 @@ document.write(`
 <!-- - **設計での選択**：Moore（出力が安定しやすい）／Mealy（状態数が少なくできることが多い）． -->
 </section>
 <section id="id3">
-<h2>順序回路の設計<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">11.2. </span>順序回路の設計<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>状態遷移図の作成</strong>：初期状態と終了状態を含む<u>複数の状態を定義</u>し，次に各状態への入力とそれにより生じる状態遷移と出力を定義する．</p></li>
 <li><p><strong>2進コード化</strong>：各状態と入出力を表する2進数の値を決め，1で作成した状態遷移図を2進数の値で描き直す．</p></li>
@@ -431,7 +466,7 @@ document.write(`
 </ol>
   <!-- （SOP/POS→K-map/Q-Mで簡略化→NAND/NOR/MUXで実装） -->
 <section id="id4">
-<h3>例：3枚入れるとコーヒーが出る自動販売機<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">11.2.1. </span>例：3枚入れるとコーヒーが出る自動販売機<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <!-- ### 例1：パターン“01”検出器（出力は1クロックだけ1） -->
 <p>1種類の硬貨のみを考え，硬貨を3枚入れるとコーヒーが出てくる自動販売機を実装する．</p>
 <p><strong>Step 1：状態遷移図の作成</strong></p>
@@ -464,7 +499,7 @@ document.write(`
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>演習2</strong></p>
+<p><strong>演習1</strong></p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(N_0\)</span>のカルノー図を作成し，<span class="math notranslate nohighlight">\(N_0\)</span>を加法標準形で表せ．</p></li>
 <li><p><span class="math notranslate nohighlight">\(G\)</span>のカルノー図を作成し，<span class="math notranslate nohighlight">\(G\)</span>を加法標準形で表せ．</p></li>
@@ -480,6 +515,283 @@ N_0 = C_0 \cdot \overline{S} + \overline{C_0} \cdot \overline{C_1} \cdot S
 G = C_1 \cdot S
 \]</div>
 </div>
+<ol class="arabic simple" start="4">
+<li><p>回路の設計（論理式の決定）</p>
+<ul class="simple">
+<li><p>(Q^+) と (Y) を <strong>K-map</strong> や <strong>Q–M法</strong>で簡略化し，<strong>D-FF／JK-FF／T-FF</strong> いずれかで実装する．</p></li>
+<li><p>FFをJK/Tで用いるなら<strong>励起表</strong>で入力式を導出（例：Tは「変えたいとき1」）．</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h3><span class="section-number">11.2.2. </span>回路の構成（最小ブロック）<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>記憶：D-FF（一般的），またはJK/T-FF（カウンタ等）を<strong>状態ビット数だけ</strong>用意．</p></li>
+<li><p>組合せ回路：</p>
+<ul>
+<li><p>次状態方程式 (Q^+ = f(Q, X))</p></li>
+<li><p>出力方程式 (Y = g(Q))（Moore）または (g(Q, X))（Mealy）</p></li>
+</ul>
+</li>
+<li><p>リセット（初期化）：</p>
+<ul>
+<li><p>同期リセット（CLKで反映）／非同期リセット（即反映）．FPGA/ASICで流儀が異なるため<strong>方針を統一</strong>する．</p></li>
+</ul>
+</li>
+<li><p>クロック：</p>
+<ul>
+<li><p>1ドメイン内で配線（スキュー最小化），非同期入力は<strong>2段同期器</strong>で取り込み（第9回復習）．</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h3><span class="section-number">11.2.3. </span>現実の回路における問題点<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>タイミング制約</p>
+<ul class="simple">
+<li><p>コインが投入された(1)のとき，クロックが1でないと投入は判定されない．</p></li>
+<li><p>コインが投入された(1)ときに，クロックが早く1→0→1となると，コインは1度しか投入されていないにも関わらず2度投入された判定をされてしまう．</p></li>
+</ul>
+<!-- - セットアップ：(T_{clk} \ge t_{CQ}^{max} + t_{comb}^{max} + t_{setup} + \text{skew}^{max})
+- ホールド：(t_{CQ}^{min} + t_{comb}^{min} \ge t_{hold} + \text{skew}^{min})
+- 速すぎても遅すぎても破る．遅延挿入や再配線で調整． -->
+</li>
+<li><p>メタスタビリティ</p>
+<ul class="simple">
+<li><p>非同期入力をクロック縁でサンプリングすると発生し得る → <strong>FF×2 同期器</strong>で確率低減．</p></li>
+</ul>
+</li>
+<li><p>ハザード</p>
+<ul class="simple">
+<li><p>論理最小化で<strong>静的ハザード</strong>が現れることがある → <strong>冗長項の追加</strong>や<strong>同期化</strong>で抑制．</p></li>
+</ul>
+</li>
+<li><p>クロックスキュー／ジッタ</p>
+<ul class="simple">
+<li><p>スキューは setup/hold マージンに直撃．ツリー設計や配線長・バッファで管理．</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2><span class="section-number">11.3. </span>カウンタ<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h3><span class="section-number">11.3.1. </span>非同期カウンタ（リップルカウンタ）<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>構成</p>
+<ul>
+<li><p><strong>フリップフロップの出力</strong>を<strong>次段のクロック</strong>に接続（L→HまたはH→Lでトグル）．</p></li>
+<li><p>例：T-FF を用い (T=1) 固定でトグルさせる．</p></li>
+</ul>
+</li>
+<li><p>特徴</p>
+<ul>
+<li><p>構成が簡単，ゲートが少ない．</p></li>
+<li><p>ただし<strong>各段で遅延がリップル</strong>し，ビット幅に比例して<strong>グリッチ</strong>と<strong>遅延</strong>が増大．</p></li>
+</ul>
+</li>
+<li><p>2分周チェーン例（T-FF×n）</p>
+<ul>
+<li><p>(Q_0)：入力CLKの1/2，(Q_1)：1/4，…（逓倍器・LED走査などで有用）</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1（非同期カウンタ）</strong><br />
+T-FFを3段接続し，入力CLKに対する (Q_2Q_1Q_0) の出力列を最初の 8クロック分書け（初期 000）．</p>
+</div>
+</section>
+<section id="id9">
+<h3><span class="section-number">11.3.2. </span>同期カウンタ<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>構成</p>
+<ul>
+<li><p><strong>全FFに同一クロック</strong>を与え，<strong>次状態回路</strong>で同時更新．</p></li>
+</ul>
+</li>
+<li><p>2ビット上カウントの設計例</p>
+<ul>
+<li><p>D-FFで：</p>
+<ul>
+<li><p>(D_0=\overline{Q_0})（毎回反転）</p></li>
+<li><p>(D_1=Q_1 \oplus Q_0)（下位が1のとき反転）</p></li>
+</ul>
+</li>
+<li><p>T-FFで：</p>
+<ul>
+<li><p>(T_0=1,\ T_1=Q_0)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>特徴</p>
+<ul>
+<li><p>遅延は<strong>1サイクル内の組合せ遅延のみ</strong> → 高速・安定．</p></li>
+<li><p>論理が増える場合あり（ただし小規模では軽微）．</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>手を動かす（5分）</strong><br />
+3ビット同期カウンタ（上カウント）を T-FF で設計：<br />
+(T_0=1,\ T_1=Q_0,\ T_2=Q_1\cdot Q_0) を導出してブロック図化．</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id10">
+<h2><span class="section-number">11.4. </span>レジスタ<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>レジスタ：<strong>並列ビット</strong>の格納要素（D-FFの束）．</p>
+<ul>
+<li><p>入力 (D_{n-1:0}) をクロックで取り込み，出力 (Q_{n-1:0}) として保持．</p></li>
+</ul>
+</li>
+<li><p>クリア／プリセット付き，イネーブル（EN）付き等のバリエーション．</p></li>
+</ul>
+<section id="id11">
+<h3><span class="section-number">11.4.1. </span>シフトレジスタ<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>1クロックごとに<strong>ビットを隣へ転送</strong>．用途：シリアル通信，逐次演算，LED制御など．</p></li>
+<li><p>代表4種（入出力の形態）</p>
+<ul>
+<li><p>SISO（Serial In Serial Out）：ビット列を直列入出力</p></li>
+<li><p>SIPO（Serial In Parallel Out）：直列で受けて並列に出力（受信バッファ等）</p></li>
+<li><p>PISO（Parallel In Serial Out）：並列で取り込み直列で送出（送信シフト）</p></li>
+<li><p>PIPO（Parallel In Parallel Out）：レジスタとして保持（シフトしない）</p></li>
+</ul>
+</li>
+<li><p>右シフト（SIPO）構成例（D-FF×n）</p>
+<ul>
+<li><p>(D_{i}=Q_{i-1})（(i\ge1)），(D_0=\text{SER_IN})，出力 (Q_{n-1:0})</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2（シフト）</strong><br />
+SIPO 4ビットの右シフトレジスタに <code class="docutils literal notranslate"><span class="pre">SER_IN=1,0,1,1</span></code> を順に入力（1クロックごと）．<br />
+各クロック後の (Q_3Q_2Q_1Q_0) を初期 0000 から追跡せよ．</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id12">
+<h2><span class="section-number">11.5. </span>例で学ぶ：順序回路の設計（総合ミニ例）<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>仕様</p>
+<ul class="simple">
+<li><p>入力 (X) が「連続する 2回の 1」を検出した直後の<strong>次クロック</strong>で (Y=1) を出し，それ以外は 0．（Moore，1クロック幅）</p></li>
+</ul>
+<p>手順</p>
+<ul class="simple">
+<li><p>状態遷移図</p>
+<ul>
+<li><p>(S_0)：未検出，(S_1)：直前 1，(S_2)：検出直後（(Y=1)），次で (S_0)．</p></li>
+</ul>
+</li>
+<li><p>2進コード化</p>
+<ul>
+<li><p>(S_0=00,\ S_1=01,\ S_2=10)（11は未使用）．</p></li>
+</ul>
+</li>
+<li><p>遷移表（抜粋）</p>
+<ul>
+<li><p>(00 \xrightarrow{X=1} 01)，(01 \xrightarrow{X=1} 10)，(10 \xrightarrow{X=*} 00) 他は適宜．</p></li>
+</ul>
+</li>
+<li><p>論理式（K-mapで簡略化の一例）</p>
+<ul>
+<li><p>(Q_1^+ = \overline{Q_1}Q_0X)</p></li>
+<li><p>(Q_0^+ = \overline{Q_1}\overline{X})</p></li>
+<li><p>(Y = Q_1\overline{Q_0})</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>設計メモ</strong><br />
+未使用状態“11”には安全遷移（例：00）を割当てておく．リセットは 00 に向ける．</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id13">
+<h2><span class="section-number">11.6. </span>例題と演習<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>例題1（設計手順の適用）</strong><br />
+仕様：「入力Xが“010”を検出したら次クロックでY=1（1クロックだけ）」の Moore 機械を設計せよ：</p>
+<ol class="arabic simple">
+<li><p>状態遷移図 → 2) 2進コード化 → 3) 遷移表 → 4) (Q^+), (Y) の論理式（K-map簡略化）．</p></li>
+</ol>
+</div>
+<p><strong>解答例（要点）</strong></p>
+<ul class="simple">
+<li><p>状態：(S_0)（なし），(S_1)（直前0），(S_2)（直前01），(S_3)（出力1）</p></li>
+<li><p>符号化例：(S_0=00,S_1=01,S_2=11,S_3=10)（一例）</p></li>
+<li><p>(Y=1) は (S_3) のみ（Moore），K-mapで次状態を導出（配布解答に式提示）．</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習3（カウンタ比較・10分）</strong></p>
+<ol class="arabic simple">
+<li><p>3ビット非同期カウンタで <strong>011→100</strong> へ移る瞬間の各ビットの切替順序を言語化せよ（なぜグリッチが出やすい？）．</p></li>
+<li><p>同じ機能を同期カウンタで実装し，ゲート式（T-FF使用）を与えよ（(T_0=1,\ T_1=Q_0,\ T_2=Q_1Q_0) をヒントに）．</p></li>
+</ol>
+</div>
+<p><strong>解答例（要点）</strong></p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>非同期は LSB→MSB の順に遅延を伴い反転するため，一瞬「100」に達する前に「000」「001」等を経由し得る．</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>同期では同一クロックで同時更新するため，内部は論理式どおりに一挙に遷移する．</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h2><span class="section-number">11.7. </span>まとめ<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>順序回路の設計は「状態遷移図 → 2進化 → 遷移表 → 論理式 → 実装」の<strong>型</strong>で機械的に進められる．</p></li>
+<li><p>実回路では<strong>タイミング制約</strong>・<strong>非同期入力</strong>・<strong>ハザード</strong>に注意．</p></li>
+<li><p>カウンタは学習効果が高い題材：<strong>非同期</strong>は簡単だが遅延が累積，<strong>同期</strong>は高速・堅牢．</p></li>
+<li><p>レジスタ／シフトはデータの受け渡しの基本部品．</p></li>
+</ul>
+<hr class="docutils" />
+<section id="id15">
+<h3><span class="section-number">11.7.1. </span>付録：板書用チートシート<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>タイミング不等式</p>
+<ul>
+<li><p>(T_{clk}\ge t_{CQ}^{max}+t_{comb}^{max}+t_{setup}+\text{skew}^{max})</p></li>
+<li><p>(t_{CQ}^{min}+t_{comb}^{min}\ge t_{hold}+\text{skew}^{min})</p></li>
+</ul>
+</li>
+<li><p>励起表（抜粋）</p>
+<ul>
+<li><p>D：(D=Q^+)</p></li>
+<li><p>T：(T=Q\oplus Q^+)（変える=1）</p></li>
+<li><p>JK：(Q^+=J\overline{Q}+\overline{K}Q)</p></li>
+</ul>
+</li>
+<li><p>シフト4形（SISO/SIPO/PISO/PIPO）</p></li>
+<li><p>同期3ビットカウンタ（T-FF）：(T_0=1,\ T_1=Q_0,\ T_2=Q_1Q_0)</p></li>
+</ul>
+<p>図版（任意パス）</p>
+<ul class="simple">
+<li><p>状態遷移図テンプレ：<code class="docutils literal notranslate"><span class="pre">/contents/figs/11/states.png</span></code></p></li>
+<li><p>リップル vs 同期カウンタ：<code class="docutils literal notranslate"><span class="pre">/contents/figs/11/counters.png</span></code></p></li>
+<li><p>SIPOシフト：<code class="docutils literal notranslate"><span class="pre">/contents/figs/11/shift_sipo.png</span></code></p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -514,6 +826,15 @@ G = C_1 \cdot S
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="10_flip-flop.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>様々なフリップフロップ</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -530,9 +851,26 @@ G = C_1 \cdot S
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">順序回路</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">順序回路の設計</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">例：3枚入れるとコーヒーが出る自動販売機</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">11.1. 順序回路</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">11.2. 順序回路の設計</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">11.2.1. 例：3枚入れるとコーヒーが出る自動販売機</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">11.2.2. 回路の構成（最小ブロック）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">11.2.3. 現実の回路における問題点</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">11.3. カウンタ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">11.3.1. 非同期カウンタ（リップルカウンタ）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">11.3.2. 同期カウンタ</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">11.4. レジスタ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">11.4.1. シフトレジスタ</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">11.5. 例で学ぶ：順序回路の設計（総合ミニ例）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">11.6. 例題と演習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">11.7. まとめ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">11.7.1. 付録：板書用チートシート</a></li>
 </ul>
 </li>
 </ul>

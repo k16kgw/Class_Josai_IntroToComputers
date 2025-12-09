@@ -19,6 +19,6 @@ parts:
       - file: contents/8_state
       - file: contents/9_clock
       - file: contents/10_flip-flop
-      # - file: contents/11_sequential_curcuit
+      - file: contents/11_sequential_curcuit
       # - file: contents/12_multiplier
       # - file: contents/13_memory
