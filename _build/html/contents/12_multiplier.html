@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; Introduction to Computers I</title>
+    <title>12. 乗算回路・除算回路 &#8212; Introduction to Computers I</title>
   
   
   
@@ -57,9 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/12_multiplier';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="11. 順序回路の設計法" href="11_sequential_curcuit.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,11 +181,19 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_Karnaugh.html">4. カルノー図による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_combinational_circuit.html">5. クワイン・マクラスキー法による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_adder.html">6. 半加算器・全加算器・減算器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_test_ans.html">7. 中間試験</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_state.html">8. 順序回路による状態の保持，状態遷移</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_clock.html">9. クロックの役割，同期回路と非同期回路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_flip-flop.html">10. 様々なフリップフロップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_sequential_curcuit.html">11. 順序回路の設計法</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. 乗算回路・除算回路</a></li>
 </ul>
 
     </div>
@@ -370,7 +379,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>乗算回路・除算回路</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -379,9 +388,29 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12.1. 授業アンケート</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">12.2. レジスタ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">12.3. 2のべき乗を掛ける／割る</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">12.4. 乗算</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">12.4.1. 一桁の乗算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shift-and-add">12.4.2. 逐次型（shift-and-add：加算＋シフト）</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">12.5. 除算</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shift-and-subtract">12.5.1. 逐次型（長除法：shift-and-subtract）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">12.6. 逐次型の「実装の型」：データパス＋制御</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">12.6.1. 乗算器（逐次型）の型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">12.6.2. 除算器（逐次型）の型</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">12.7. 符号付き（2の補数）の扱い</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">12.8. 速度と面積のトレードオフ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">12.9. 例題・演習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">12.10. まとめ</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -392,7 +421,304 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">12. </span>乗算回路・除算回路<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>到達目標</p>
+<ul class="simple">
+<li><p><strong>順序回路</strong>（シフト＋加減算＋制御）と<strong>組合せ回路</strong>（配列・圧縮木など）による<strong>乗算／除算</strong>の実現方法を説明できる．</p></li>
+<li><p>4〜8ビット規模で<strong>逐次型乗算器／除算器</strong>の<strong>データパス＋制御</strong>（FSM）を設計できる．</p></li>
+<li><p>代表的な上位手法（<strong>Booth</strong>, <strong>配列乗算器</strong>, <strong>SRT</strong>, <strong>逆数反復</strong>）の狙いを概要説明できる．</p></li>
+</ul>
+<p>今日の問い</p>
+<ul class="simple">
+<li><p>なぜ「シフト＋加減算」で乗算・除算ができる？</p></li>
+<li><p>面積と速度をどうトレードオフする？</p></li>
+<li><p>符号付き（2の補数）では何が変わる？</p></li>
+</ul>
+<p>キーワード</p>
+<ul class="simple">
+<li><p>shift-and-add / shift-and-subtract</p></li>
+<li><p>アキュムレータ（ACC），シフトレジスタ（SR），カウンタ（CNT）</p></li>
+<li><p>配列乗算器，Booth，Wallace/Dadda 圧縮木</p></li>
+<li><p>restoring / non-restoring 除算，SRT，Newton–Raphson</p></li>
+</ul>
+<hr class="docutils" />
+<section id="id2">
+<h2><span class="section-number">12.1. </span>授業アンケート<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>WebClassのリンクから回答</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">12.2. </span>レジスタ<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>データを一時的に記憶するための回路．</p>
+<p>種類</p>
+<ul class="simple">
+<li><p>汎用レジスタ：算術演算や論理演算の入力や出力結果を一時的に記憶．</p></li>
+<li><p>フラグレジスタ：演算結果に関する属性（符号・オーバーフローなど）を記憶．条件分岐などで参照する．</p></li>
+<li><p>スタックポインタ：スタック領域を指示．（スタック：データを一時的に詰める場所）</p></li>
+<li><p>プログラムカウンタ：次に実行する命令が格納されているアドレスを指示．</p></li>
+<li><p>命令レジスタ：メモリから読み出した現在実行中の命令を記憶．</p></li>
+<li><p>メモリアドレスレジスタ：これからアクセスするメモリのアドレスを指示．</p></li>
+<li><p>メモリデータレジスタ：メモリからCPUへ流すデータを一時的に記憶．</p></li>
+</ul>
+<p><img alt="演算" src="../_images/computer.png" /></p>
+<p>※ ALU（Arithmetic and Logic Unit，算術論理演算器）は演算を行う回路．</p>
+<p>基本的な4ビットのレジスタは次のように実装される．</p>
+<p><img alt="レジスタ回路" src="../_images/register.png" /></p>
+</section>
+<section id="id4">
+<h2><span class="section-number">12.3. </span>2のべき乗を掛ける／割る<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>ビットシフトの意味</p>
+<ul>
+<li><p>左に1桁シフト：<span class="math notranslate nohighlight">\(\times 2\)</span></p></li>
+<li><p>右に1桁シフト：<span class="math notranslate nohighlight">\(/2\)</span></p></li>
+<li><p>cf. 10進数だったら左に1桁シフトは10倍，右に1桁シフトは1/10倍に相当する．</p></li>
+<li><p>cf. N進数での1桁シフトはN倍／1/N倍に相当する．</p></li>
+</ul>
+</li>
+<li><p>2のべき乗</p>
+<ul>
+<li><p>左にn桁シフト：<span class="math notranslate nohighlight">\(\times 2^n\)</span></p></li>
+<li><p>右にn桁シフト：<span class="math notranslate nohighlight">\(/(2^n)\)</span></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2><span class="section-number">12.4. </span>乗算<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h3><span class="section-number">12.4.1. </span>一桁の乗算<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(A\)</span>と<span class="math notranslate nohighlight">\(B\)</span>の積</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>1bitの<span class="math notranslate nohighlight">\(A\)</span>と<span class="math notranslate nohighlight">\(B\)</span>の積は<span class="math notranslate nohighlight">\(A \cdot B\)</span>に等しい．</p>
+</section>
+<section id="shift-and-add">
+<h3><span class="section-number">12.4.2. </span>逐次型（shift-and-add：加算＋シフト）<a class="headerlink" href="#shift-and-add" title="Link to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習1</strong></p>
+<p>2進数の2つの数<span class="math notranslate nohighlight">\(1011\)</span>と<span class="math notranslate nohighlight">\(101\)</span>との積を次の2つの方法で計算し，値が一致することを確認せよ．</p>
+<ul class="simple">
+<li><p>一桁の乗算の結果を参考に，筆算を用いて計算する．</p></li>
+<li><p>10進数に直して乗算を計算する．</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>演習2</strong></p>
+<p>前演習1の筆算の手続きを参考に，2bitの数<span class="math notranslate nohighlight">\(A_1 A_0\)</span>と<span class="math notranslate nohighlight">\(B_1 B_0\)</span>との積を実装する回路を考えよ．</p>
+</div>
+<!-- 
+#### 符号付き（2の補数）
+
+- そのままでは負値の部分積調整が必要→**Booth法**で連続1をまとめ，符号も自然に扱う（後述）．
+ -->
+<!-- 
+### 組合せ型（並列）：配列乗算器＆圧縮木
+
+**配列乗算器（array multiplier）**
+
+- 各ビットの **部分積 (A\cdot B_i\ll i)** を**同時生成**し，行列状に加算．
+- ブロック図：`/contents/figs/12/mul_array.png`
+- レイテンシ短（1〜数段）が，配線・面積は大．
+
+**圧縮木（Wallace / Dadda）**
+
+- 部分積ビット列を**3:2 圧縮（フル加算器）**で木状に畳む → 2列へ → 最終加算器．
+- ブロック図：`/contents/figs/12/mul_wallace.png`
+- 速度◎（段数 (\approx O(\log n))），設計は複雑．
+
+**Booth（修正Booth）**
+
+- 乗数のビット列を 1/−1/±2 などに「再符号化」→ **部分積数の削減**＋**符号の自然処理**．
+- 逐次型/並列型どちらにも適用可能．
+ -->
+</section>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2><span class="section-number">12.5. </span>除算<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="shift-and-subtract">
+<h3><span class="section-number">12.5.1. </span>逐次型（長除法：shift-and-subtract）<a class="headerlink" href="#shift-and-subtract" title="Link to this heading">#</a></h3>
+<p><strong>アイデア</strong>
+上位から1ビットずつ降ろし，<strong>引けるか判定</strong>して商ビットを立てる．</p>
+<ul class="simple">
+<li><p><strong>restoring（復元）法</strong></p>
+<ol class="arabic simple">
+<li><p>余り (R) を左シフトし，被除数の次ビットを取り込む</p></li>
+<li><p>(R\leftarrow R - D)</p></li>
+<li><p>(R\ge 0) なら 商_bit=1（そのまま）／ (R&lt;0) なら 商_bit=0 &amp; (R\leftarrow R + D)（<strong>復元</strong>）</p></li>
+</ol>
+</li>
+<li><p><strong>non-restoring（非復元）法</strong>
+“引けなかったら次サイクルで加える”に切り替え，<strong>復元を省く</strong>（状態で加減を選択）</p></li>
+<li><p><strong>構成（データパス）</strong>：</p>
+<ul>
+<li><p>SR_N（被除数），REG_D（除数），REG_Q（商），REG_R（余り），減算器/加算器，共通制御CNT</p></li>
+</ul>
+</li>
+<li><p><strong>ブロック図</strong>：<code class="docutils literal notranslate"><span class="pre">/contents/figs/12/div_sequential.png</span></code></p></li>
+<li><p><strong>特性</strong>：面積小，レイテンシ ≈ <strong>nサイクル</strong>（±α）．</p></li>
+</ul>
+<p><strong>手を動かす2（5分）｜4ビット restoring</strong>
+N=1101(=13), D=0011(=3)．各サイクルで (R,Nの次ビット, 引減, 商ビット) を追跡し，Q と R を求めよ．
+（答え：Q=0101(=5), R=0000）</p>
+<!-- 
+### 高速化の入口
+
+- **SRT除算**：商の桁を ({-2,-1,0,1,2}) などから**桁選択**する方式（並列性↑）．
+- **逆数×乗算**：浮動小数点では (1/D) を Newton–Raphson / Goldschmidt で反復近似 → **A×(1/D)**．
+  乗算器が強いアーキテクチャで有利（GPU/FPGA の DSP ブロックなど）．
+ -->
+</section>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h2><span class="section-number">12.6. </span>逐次型の「実装の型」：データパス＋制御<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h3><span class="section-number">12.6.1. </span>乗算器（逐次型）の型<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>データパス</strong>：ACC, SR_A, SR_B, ALU(+), CNT, Z判定</p></li>
+<li><p><strong>制御（Moore FSM）</strong>：IDLE→LOAD→LOOP{TEST, ADD, SHIFT, DEC}→DONE</p></li>
+<li><p><strong>信号</strong>：<code class="docutils literal notranslate"><span class="pre">ACC_EN,</span> <span class="pre">A_SHL,</span> <span class="pre">B_SHR,</span> <span class="pre">ADD_EN,</span> <span class="pre">CNT_DEC,</span> <span class="pre">DONE</span></code> など</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">/contents/figs/12/mul_sequential_fsm.png</span></code></p>
+</section>
+<section id="id10">
+<h3><span class="section-number">12.6.2. </span>除算器（逐次型）の型<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>データパス</strong>：REG_R, REG_Q, REG_D, ALU(±), CNT</p></li>
+<li><p><strong>制御（restoring）</strong>：IDLE→LOAD→LOOP{SHIFT_R, SUB, TEST, (RESTORE), Q_WRITE, DEC}→DONE</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">/contents/figs/12/div_sequential_fsm.png</span></code></p>
+<p><strong>設計メモ</strong></p>
+<!-- - “シフト方向”と“取り込み側”で配線がこんがらがりやすい．波形スケッチで自分に方言を作ると安定． -->
+<ul class="simple">
+<li><p>1クロック/1ステップで動かすか，<strong>マルチサイクル</strong>で加算・比較を分けるかはリソース次第．</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id11">
+<h2><span class="section-number">12.7. </span>符号付き（2の補数）の扱い<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>乗算</strong></p>
+<ul>
+<li><p><strong>Booth</strong>（もしくは修正Booth）で乗数の 0/1 連長を ±1,±2 に畳み，<strong>負値の部分積</strong>を自然に扱う．</p></li>
+<li><p>逐次型でも適用可：<code class="docutils literal notranslate"><span class="pre">…00</span></code>（変化なし）, <code class="docutils literal notranslate"><span class="pre">…01</span></code>（+A）, <code class="docutils literal notranslate"><span class="pre">…10</span></code>（−A）, <code class="docutils literal notranslate"><span class="pre">…11</span></code>（変化なし）等の判定．</p></li>
+</ul>
+</li>
+<li><p><strong>除算</strong></p>
+<ul>
+<li><p>被除数・除数の符号を先に分離し，<strong>絶対値で操作</strong>→ 最後に商の符号を付与，余りは被除数の符号に合わせるのが一般的．</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id12">
+<h2><span class="section-number">12.8. </span>速度と面積のトレードオフ<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>方式</p></th>
+<th class="head"><p>面積</p></th>
+<th class="head"><p>レイテンシ</p></th>
+<th class="head"><p>スループット</p></th>
+<th class="head"><p>難易度</p></th>
+<th class="head"><p>典型用途</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>逐次（シフト＋加/減算）</p></td>
+<td><p>小</p></td>
+<td><p>大（≈n）</p></td>
+<td><p>低</p></td>
+<td><p>低</p></td>
+<td><p>教育・小規模FPGA・省リソース</p></td>
+</tr>
+<tr class="row-odd"><td><p>配列乗算器</p></td>
+<td><p>中〜大</p></td>
+<td><p>小</p></td>
+<td><p>中</p></td>
+<td><p>中</p></td>
+<td><p>固定長整数の中速実装</p></td>
+</tr>
+<tr class="row-even"><td><p>圧縮木（Wallace/Dadda）</p></td>
+<td><p>大</p></td>
+<td><p>小 (<span class="math notranslate nohighlight">\(\log n\)</span>)</p></td>
+<td><p>高（パイプライン可）</p></td>
+<td><p>高</p></td>
+<td><p>高速演算器・DSP</p></td>
+</tr>
+<tr class="row-odd"><td><p>SRT/反復法（除算）</p></td>
+<td><p>大</p></td>
+<td><p>小〜中</p></td>
+<td><p>高</p></td>
+<td><p>高</p></td>
+<td><p>浮動小数点・高性能CPU</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id13">
+<h2><span class="section-number">12.9. </span>例題・演習<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<p><strong>例題A（設計）｜4ビット逐次乗算器</strong>
+データパス：ACC(8b), SR_A(4b), SR_B(4b), ADD, CNT．</p>
+<ol class="arabic simple">
+<li><p>ブロック図を描け．2) FSMの状態と出力制御信号を表にせよ．3) A=1011, B=0101 の動作表を1行作れ．</p></li>
+</ol>
+<p><strong>例題B（設計）｜4ビット restoring 除算器</strong>
+データパス：R(5b), Q(4b), D(4b), SUB, CNT．</p>
+<ol class="arabic simple">
+<li><p>R のビット幅理由を述べよ．2) N=1101, D=0011 の1サイクル分の更新式を書け．</p></li>
+</ol>
+<p><strong>演習1（Booth入門）</strong>
+乗数Bのビット列 <code class="docutils literal notranslate"><span class="pre">...</span> <span class="pre">b_{i+1}</span> <span class="pre">b_i</span></code> を見て，(b_{i+1}, b_i) が (0,1) なら <code class="docutils literal notranslate"><span class="pre">+A&lt;&lt;i</span></code>，(1,0) なら <code class="docutils literal notranslate"><span class="pre">-A&lt;&lt;i</span></code>，他は0 を加えるルールで，
+A=0110, B=0111 の部分積列を列挙せよ（上位のバイアス処理は無視）．</p>
+<p><strong>演習2（比較）</strong>
+同じ 8ビット乗算を，逐次型（1加算器）と配列型（部分積＋加算段）で概算ゲート数・段数を比較し，
+「クロック制約」「消費電力」「配線難度」の観点で短所長所を3行でまとめよ．</p>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h2><span class="section-number">12.10. </span>まとめ<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>逐次型：<strong>シフト＋加減算＋レジスタ＋カウンタ＋制御</strong>の組で作る（理解の母体，面積小）．</p></li>
+<li><p>高速化：<strong>並列生成（部分積）＋圧縮木</strong>，Booth/SRT/反復法で<strong>段数 or 桁選択</strong>を圧縮．</p></li>
+<li><p>符号付きは <strong>Booth</strong>（乗算）／<strong>符号分離→絶対値演算</strong>（除算）が実務の型．</p></li>
+<li><p>次回は，これらを<strong>CPUデータパス</strong>（ALU・レジスタファイル・制御）に統合する見取り図へ．</p></li>
+</ul>
+</section>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -423,6 +749,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="11_sequential_curcuit.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>順序回路の設計法</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -438,9 +773,29 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">12.1. 授業アンケート</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">12.2. レジスタ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">12.3. 2のべき乗を掛ける／割る</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">12.4. 乗算</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">12.4.1. 一桁の乗算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shift-and-add">12.4.2. 逐次型（shift-and-add：加算＋シフト）</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">12.5. 除算</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shift-and-subtract">12.5.1. 逐次型（長除法：shift-and-subtract）</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">12.6. 逐次型の「実装の型」：データパス＋制御</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">12.6.1. 乗算器（逐次型）の型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">12.6.2. 除算器（逐次型）の型</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">12.7. 符号付き（2の補数）の扱い</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">12.8. 速度と面積のトレードオフ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">12.9. 例題・演習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">12.10. まとめ</a></li>
+</ul>
   </nav></div>
 
 </div></div>
