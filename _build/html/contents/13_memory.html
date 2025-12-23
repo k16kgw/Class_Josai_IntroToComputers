@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>揮発性記憶と不揮発性記憶 &#8212; Introduction to Computers I</title>
+    <title>13. 揮発性記憶と不揮発性記憶 &#8212; Introduction to Computers I</title>
   
   
   
@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'contents/13_memory';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="12. 乗算回路，除算回路" href="12_multiplier.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +123,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,7 +179,7 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
@@ -193,6 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="10_flip-flop.html">10. 様々なフリップフロップ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="11_sequential_curcuit.html">11. 順序回路の設計法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_multiplier.html">12. 乗算回路，除算回路</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. 揮発性記憶と不揮発性記憶</a></li>
 </ul>
 
     </div>
@@ -388,23 +388,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">復習</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">記憶とは何か：抽象から物理へ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">揮発性 vs 不揮発性（定義と代表例）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">揮発性メモリのしくみ</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sram-static-ram">SRAM（Static RAM）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dram-dynamic-ram">DRAM（Dynamic RAM）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. これまでの復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.2. 記憶とは</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.3. メモリの種類</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rom">13.3.1. ROMの種類</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ram">13.3.2. RAMの種類</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dram">13.3.3. DRAMの仕組み</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sram">13.3.4. SRAMの仕組み</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">不揮発性メモリのしくみ</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rom">ROM／フラッシュ</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">新型不揮発（概観）</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">設計者の視点：評価指標と使い分け</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">具体例：セルとタイミング（後半その1：10分）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">よくある設計課題</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">まとめ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.4. 評価指標と使い分け</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.5. まとめ</a></li>
 </ul>
             </nav>
         </div>
@@ -417,129 +411,238 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>揮発性記憶と不揮発性記憶<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">13. </span>揮発性記憶と不揮発性記憶<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>到達目標</p>
 <ul class="simple">
-<li><p><strong>揮発性</strong>と<strong>不揮発性</strong>の定義を説明し，代表的素子（<strong>SRAM／DRAM／ROM／フラッシュ</strong>ほか）の<strong>動作原理・特徴</strong>を述べられる．</p></li>
-<li><p>記憶の<strong>物理実装</strong>（電荷・磁化・相変化・分極 等）と<strong>安定性・エネルギ</strong>の関係を説明できる．</p></li>
-<li><p>用途に応じて適切な記憶の種類を<strong>設計観点</strong>（遅延・帯域・密度・消費電力・耐久性・コスト）で選定できる．</p></li>
+<li><p>メモリの種類（ROMとRAM，<strong>揮発性</strong>と<strong>不揮発性</strong>）とその用途の違いを理解する．</p></li>
 </ul>
-<p>今日の問い</p>
-<ul class="simple">
-<li><p>「電源を切ると消える」か「残る」かは何で決まる？</p></li>
-<li><p>なぜ DRAM は<strong>リフレッシュ</strong>が必要で，SRAM は不要なのか？</p></li>
-<li><p>スマホやPCは<strong>どの記憶</strong>を<strong>どこに</strong>使い分けている？</p></li>
-</ul>
+<!-- - 記憶の**物理実装**（電荷・磁化・相変化・分極 等）と**安定性・エネルギ**の関係を説明できる． -->
+<!-- - 用途に応じて適切な記憶の種類を**設計観点**（遅延・帯域・密度・消費電力・耐久性・コスト）で選定できる． -->
+<!-- 今日の問い -->
+<!-- - 「電源を切ると消える」か「残る」かは何で決まる？ -->
+<!-- - なぜ DRAM は**リフレッシュ**が必要で，SRAM は不要なのか？ -->
+<!-- - スマホやPCは**どの記憶**を**どこに**使い分けている？ -->
 <p>キーワード</p>
 <ul class="simple">
-<li><p>揮発性／不揮発性，保持（retention），安定性（エネルギ障壁）</p></li>
-<li><p>SRAM（6T），DRAM（1T1C，リフレッシュ），ROM，フラッシュ（NAND/NOR）</p></li>
-<li><p>新型不揮発：MRAM／ReRAM／PCM／FeRAM</p></li>
-<li><p>レイテンシ，帯域，密度，消費電力，耐久性（書換回数），TCO</p></li>
+<li><p>ROM／RAM</p></li>
+<li><p>揮発性／不揮発性</p></li>
+<li><p>フラッシュメモリ</p></li>
+<li><p>SRAM／DRAM</p></li>
 </ul>
+<!-- 
+- 揮発性／不揮発性，保持（retention），安定性（エネルギ障壁）
+- SRAM（6T），DRAM（1T1C，リフレッシュ），ROM，フラッシュ（NAND/NOR）
+- 新型不揮発：MRAM／ReRAM／PCM／FeRAM
+- レイテンシ，帯域，密度，消費電力，耐久性（書換回数），TCO
+ -->
 <hr class="docutils" />
 <section id="id2">
-<h2>復習<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.1. </span>これまでの復習<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><img alt="概要図" src="../_images/machine.png" /></p>
+<p>出典「【図解】コンピュータの仕組み・構成と五大装置」<a class="reference external" href="https://elite-lane.com/computer/%EF%BC%882025%E5%B9%B412%E6%9C%8816%E6%97%A5%E9%96%B2%E8%A6%A7%EF%BC%89">https://elite-lane.com/computer/（2025年12月16日閲覧）</a></p>
 <ul class="simple">
-<li><p>第9〜12回のつながり：FFやレジスタは<strong>記憶</strong>の基本素片（揮発）→ そこから主記憶・外部記憶へ拡張．</p></li>
-<li><p>D-FFが“記憶できる”のはなぜ？電源OFF後はどうなる？</p></li>
+<li><p>ALU（演算装置）：第6回（加算と減算），第12回（乗算と除算）</p></li>
+<li><p>レジスタ：第10回（フリップフロップ），第12回（レジスタ）</p></li>
+<li><p>制御装置：第9回（クロック・同期），第11回（順序回路の設計法）</p></li>
+<li><p>物理実装（トランジスタ）：第8回（NOT・NANDの電気的動作）</p></li>
+<li><p>メモリ：第10回（フリップフロップ），第13回（SRAM・DRAM・Flashメモリ）</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="id3">
-<h2>記憶とは何か：抽象から物理へ<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>記憶とは<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>抽象</strong>：ビット = 0/1 の<strong>安定な2状態</strong>．</p></li>
-<li><p><strong>物理実装の原理</strong>（例）</p>
+<li><p>記憶：ビット = 0/1 の安定な2状態．</p></li>
+<li><p>安定性：2状態間の<strong>エネルギ障壁</strong>が高いほど保持しやすい（ノイズ・漏れ電流に強い）が，書き換えにコストがかかる．</p></li>
+<li><p>物理実装の例（用途に応じて使い分ける）</p>
 <ul>
-<li><p>電荷の有無（<strong>DRAM，フラッシュ</strong>）</p></li>
-<li><p>回路の再帰（<strong>SRAM／ラッチ／FF</strong>）</p></li>
-<li><p>磁化（<strong>MRAM</strong>），分極（<strong>FeRAM</strong>），相変化（<strong>PCM</strong>），導電フィラメント（<strong>ReRAM</strong>）</p></li>
+<li><p>電荷の有無（<strong>DRAM／フラッシュメモリ</strong>）</p></li>
+<li><p>回路の再帰（<strong>SRAM／ラッチ／フリップフロップ</strong>）</p></li>
+<li><p>磁化（<strong>MRAM</strong>）</p></li>
+<li><p>分極（FeRAM）</p></li>
+<li><p>相変化（PCM）</p></li>
+<li><p>導電フィラメント（ReRAM）</p></li>
 </ul>
 </li>
-<li><p><strong>安定性の直観</strong>：2状態間の<strong>エネルギ障壁</strong>が高いほど<strong>保持</strong>しやすい（ノイズ・漏れ電流に強い）が，<strong>書き換え</strong>にコストがかかる傾向．</p></li>
-<li><p>「0/1 を何の物理量で持っているか」を4例挙げ，長所・短所を1語ずつ書く（電荷＝高速／漏れ 等）．</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="vs">
-<h2>揮発性 vs 不揮発性（定義と代表例）<a class="headerlink" href="#vs" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>揮発性（Volatile）</strong>：電源供給が止まると<strong>情報消失</strong>（例：レジスタ，<strong>SRAM</strong>，<strong>DRAM</strong>）</p></li>
-<li><p><strong>不揮発性（Non-volatile）</strong>：電源OFFでも<strong>保持</strong>（例：<strong>ROM／フラッシュ</strong>，MRAM，ReRAM，PCM，FeRAM）</p></li>
-</ul>
-<p>用途の大枠</p>
-<ul class="simple">
-<li><p><strong>揮発性</strong>：演算の作業領域（<strong>キャッシュ／主記憶</strong>）</p></li>
-<li><p><strong>不揮発性</strong>：起動コード・プログラム・データの<strong>長期保存</strong>（SSD／組込みROM）</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="id4">
-<h2>揮発性メモリのしくみ<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<section id="sram-static-ram">
-<h3>SRAM（Static RAM）<a class="headerlink" href="#sram-static-ram" title="Link to this heading">#</a></h3>
+<h2><span class="section-number">13.3. </span>メモリの種類<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>6Tセル</strong>（反転器対＋アクセスMOS）．双安定回路で<strong>常時保持</strong>（ただし電源必須）．</p></li>
-<li><p><strong>特徴</strong></p>
+<li><p><span style="color:red">ROM</span> (Read Only Memory)</p>
 <ul>
-<li><p>レイテンシ：非常に小（高速），リフレッシュ不要</p></li>
-<li><p>密度：DRAMより低い（トランジスタ数が多い）</p></li>
-<li><p>用途：<strong>CPUキャッシュ</strong>，レジスタファイル，オンチップバッファ</p></li>
+<li><p>読み出し専用メモリ</p></li>
+<li><p>データの書き込みは製造時，または特殊な機器で行う．</p></li>
+<li><p>書き換え回数に制限がある．</p></li>
+<li><p><span style="color:red">電源を切ってもデータは残る</span>（<strong>不揮発性メモリ</strong>）．</p></li>
+<li><p>使用例：コンピュータの起動コード，電子辞書のデータ，組み込み機器のソフトウェアなど（SSD／組込みROM）</p></li>
+</ul>
+</li>
+<li><p><span style="color:red">RAM</span> (Random Access Memory)</p>
+<ul>
+<li><p>任意のアドレスのデータを読み書きできる．</p></li>
+<li><p><span style="color:red">電源を切るとデータは消える</span>（<strong>揮発性メモリ</strong>）．</p></li>
+<li><p>電池からの電気の供給でデータを残すものもある．</p></li>
+<li><p>使用例：演算の作業領域（キャッシュ／主記憶）</p></li>
 </ul>
 </li>
 </ul>
+<section id="rom">
+<h3><span class="section-number">13.3.1. </span>ROMの種類<a class="headerlink" href="#rom" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>MROM (Mask ROM)</p></li>
+<li><p>PROM (Programmable ROM)</p>
+<ul>
+<li><p>ROM製造後に利用者がカスタマイズ可能</p></li>
+</ul>
+</li>
+<li><p>EPROM (Erasable PROM)</p>
+<ul>
+<li><p>消去可能なPROM</p></li>
+<li><p>データを複数回書き換え可能</p></li>
+<li><p>強い紫外線を当てるなどしてデータを消去する．</p></li>
+</ul>
+</li>
+<li><p>EEPROM (Electrically Erasable PROM)</p>
+<ul>
+<li><p>電気的に消去可能なPROM</p></li>
+<li><p>高い電圧をかけることでデータの書き込みや消去を行う．</p></li>
+</ul>
+</li>
+<li><p><span style="color:red">フラッシュメモリ</span></p>
+<ul>
+<li><p>ブロック単位でデータを一括消去可能なEEPROM</p></li>
+<li><p>ブロック単位で消去と書き込みを行うため動作が遅い．</p></li>
+<li><p>NOR型とNAND型がある．</p></li>
+<li><p>USBメモリ，メモリカード，SSD (Solid State Drive，Macbook airのストレージ)</p></li>
+</ul>
+</li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>NAND型</p></th>
+<th class="head"><p>NOR型</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>大容量</strong></p></td>
+<td><p>小容量</p></td>
+</tr>
+<tr class="row-odd"><td><p>アクセスが遅い</p></td>
+<td><p><strong>アクセスが速い</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>順次アクセス向け</p></td>
+<td><p>コード格納向け</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- - <span style="color:red">不揮発性</span>（Non-volatile）：電源OFFでも**保持**（例：**ROM／フラッシュ**，MRAM，ReRAM，PCM，FeRAM） -->
 </section>
-<section id="dram-dynamic-ram">
-<h3>DRAM（Dynamic RAM）<a class="headerlink" href="#dram-dynamic-ram" title="Link to this heading">#</a></h3>
+<section id="ram">
+<h3><span class="section-number">13.3.2. </span>RAMの種類<a class="headerlink" href="#ram" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>1T1Cセル</strong>（アクセスMOS＋キャパシタ）．<strong>電荷の有無</strong>でビットを表現．</p></li>
-<li><p><strong>なぜリフレッシュ？</strong> キャパシタの電荷は<strong>漏れ</strong>で減る → <strong>一定周期で再充電</strong>が必要</p></li>
-<li><p><strong>特徴</strong></p>
+<li><p>DRAM (Dynamic RAM)</p>
 <ul>
-<li><p>レイテンシ：SRAMより大きい（行アクティベーション→列アクセス）</p></li>
-<li><p>密度：高い（安価に大容量）</p></li>
-<li><p>用途：<strong>主記憶（メインメモリ）</strong></p></li>
+<li><p>キャパシタ（大容量のコンデンサ）に電荷を蓄えることでデータを保持する．</p></li>
+<li><p>キャパシタからの電荷の漏れがあるため，定期的に<strong>リフレッシュ</strong>（再充電）する必要がある．</p></li>
+<li><p>データの保持のために回路が動作しているため”Dynamic”と呼ばれる．</p></li>
 </ul>
 </li>
-<li><p>キャパシタに入れた電荷がゆっくり減るイメージを図示．</p></li>
-<li><p>「読み出しが破壊的（read-disturb）」になる理由を説明：読み出しで電荷が動く→<strong>再書込み</strong>が必要．</p></li>
+<li><p>SRAM (Static RAM)</p>
+<ul>
+<li><p>論理回路としてデータを保持する．</p></li>
+<li><p>NOTゲートやフリップフロップの原理に基づきデータを保持する．</p></li>
+<li><p>DRAMより複雑な回路となるため，実装コストが高い．</p></li>
 </ul>
+</li>
+</ul>
+<p>データの使用頻度によってメモリの種類を使い分ける．</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>使用場所</p></th>
+<th class="head"><p>頻度</p></th>
+<th class="head"><p>メモリの種類</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CPU</p></td>
+<td><p>高頻度</p></td>
+<td><p>レジスタ</p></td>
+</tr>
+<tr class="row-odd"><td><p>キャッシュメモリ</p></td>
+<td><p>中頻度</p></td>
+<td><p>SRAM</p></td>
+</tr>
+<tr class="row-even"><td><p>メインメモリ</p></td>
+<td><p>低頻度</p></td>
+<td><p>DRAM</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dram">
+<h3><span class="section-number">13.3.3. </span>DRAMの仕組み<a class="headerlink" href="#dram" title="Link to this heading">#</a></h3>
+<p><img alt="仕組み" src="../_images/dram_switch.png" /></p>
+<p>1bit分のデータを保持する回路は次の通り．</p>
+<p><img alt="回路図" src="../_images/dram.png" /></p>
+</section>
+<section id="sram">
+<h3><span class="section-number">13.3.4. </span>SRAMの仕組み<a class="headerlink" href="#sram" title="Link to this heading">#</a></h3>
+<p>NOTゲートの回路が基本コンセプト</p>
+<p><img alt="NOT" src="../_images/not1.png" /></p>
+<p>1bit分のデータを保持する回路は次の通り．</p>
+<p><img alt="回路図" src="../_images/sram_1bit.png" /></p>
+<!-- 
+---
+
+### SRAM（Static RAM）
+
+- **6Tセル**（反転器対＋アクセスMOS）．双安定回路で**常時保持**（ただし電源必須）．
+- **特徴**
+
+  - レイテンシ：非常に小（高速），リフレッシュ不要
+  - 密度：DRAMより低い（トランジスタ数が多い）
+  - 用途：**CPUキャッシュ**，レジスタファイル，オンチップバッファ
+ -->
+<!-- ---
+
+## 不揮発性メモリのしくみ
+
+### ROM／フラッシュ
+
+- **ROM**：製造時または書換え限定で固定（マスクROM，OTP，EPROM/EEPROM）
+- **フラッシュ**（代表：NAND，NOR）
+
+  - **浮遊ゲート**に電荷を蓄える（トンネル効果で書込／消去）
+  - **ブロック消去**＋**ページ書込**（細粒度は苦手），**耐久性**（書換回数）に限界
+  - **NAND**：高密度・順次アクセス向け（SSD）／**NOR**：ランダム実行・コード格納向け（組込み）
+
+### 新型不揮発（概観）
+
+- **MRAM**（磁化）／**ReRAM**（抵抗変化）／**PCM**（相変化）／**FeRAM**（分極）
+  目的：**SRAM/DRAM並の速度**や**高耐久**と**不揮発**の両立（まだ用途最適化の過程）
+ -->
 </section>
 </section>
 <hr class="docutils" />
 <section id="id5">
-<h2>不揮発性メモリのしくみ<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
-<section id="rom">
-<h3>ROM／フラッシュ<a class="headerlink" href="#rom" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>ROM</strong>：製造時または書換え限定で固定（マスクROM，OTP，EPROM/EEPROM）</p></li>
-<li><p><strong>フラッシュ</strong>（代表：NAND，NOR）</p>
-<ul>
-<li><p><strong>浮遊ゲート</strong>に電荷を蓄える（トンネル効果で書込／消去）</p></li>
-<li><p><strong>ブロック消去</strong>＋<strong>ページ書込</strong>（細粒度は苦手），<strong>耐久性</strong>（書換回数）に限界</p></li>
-<li><p><strong>NAND</strong>：高密度・順次アクセス向け（SSD）／<strong>NOR</strong>：ランダム実行・コード格納向け（組込み）</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="id6">
-<h3>新型不揮発（概観）<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>MRAM</strong>（磁化）／<strong>ReRAM</strong>（抵抗変化）／<strong>PCM</strong>（相変化）／<strong>FeRAM</strong>（分極）
-目的：<strong>SRAM/DRAM並の速度</strong>や<strong>高耐久</strong>と<strong>不揮発</strong>の両立（まだ用途最適化の過程）</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="id7">
-<h2>設計者の視点：評価指標と使い分け<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<p>評価表の軸（○良い，△普通，×弱い：学習目的の目安）</p>
+<h2><span class="section-number">13.4. </span>評価指標と使い分け<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>評価表の軸（○良い，△普通，×弱い：あくまで目安）</p>
+<!-- 
+| 種別          | 速度(遅延) | 帯域    | 密度 | 消費電力      | 価格/容量 | 書換耐久 | 保持 |
+| ----------- | ------ | ----- | -- | --------- | ----- | ---- | -- |
+| SRAM        | ○      | ○     | △  | ○（待機×）    | △     | ○    | ×  |
+| DRAM        | △      | ○     | ○  | △（リフレッシュ） | ○     | ○    | ×  |
+| フラッシュメモリ(NAND) | △〜×    | ○（順次） | ◎  | ○（待機◎）    | ◎     | △    | ○  |
+| MRAM等       | ○      | ○     | △  | ○         | △     | ○    | ○  |
+ -->
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>種別</p></th>
 <th class="head"><p>速度(遅延)</p></th>
-<th class="head"><p>帯域</p></th>
 <th class="head"><p>密度</p></th>
 <th class="head"><p>消費電力</p></th>
 <th class="head"><p>価格/容量</p></th>
@@ -550,7 +653,6 @@ document.write(`
 <tbody>
 <tr class="row-even"><td><p>SRAM</p></td>
 <td><p>○</p></td>
-<td><p>○</p></td>
 <td><p>△</p></td>
 <td><p>○（待機×）</p></td>
 <td><p>△</p></td>
@@ -560,15 +662,13 @@ document.write(`
 <tr class="row-odd"><td><p>DRAM</p></td>
 <td><p>△</p></td>
 <td><p>○</p></td>
-<td><p>○</p></td>
 <td><p>△（リフレッシュ）</p></td>
 <td><p>○</p></td>
 <td><p>○</p></td>
 <td><p>×</p></td>
 </tr>
-<tr class="row-even"><td><p>フラッシュ(NAND)</p></td>
+<tr class="row-even"><td><p>フラッシュメモリ(NAND)</p></td>
 <td><p>△〜×</p></td>
-<td><p>○（順次）</p></td>
 <td><p>◎</p></td>
 <td><p>○（待機◎）</p></td>
 <td><p>◎</p></td>
@@ -576,7 +676,6 @@ document.write(`
 <td><p>○</p></td>
 </tr>
 <tr class="row-odd"><td><p>MRAM等</p></td>
-<td><p>○</p></td>
 <td><p>○</p></td>
 <td><p>△</p></td>
 <td><p>○</p></td>
@@ -587,41 +686,9 @@ document.write(`
 </tbody>
 </table>
 </div>
-<ul class="simple">
-<li><p><strong>層構造で使い分け</strong>：</p>
-<ul>
-<li><p>レジスタ／L1-L3（SRAM）→ 主記憶（DRAM）→ 永続（フラッシュ/SSD）</p></li>
-</ul>
-</li>
-<li><p><strong>SoC/組込み</strong>：ブートROM＋内蔵SRAM＋外付DRAM＋外付フラッシュが定番</p></li>
-</ul>
+<!-- - 層構造で使い分ける：レジスタ／L1-L3（SRAM）→ 主記憶（DRAM）→ 永続（フラッシュメモリ／SSD） -->
+<!-- - **SoC/組込み**：ブートROM＋内蔵SRAM＋外付DRAM＋外付フラッシュが定番 -->
 <!-- - 「センサを常時監視し，電池で数年動かしたい」用途で，SRAM/DRAM/フラッシュ の組み合わせ案を2通り提案し，理由を1行ずつ． -->
-</section>
-<hr class="docutils" />
-<section id="id8">
-<h2>具体例：セルとタイミング（後半その1：10分）<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>SRAM 6T</strong>：交差結合インバータ（保持）＋2アクセスMOS（読み書き）</p></li>
-<li><p><strong>DRAM 1T1C</strong>：ビット線，ワード線，選択MOS，容量C</p></li>
-<li><p><strong>フラッシュ</strong>：浮遊ゲートMOS，しきい値電圧の違いで 0/1（多値も可能）</p></li>
-</ul>
-<p>タイミングの直観</p>
-<ul class="simple">
-<li><p>SRAM 読み出し：選択→ビット線差電圧→センス</p></li>
-<li><p>DRAM 読み出し：行アクティベート（全行の電荷をビット線へ）→センス→<strong>リストア</strong>→列選択</p></li>
-<li><p>フラッシュ 書込／消去：高電界トンネル→<strong>遅いが保持は長い</strong></p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="id9">
-<h2>よくある設計課題<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>DRAMリフレッシュの負担</strong>：一定周期で全セル巡回 → 帯域の一部を消費</p></li>
-<li><p><strong>消費電力</strong>：SRAMは待機リーク，DRAMはリフレッシュ電力，フラッシュは書込ピークが大きいが待機極小</p></li>
-<li><p><strong>耐久性</strong>：フラッシュは書換寿命あり → <strong>ウェアレベリング／ECC</strong> が必須</p></li>
-<li><p><strong>セキュリティ</strong>：不揮発は残留情報 → <strong>暗号化／消去</strong> の手当て</p></li>
-</ul>
-<hr class="docutils" />
 <!-- 
 ## 例題・演習
 
@@ -648,13 +715,14 @@ document.write(`
 ---
  -->
 </section>
-<section id="id10">
-<h2>まとめ<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h2><span class="section-number">13.5. </span>まとめ<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>揮発性</strong>：高速・演算向け（SRAM/DRAM）／<strong>不揮発性</strong>：保持・保存向け（ROM/フラッシュ 他）．</p></li>
-<li><p>物理実装の差（電荷・磁化・相変化…）が<strong>保持・速度・耐久・密度</strong>を決める．</p></li>
-<li><p>システムは<strong>階層化</strong>で最適化する：レジスタ/キャッシュ→主記憶→外部記憶．</p></li>
+<li><p>ROM（<strong>不揮発性メモリ</strong>）：保持・保存向け（ROM/フラッシュ 他）．</p></li>
+<li><p>RAM（<strong>揮発性メモリ</strong>）：高速・演算向け（SRAM/DRAM）</p></li>
+<li><p>物理実装の差（電荷・磁化・相変化など）が記憶の<strong>保持・速度・耐久・密度</strong>を決める．</p></li>
 </ul>
+<!-- - システムは**階層化**で最適化する：レジスタ/キャッシュ→主記憶→外部記憶． -->
 </section>
 </section>
 
@@ -688,6 +756,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="12_multiplier.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>乗算回路，除算回路</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -704,23 +781,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">復習</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">記憶とは何か：抽象から物理へ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">揮発性 vs 不揮発性（定義と代表例）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">揮発性メモリのしくみ</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sram-static-ram">SRAM（Static RAM）</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dram-dynamic-ram">DRAM（Dynamic RAM）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.1. これまでの復習</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.2. 記憶とは</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.3. メモリの種類</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rom">13.3.1. ROMの種類</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ram">13.3.2. RAMの種類</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dram">13.3.3. DRAMの仕組み</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sram">13.3.4. SRAMの仕組み</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">不揮発性メモリのしくみ</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rom">ROM／フラッシュ</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">新型不揮発（概観）</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">設計者の視点：評価指標と使い分け</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">具体例：セルとタイミング（後半その1：10分）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">よくある設計課題</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">まとめ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.4. 評価指標と使い分け</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.5. まとめ</a></li>
 </ul>
   </nav></div>
 
