@@ -213,3 +213,4 @@ $G = \overline{A} \cdot B \cdot C + A \cdot B \cdot \overline{C} + \overline{A} 
 ![4ビット減算器](/contents/figs/6/rcd.png)
 
 
+
