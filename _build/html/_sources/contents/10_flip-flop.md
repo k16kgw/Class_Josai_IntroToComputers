@@ -55,7 +55,7 @@
 ```{note}
 **演習1**
 
-上記の状態遷移表から次の状態$Q'$に関するカルノー図を作成し，$Q'$ほ表す論理式（<span style="color:red">特性方程式</span>と呼ぶ）を導け．
+上記の状態遷移表から次の状態$Q'$に関するカルノー図を作成し，$Q'$を表す論理式（<span style="color:red">特性方程式</span>と呼ぶ）を導け．
 
 ![カルノー図](/contents/figs/10/dff_karnaugh.png)
 

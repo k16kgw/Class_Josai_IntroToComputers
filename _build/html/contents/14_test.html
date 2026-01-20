@@ -1,0 +1,694 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>14. 期末試験 &#8212; Introduction to Computers I</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contents/14_test';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="13. 揮発性記憶と不揮発性記憶" href="13_memory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Introduction to Computers I - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Introduction to Computers I - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    計算機入門I（城西大学）
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">目次</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_digital.html">1. アナログとデジタル，数値表現</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_bool.html">2. ブール代数，論理演算，真理値表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_normal_form.html">3. 主加法標準形，主乗法標準形，論理ゲート</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Karnaugh.html">4. カルノー図による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_combinational_circuit.html">5. クワイン・マクラスキー法による組合せ回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_adder.html">6. 半加算器・全加算器・減算器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_test_ans.html">7. 中間試験</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_state.html">8. 順序回路による状態の保持，状態遷移</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9_clock.html">9. クロックの役割，同期回路と非同期回路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_flip-flop.html">10. 様々なフリップフロップ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_sequential_curcuit.html">11. 順序回路の設計法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_multiplier.html">12. 乗算回路，除算回路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_memory.html">13. 揮発性記憶と不揮発性記憶</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. 期末試験</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontents/14_test.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/contents/14_test.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>期末試験</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">14. </span>期末試験<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>時間：60分</p></li>
+<li><p>配点：合計30点（全5問+α）</p></li>
+<li><p>持込：筆記用具・A4用紙1枚</p></li>
+<li><p>誤答であっても<strong>途中式・手順</strong>が残っていれば，ここから加点をすることがある．</p></li>
+</ul>
+<hr class="docutils" />
+<p><u><strong>問1</strong> （加算器）〔4点〕</u></p>
+<p><strong>問1-1.</strong> 次の図で示した全加算器を組み合わせ，4ビットのリップルキャリー加算器の回路図を描け。
+なお、加算する2つの変数と加算した結果の変数の下から<span class="math notranslate nohighlight">\(i\)</span>桁目を<span class="math notranslate nohighlight">\(A_i\)</span>，<span class="math notranslate nohighlight">\(B_i\)</span>，<span class="math notranslate nohighlight">\(S_i\)</span>と表記することとする．
+つまり<span class="math notranslate nohighlight">\(A_4 A_3 A_2 A_1 + B_4 B_3 B_2 B_1 = S_5 S_4 S_3 S_2 S_1\)</span>を計算する．（2点）</p>
+<p><strong>問1-2.</strong> 次に示す回路は4ビットの加算を計算する桁上げ先見回路付き4ビット加算器であるが，リップルキャリー加算器より桁上げ先見回路付き4ビット加算器の方が計算速度が速くなる理由を述べよ。（2点）</p>
+<p><img alt="桁上げ先見回路付き4ビット加算器" src="../_images/CLA.png" /></p>
+<hr class="docutils" />
+<p><u><strong>問2</strong> （フリップフロップ回路）〔4点〕</u></p>
+<p><strong>問2-1.</strong> 次のTフリップフロップ回路の回路図を参考に，状態遷移表を埋める形で完成させよ．</p>
+<p><img alt="TFF回路" src="../_images/tff_circuit.png" /></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>入力<span class="math notranslate nohighlight">\(T\)</span></p></th>
+<th class="head text-center"><p>現在の状態<span class="math notranslate nohighlight">\(Q\)</span></p></th>
+<th class="head text-center"><p>次の状態<span class="math notranslate nohighlight">\(Q'\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>問2-2.</strong> 次のJKフリップフロップ回路の回路図を参考に，状態遷移表を埋める形で完成させよ．
+なお，<span class="math notranslate nohighlight">\(CLK\)</span>はクロックを表す．</p>
+<p><img alt="JKフリップフロップ" src="../_images/jkff_circuit_sol.png" /></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>入力<br><span class="math notranslate nohighlight">\(J\)</span></p></th>
+<th class="head text-center"><p>入力<br><span class="math notranslate nohighlight">\(K\)</span></p></th>
+<th class="head text-center"><p>現在の状態<span class="math notranslate nohighlight">\(Q\)</span></p></th>
+<th class="head text-center"><p>次の状態<span class="math notranslate nohighlight">\(Q'\)</span><br><span class="math notranslate nohighlight">\(（CLK=0\)</span>のとき）</p></th>
+<th class="head text-center"><p>次の状態<span class="math notranslate nohighlight">\(Q'\)</span><br>（<span class="math notranslate nohighlight">\(CLK=1\)</span>のとき）</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<br>
+<p><u><strong>問3</strong> （NAND回路）〔7点〕</u></p>
+<p>次のNANDゲートを用いた回路について，次の問に答えよ．</p>
+<p><img alt="NANDゲート" src="../_images/nand_memory2.png" /></p>
+<p><strong>問3-1.</strong> 次の表を埋める形で，<span class="math notranslate nohighlight">\(A,B\)</span>の全ての組み合わせに対して<span class="math notranslate nohighlight">\(P,Q\)</span>はどの値を取れば良いか答えよ．（2点）</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(A\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(B\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(P\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Q\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>※ <span class="math notranslate nohighlight">\((A,B)=(1,1)\)</span>のときは2通りの可能性がある．</p>
+<p><strong>問3-2.</strong> 入力の値が<span class="math notranslate nohighlight">\((A,B)=(0,1)\)</span>から<span class="math notranslate nohighlight">\((1,1)\)</span>に変わったとき，出力<span class="math notranslate nohighlight">\((P,Q)\)</span>の値はどのように変化するかを述べよ．（2点）</p>
+<p><strong>問3-3.</strong> 入力の値が<span class="math notranslate nohighlight">\((A,B)=(0,0)\)</span>から<span class="math notranslate nohighlight">\((1,1)\)</span>に変わったとき，出力<span class="math notranslate nohighlight">\((P,Q)\)</span>の値はどのように変化すると予想されるか．現実の電気回路を想定して述べよ．（3点）</p>
+<hr class="docutils" />
+<p><br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br></p>
+<p><u><strong>問4</strong> （自動販売機の実装）〔13点〕</u></p>
+<p>1種類の硬貨のみを考え，硬貨を3枚入れるとコーヒーが出てくる自動販売機を次の手続きに従って実装する．</p>
+<ol class="arabic simple">
+<li><p><strong>状態遷移図の作成</strong>：初期状態と終了状態を含む複数の状態を定義し，次に各状態への入力とそれにより生じる状態遷移と出力を定義する．</p></li>
+<li><p><strong>2進コード化</strong>：各状態と入出力を表す2進数の値を決め，1で作成した状態遷移図を2進数の値で描き直す．</p></li>
+<li><p><strong>状態遷移表の作成</strong>：現在の状態から入力により次の状態へ遷移し，出力する様子を状態遷移表にまとめる．</p></li>
+<li><p><strong>回路化</strong>：状態遷移表に従い，状態遷移図と同様の動作を行う順序回路を，フリップフロップと組合せ回路を用いて設計する．</p></li>
+</ol>
+<p>次のような状態遷移図を考える．</p>
+<p><img alt="状態遷移図" src="../_images/state_graph.png" /></p>
+<p>また次のルールに従って2進コード化を行い，状態遷移図は次のようになる．</p>
+<ul class="simple">
+<li><p>入力：硬貨を投入する/しない → 1,0</p></li>
+<li><p>出力：コーヒーを出す/出さない → 1,0</p></li>
+<li><p>現在の状態：硬貨の枚数0,1,2枚 → 00,01,10</p></li>
+</ul>
+<!-- ![2進コード化](/contents/figs/9/bit_graph.png) -->
+<p><img alt="2進コード化" src="../_images/bit_graph1.png" /></p>
+<p>各状態に対応する変数を次のように定義する．</p>
+<ul class="simple">
+<li><p>入力：硬貨を投入する/しない(1,0) → <span class="math notranslate nohighlight">\(S\)</span>（1bit）</p></li>
+<li><p>出力：コーヒーを出す/出さない(1,0) → <span class="math notranslate nohighlight">\(G\)</span>（1bit）</p></li>
+<li><p>現在の状態：硬貨の枚数0,1,2枚(00,01,10) → <span class="math notranslate nohighlight">\(C_1, C_0\)</span>（2bit）</p></li>
+<li><p>次の状態：硬貨の枚数0,1,2枚(00,01,10) → <span class="math notranslate nohighlight">\(N_1, N_0\)</span>（2bit）</p></li>
+</ul>
+<p><br><br><br></p>
+<p><strong>問4-1.</strong> 次の状態遷移表を埋めて完成させよ．（4点）</p>
+<p><img alt="状態遷移表" src="../_images/q4-1.png" /></p>
+<p><strong>問4-2.</strong> <span class="math notranslate nohighlight">\(N_1\)</span>, <span class="math notranslate nohighlight">\(N_0\)</span>, <span class="math notranslate nohighlight">\(G\)</span>のカルノー図を作成し，<span class="math notranslate nohighlight">\(N_1\)</span>, <span class="math notranslate nohighlight">\(N_0\)</span>, <span class="math notranslate nohighlight">\(G\)</span>を加法標準形で表せ．（9点）</p>
+<p>最終的にこれらを回路として実装すると次のようになる．これを参考に<span class="math notranslate nohighlight">\(N_1\)</span>, <span class="math notranslate nohighlight">\(N_0\)</span>, <span class="math notranslate nohighlight">\(G\)</span>の加法標準形を検算してよい．</p>
+<p><img alt="回路" src="../_images/vending_circuit.png" /></p>
+<hr class="docutils" />
+<p><u><strong>問5</strong> （メモリ）〔2点〕</u></p>
+<p>メモリは<strong>ROM</strong>(Read Only Memory)と<strong>RAM</strong>(Random Access Memory)との2種類に大別できるが、ROMとRAMの電源を切ったときの挙動の違いを説明せよ。</p>
+<hr class="docutils" />
+<p><u><strong>問α</strong>（追加得点の問題）</u></p>
+<p>半導体メモリの種類（RAM/ROM/不揮発メモリの方式名）を思い出せる限り列挙せよ（略称でも良い）．</p>
+<p>※ なお，正答1つにつき1点を加算し，誤答が6つ以上ある場合は誤答1つにつき1点を減点する．
+また，問5まで全答すれば満点の30点を獲得できるが，全答でない場合に本問で獲得した得点を加算して成績評価に使用する．</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./contents"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="13_memory.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>揮発性記憶と不揮発性記憶</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Keiichiro Kagawa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
